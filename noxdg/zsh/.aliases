@@ -1,0 +1,39 @@
+#!/usr/bin/sh
+
+# main
+alias :q="exit"
+alias cl="clear"
+alias wg="sudo wg"
+alias zt="zathura"
+alias sudo="sudo "
+alias vi="NVIM_APPNAME='minimal' nvim"
+alias yay="paru"
+alias btml="btm --theme=default-light"
+
+# fihs
+alias sp="systemctl suspend"
+alias dh="rm ~/.history.db"
+alias sht="shutdown now"
+alias clear="clear; printf '\033[4 q'"
+alias fontcache="sudo fc-cache -f -v"
+alias motivation="mpv ~/MEGAsync/personal/pc/videos/biy/cristiano.mp4"
+alias rel="xrdb merge ~/.Xresources && kill -USR1 \$(pidof st) && kill -USR1 \$(pidof st-light)"
+alias ff="fastfetch"
+
+alias gb="git branch"
+alias glg="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --all"
+alias gsb="git status --short --branch"
+alias lzg="lazygit"
+alias gdc="git diff --cached"
+alias gd="git diff"
+alias gco="git checkout"
+alias gaa="git add -A"
+alias gc="git commit"
+alias ggpush='git push origin $(git rev-parse --abbrev-ref HEAD)'
+alias ggpull='git pull origin $(git rev-parse --abbrev-ref HEAD)'
+
+alias lzd="lazydocker"
+
+alias ta="tmux attach"
+alias tk="tmux kill-server"
+alias tn='tmux new -s $USER'

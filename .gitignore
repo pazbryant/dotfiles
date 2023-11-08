@@ -1,0 +1,14 @@
+# mdp
+.config/mpd/mpd.log
+.config/mpd/mpdstate
+.config/mpd/mpd.pid
+
+# lazy
+.config/lazygit/state.yml
+
+# qBittorrent
+.config/qBittorrent/qBittorrent-data.conf
+.config/qBittorrent/lockfile
+.config/qBittorrent/rss
+noxdg/ssh/personal_github
+noxdg/ssh/known_hosts

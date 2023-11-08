@@ -1,0 +1,18 @@
+#!/bin/env sh
+
+CURRENT_SESSION=$(tmux display-message -p "#S")
+
+kill_windows() {
+  current_window=$(tmux display-message -p "#I")
+
+  tmux list-windows -t "$1" -F "#I" | grep -v "^${current_window}$" | while read -r window; do
+    tmux kill-window -t "${1}:${window}"
+  done
+}
+
+# Main execution
+main() {
+  kill_windows "$CURRENT_SESSION"
+}
+
+main

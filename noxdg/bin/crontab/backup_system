@@ -1,0 +1,102 @@
+#!/bin/env sh
+
+set -x
+set -e
+
+backup_source="/"
+backup_destination="/run/media/bryant/tiagovault/backups"
+
+# Define exclude folders and additional excludes
+exclude_folders="
+  /home/bryant/Desktop /home/bryant/Documents /home/bryant/Downloads
+  /home/bryant/Mega /home/bryant/Pictures /home/bryant/Calibre Library
+  /home/bryant/Music /home/bryant/Videos /home/bryant/.tealdeer-cache
+  /home/bryant/.cache /home/bryant/.local/share/ 
+  /home/bryant/share
+"
+
+additional_excludes="
+  --exclude=/dev --exclude=/proc --exclude=/sys --exclude=/tmp
+  --exclude=/run --exclude=/mnt --exclude=/media --exclude=/lost+found
+  --exclude=/var/log --exclude=/var/tmp --exclude=/var/run
+  --exclude=/swapfile --exclude=*/Cache --exclude=*/cache --exclude=*/.cache
+"
+
+create_directories() {
+  backup_folder="$1"
+
+  mkdir -p "$backup_folder" || {
+    echo "Failed to create directory: $backup_folder"
+    exit 1
+  }
+}
+
+construct_excludes() {
+  excludes=""
+
+  for folder in $exclude_folders; do
+    excludes="$excludes --exclude=$folder"
+  done
+
+  excludes="$excludes $additional_excludes"
+  echo "$excludes"
+}
+
+perform_backup() {
+  backup_folder="$1"
+  previous_backups="$2"
+  excludes="$3"
+
+  error_log=~/.rsync_last_error.log
+
+  rsync -aAXv --delete --progress $excludes \
+    --link-dest="$previous_backups" "$backup_source" "$backup_folder" 2>"$error_log"
+
+  if [ $? -ne 0 ]; then
+    echo "Rsync encountered an error. Check $error_log for details."
+  fi
+
+  echo "Backup finalized successfully. Syncing data"
+}
+
+sync_data() {
+  echo "Syncing data..."
+  sync
+  echo "Data synced successfully."
+}
+
+cleanup_backups() {
+  # Remove the oldest backup if there are more than 3
+  backups=$(fd --type d --max-depth 1 "$backup_destination/arch" | sort)
+
+  # Count number of backups
+  count=$(echo "$backups" | wc -l)
+
+  if [ "$count" -gt 3 ]; then
+    # Remove the oldest backup
+    echo "$backups" | head -n -3 | xargs -r rm -rf
+  fi
+}
+
+# Main function to coordinate the backup process
+main() {
+  backup_date=$(date +%Y-%m-%d)
+  backup_folder="$backup_destination/arch/$backup_date"
+  previous_backups="$backup_destination/arch/"
+
+  cleanup_backups
+
+  create_directories "$backup_folder"
+
+  excludes=$(construct_excludes)
+
+  perform_backup "$backup_folder" "$previous_backups" "$excludes"
+
+  sync_data
+
+  echo "Backup finalized successfully."
+
+  exit 0
+}
+
+main

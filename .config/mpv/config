@@ -1,0 +1,4 @@
+[default]
+ytdl-format=bestvideo[height<=?1080]+bestaudio/best
+
+script-opts = ytdl_hook-ytdl_path=/usr/bin/yt-dlp

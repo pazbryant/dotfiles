@@ -1,0 +1,7 @@
+--cookies-from-browser firefox
+--format "bestvideo[height<=3840][vcodec^=vp]+bestaudio/best[height<=3840]"
+--socket-timeout=10
+--add-metadata
+--prefer-free-formats
+--embed-subs
+--no-mtime

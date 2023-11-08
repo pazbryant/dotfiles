@@ -1,0 +1,31 @@
+autoload -U compinit && compinit
+autoload -U bashcompinit && bashcompinit
+
+# set emacs keybind
+bindkey -e
+
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_FIND_NO_DUPS
+
+# extend path
+extra_path=(
+  ~/.cargo/bin/
+  ~/bin/global/
+  ~/.local/bin/
+  /usr/local/bin/
+  /var/lib/flatpak/exports/bin/
+  ~/.local/share/nvim/mason/bin/
+  ~/.local/share/bob/nvim-bin/
+) 
+export PATH="${(j|:|)extra_path}:$PATH"
+
+
+# fzf
+eval "$(fzf --zsh)"
+
+# start binaries config
+eval "$(atuin init zsh)"
+eval "$(fnm env --use-on-cd)"
+eval "$(zoxide init --cmd cd zsh)"
+eval "$(starship init zsh)"
