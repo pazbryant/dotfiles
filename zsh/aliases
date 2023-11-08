@@ -1,0 +1,51 @@
+#!/usr/bin/sh
+
+# main
+alias n="nvim"
+alias :q="exit"
+alias yay="paru"
+alias cl="clear"
+alias sudo="sudo "
+alias wg="sudo wg"
+alias pass="gopass"
+alias bb="btm --basic"
+alias transes="trans en:es"
+alias anime="ani-cli -q 1080"
+alias zsha="cd ~/zsh && vi aliases"
+alias zshc="cd ~/zsh && vi zshconfig"
+alias vi="NVIM_APPNAME='vim' nvim"
+alias c="xclip -selection clipboard"
+alias p="xclip -selection clipboard -o"
+alias ani-cli-dub="ani-cli -q 1080 --dub"
+alias fishc="cd ~/.config/fish && vi config.fish"
+
+alias ff="fastfetch"
+alias sht="shutdown now"
+alias dh="rm ~/.history.db"
+alias sp="systemctl suspend"
+alias rebootcmd="systemctl reboot"
+alias fontcache="sudo fc-cache -f -v"
+alias rex="xrdb -remove && xrdb -merge ~/.Xresources && kill -USR1 \$(pidof st)"
+
+alias gd="git diff"
+alias lzg="lazygit"
+alias gb="git branch"
+alias gc="git commit"
+alias gaa="git add -A"
+alias gco="git checkout"
+alias gdc="git diff --cached"
+alias gcc="git rev-list --count HEAD"
+alias gsb="git status --short --branch"
+alias ggpull="git pull origin \$(git rev-parse --abbrev-ref HEAD)"
+alias ggpush="git push origin \$(git rev-parse --abbrev-ref HEAD)"
+alias glg="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --all"
+
+alias lzd="lazydocker"
+
+alias ta="tmux attach"
+alias tk="tmux kill-server"
+alias tn="tmux new -s \$USER"
+
+alias zls="ls \$ZPLUGINDIR"
+
+alias media="cd /run/media"

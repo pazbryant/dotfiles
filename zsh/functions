@@ -1,0 +1,42 @@
+#!/bin/env sh
+
+y() {
+	tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ "$cwd" != "" ] && [ "$cwd" != "$PWD" ]; then
+		cd -- "$cwd" || return
+	fi
+	rm -f -- "$tmp"
+}
+
+xevkeys() {
+	xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }'
+}
+
+rez() {
+	. /home/bryant/.zshrc
+}
+
+update_grub() {
+	sudo grub-mkconfig -o /boot/grub/grub.cfg
+}
+
+stow_dots() {
+	dots="$HOME/Documents/github/dotfiles"
+	mkdir -p "$dots" && cd "$dots" || return
+	stow --target=/home/"$USER" "$@" --restow .
+}
+
+# NOTE: this function is used in ~/.zshconfig file
+# is attached to ^X keybind
+copy_terminal_buffer() {
+	echo "$BUFFER" | xclip -selection clipboard
+	zle reset-prompt
+}
+
+# NOTE: this is to refresh DNS cache. I have this because I have
+# blocked all social media and manga websites to avoid get distracted
+# while using my computer
+flush_dns_cache() {
+	sudo systemd-resolve --flush-caches
+}
