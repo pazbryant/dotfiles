@@ -2,7 +2,6 @@
 
 # main
 alias :q="exit"
-alias cl="clear"
 alias wg="sudo wg"
 alias zt="zathura"
 alias sudo="sudo "
@@ -14,7 +13,6 @@ alias btml="btm --theme=default-light"
 alias sp="systemctl suspend"
 alias dh="rm ~/.history.db"
 alias sht="shutdown now"
-alias clear="clear; printf '\033[4 q'"
 alias fontcache="sudo fc-cache -f -v"
 alias motivation="mpv ~/MEGAsync/personal/pc/videos/biy/cristiano.mp4"
 alias rel="xrdb merge ~/.Xresources && kill -USR1 \$(pidof st) && kill -USR1 \$(pidof st-light)"

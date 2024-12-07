@@ -12,3 +12,5 @@
 .config/qBittorrent/rss
 noxdg/ssh/personal_github
 noxdg/ssh/known_hosts
+.config/calibre/gui.json
+.config/calibre/dynamic.pickle.json
