@@ -50,5 +50,3 @@ common_subcommands = [
 common_prefix = ["sudo"]
 
 keymap_mode = "vim-insert"
-
-keymap_cursor = { emacs = "steady-underline", vim_insert = "steady-underline", vim_normal = "steady-underline" }
