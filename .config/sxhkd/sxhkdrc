@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 super + q
   bspc node -c
 
@@ -31,11 +33,6 @@ super + {Tab,Escape}
 super + shift + s
   notify-send "Entering standby mode"; sleep 1; xset dpms force standby
 
-super + a
-  bspc node @/ --equalize
-
-super + o
-  obsidian
 
 # -------------- main keys -----------------------
 
@@ -43,7 +40,7 @@ super + e
   pcmanfm
 
 super + d
-  rofi -show drun -show-icons
+  rofi -show run -show-icons
 
 super + t
   st
@@ -51,7 +48,7 @@ super + t
 super + shift + t
   st-light
 
-super + space
+super + shift + space
   ~/bin/wm/switch_keyboard
 
 super + s
@@ -77,7 +74,7 @@ super + w
 super + {Left,Down,Up,Right}
   bspc node -v {-30 0,0 30,0 -30,30 0}
 
-super + u
+super + shift + f
   if [ "$(bspc query -N -n focused.floating)" ]; then \
       bspc node -f last.tiled.local; \
   else \
@@ -90,7 +87,7 @@ super + m
   bspc rule -a St -o state=floating follow=on center=true \
     rectangle=700x350+0+0 && st -e zsh -c "ncmpcpp"
 
-super + y
+super + a
   bspc rule -a St -o state=floating follow=on center=true \
     rectangle=800x400+0+0 && st -e zsh -c "yazi"
 
