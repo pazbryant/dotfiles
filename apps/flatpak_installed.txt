@@ -1,0 +1,5 @@
+GNOME Application Platform version 47	org.gnome.Platform		47	system
+Intel VAAPI driver	org.freedesktop.Platform.VAAPI.Intel		24.08	system
+Mesa (Extra)	org.freedesktop.Platform.GL.default	24.2.7	24.08extra	system
+Mesa	org.freedesktop.Platform.GL.default	24.2.7	24.08	system
+openh264	org.freedesktop.Platform.openh264	2.4.1	2.4.1	system
