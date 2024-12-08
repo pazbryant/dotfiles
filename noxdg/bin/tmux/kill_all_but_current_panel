@@ -18,6 +18,7 @@ kill_other_panes() {
   tmux list-panes -F '#{pane_id}' | while IFS= read -r pane; do
     if [ "$pane" != "$current_pane" ]; then
       tmux kill-pane -t "$pane"
+      tmux display-message "All panels have been killed"
     fi
   done
 

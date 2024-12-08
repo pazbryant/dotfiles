@@ -7,6 +7,7 @@ kill_windows() {
 
   tmux list-windows -t "$1" -F "#I" | grep -v "^${current_window}$" | while read -r window; do
     tmux kill-window -t "${1}:${window}"
+    tmux display-message "All windows have been killed"
   done
 }
 
