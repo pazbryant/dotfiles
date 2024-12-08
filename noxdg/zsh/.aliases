@@ -8,6 +8,7 @@ alias sudo="sudo "
 alias vi="NVIM_APPNAME='minimal' nvim"
 alias yay="paru"
 alias btml="btm --theme=default-light"
+alias zshconfig="vi ~/.zshconfig"
 
 # fihs
 alias sp="systemctl suspend"

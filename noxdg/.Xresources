@@ -12,7 +12,7 @@ st.font: Maple Mono NF:pixelsize=12:style:regular
 st.borderpx: 0
 
 ! font horizontal spacing
-st.cwscale: 1.05
+st.cwscale: 1.2
 
 ! transparency
 st.alpha: 1.0
