@@ -3,7 +3,7 @@
 super + q
   bspc node -c
 
-super + shift + {e,c}
+super + shift + {e,r}
 	bspc {quit,wm -r} && notify-send "Bspwm reloaded"
 
 super + control + Escape
@@ -68,7 +68,7 @@ super + b
 
 # -------- floating windows -----------
 
-super + w
+super + shift + f
   bspc node -t \~floating
 
 super + {Left,Down,Up,Right}
