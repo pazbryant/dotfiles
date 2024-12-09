@@ -1,9 +1,9 @@
 [global]
     monitor = 0
     width = 180
-    height = 300
+    height = 60
     origin = top-right
-    offset = 33x66
+    offset = 10x10
     notification_limit = 0
     progress_bar = true
     progress_bar_height = 12
