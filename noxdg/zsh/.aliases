@@ -9,6 +9,7 @@ alias vi="NVIM_APPNAME='minimal' nvim"
 alias yay="paru"
 alias btml="btm --theme=default-light"
 alias zshconfig="vi ~/.zshconfig"
+alias anime="ani-cli -q 1080"
 
 # fihs
 alias sp="systemctl suspend"
