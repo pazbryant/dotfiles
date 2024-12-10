@@ -116,4 +116,13 @@ super + shift + j
 super + shift + k
   bspc node -z bottom 0 -20 || bspc node -z top 0 -20
 
+# --------------- hide windows --------------------
+
+super + v
+    bspc node -g hidden
+
+# unhide window
+super + shift + v
+    bspc node {,$(bspc query -N -n .hidden | tail -n1)} -g hidden=off
+
 # ---------------- audio control ----------------------

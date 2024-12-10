@@ -21,6 +21,7 @@ bspc config focus_follows_pointer false
 bspc rule -a Postman desktop=^3 follow=off
 bspc rule -a qBittorrent desktop=^7 follow=off
 bspc rule -a obsidian desktop=^6 follow=off
+bspc rule -a mpv desktop=^7 follow=off
 
 # app favorite mode
 bspc rule -a pavucontrol state=floating center=true
