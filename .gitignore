@@ -10,7 +10,14 @@
 .config/qBittorrent/qBittorrent-data.conf
 .config/qBittorrent/lockfile
 .config/qBittorrent/rss
+
+# ssh
 noxdg/ssh/personal_github
 noxdg/ssh/known_hosts
+
+# calibre
 .config/calibre/gui.json
 .config/calibre/dynamic.pickle.json
+
+# mpv
+.config/mpv/mpvHistory.log

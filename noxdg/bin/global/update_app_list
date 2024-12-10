@@ -1,7 +1,5 @@
 #!/bin/sh
 
-set -x
-
 sync_system_apps() {
   sudo pacman -Qen | sort >"$1/installed_apps.txt"
 }
@@ -38,8 +36,6 @@ main() {
   sync_go_apps $DOTFILES_PATH
   sync_flatpak_apps $DOTFILES_PATH
   sync_aur_apps $DOTFILES_PATH
-
-  . "/home/bryant/.zshrc"
 }
 
 main
