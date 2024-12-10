@@ -1,8 +1,7 @@
 autoload -U compinit && compinit
-autoload -U bashcompinit && bashcompinit
 
 # set emacs keybind
-bindkey -e
+bindkey -v
 
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_ALL_DUPS
@@ -18,13 +17,11 @@ extra_path=(
   ~/.local/share/nvim/mason/bin/
   ~/.local/share/bob/nvim-bin/
 ) 
-export PATH="${(j|:|)extra_path}:$PATH"
+export PATH="$(printf "%s:" $extra_path)${PATH}"
 
 
-# fzf
+# start software
 eval "$(fzf --zsh)"
-
-# start binaries config
 eval "$(atuin init zsh)"
 eval "$(fnm env --use-on-cd)"
 eval "$(zoxide init --cmd cd zsh)"
