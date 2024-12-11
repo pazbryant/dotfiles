@@ -33,13 +33,7 @@ xsetroot -cursor_name left_ptr & # fix mouse
 ~/.fehbg &
 ~/bin/wm/start_polybar &
 
-pipewire &
-pipewire-pulse &
-dunst &
-mpd &
-picom &
-
-pgrep -x "wireplumber" >/dev/null || wireplumber &
-pgrep -x "udiskie" >/dev/null || udiskie &
+pgrep -x "picom" >/dev/null || picom &
+pgrep -x "udiskie" >/dev/null || udiskie -t &
 pgrep -x "unclutter" >/dev/null || unclutter &
 pgrep -x "sxhkd" >/dev/null || sxhkd -m -1 &
