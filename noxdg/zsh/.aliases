@@ -10,6 +10,8 @@ alias yay="paru"
 alias btml="btm --theme=default-light"
 alias zshconfig="vi ~/.zshconfig"
 alias anime="ani-cli -q 1080"
+alias c="xclip -selection clipboard"
+alias v="xclip -selection clipboard -o"
 
 # fihs
 alias sp="systemctl suspend"
