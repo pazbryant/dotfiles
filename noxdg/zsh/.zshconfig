@@ -1,7 +1,7 @@
 autoload -U compinit && compinit
 
 # set emacs keybind
-bindkey -v
+bindkey -e
 
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_ALL_DUPS
