@@ -43,12 +43,7 @@ commit_changes_to_git() {
   }
 
   git add .
-
-  name=$(git config --get user.name)
-  email=$(git config --get user.email)
-  author="${name} <${email}>"
-
-  sudo git commit --author "$author" "$FORMATTED_DATE" "$@"
+  git commit -m "Update system apps, $FORMATTED_DATE"
 
 }
 

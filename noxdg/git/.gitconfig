@@ -1,10 +1,10 @@
 [user]
- name = Bryant Paz
- email = pazbryant@proton.me
- username = pazbryant
+	name = Bryant Paz
+	email = pazbryant@proton.me
+  username = pazbryant
 [init]
- defaultBranch = main
+  defaultBranch = main
 [core]
- editor = nvim
+  editor = nvim
 [pull]
- rebase = true
+  rebase = true
