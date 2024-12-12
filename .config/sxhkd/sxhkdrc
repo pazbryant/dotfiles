@@ -64,6 +64,9 @@ shift + alt + Return
 super + b
   ~/bin/wm/set_brightness
 
+super + w
+  bspc desktop -l next
+
 # -------- floating windows -----------
 
 super + shift + f
