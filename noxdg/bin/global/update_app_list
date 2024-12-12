@@ -29,24 +29,6 @@ sync_aur_apps() {
   paru -Qm | sort >"$1/installed_aur_apps.txt"
 }
 
-commit_changes_to_git() {
-  FORMATTED_DATE=$(date "+%B %d, %Y")
-
-  if [ -z "$1" ]; then
-    echo "Error: Please provide a directory path"
-    return 1
-  fi
-
-  cd "$1" || {
-    echo "Error: Could not change to directory $1"
-    return 1
-  }
-
-  git add .
-  git commit -m "Update system apps, $FORMATTED_DATE"
-
-}
-
 main() {
   dot_path="/home/bryant/Documents/github/dotfiles/apps"
 
@@ -56,8 +38,6 @@ main() {
   sync_go_apps $dot_path
   sync_flatpak_apps $dot_path
   sync_aur_apps $dot_path
-
-  commit_changes_to_git "$dot_path"
 }
 
 main
