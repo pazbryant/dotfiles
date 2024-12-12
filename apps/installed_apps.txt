@@ -32,7 +32,6 @@ grex 1.4.5-1
 grub 2:2.12-3
 gst-plugin-pipewire 1:1.2.7-1
 hurl 6.0.0-1
-hyperfine 1.19.0-1
 imagemagick 7.1.1.41-1
 imv 4.5.0-4
 intel-media-driver 24.4.3-1
