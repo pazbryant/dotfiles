@@ -19,8 +19,12 @@ super + {n,p}
 super + shift + {p,n}
   bspc desktop -f {prev,next}.local
 
-super + {bracketleft,braceleft,parenleft,percent,equal,ampersand,parenright}
-  bspc desktop -f '^{1-7}'
+super + { bracketleft,braceleft,parenleft,percent,equal, \
+ampersand,parenright,braceright,bracketright }
+  bspc desktop -f '^{1-9}'
+
+super + exclam
+  bspc desktop -f 10
 
 super + shift {1-7}
   bspc node -d '^{1-7}'
