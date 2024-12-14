@@ -20,7 +20,7 @@ super + shift + {p,n}
   bspc desktop -f {prev,next}.local
 
 super + { bracketleft,braceleft,parenleft,percent,equal, \
-ampersand,parenright,braceright,bracketright }
+ampersand,parenright,braceright,bracketright}
   bspc desktop -f '^{1-9}'
 
 super + exclam
@@ -37,6 +37,9 @@ super + shift + s
 
 
 # -------------- main keys -----------------------
+
+super + o
+  pavucontrol
 
 super + e
   pcmanfm
