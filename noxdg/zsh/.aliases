@@ -13,6 +13,8 @@ alias anime="ani-cli -q 1080"
 alias animedub="ani-cli -q 1080 --dub"
 alias c="xclip -selection clipboard"
 alias v="xclip -selection clipboard -o"
+alias trans="trans -p"
+alias start-ssh='eval "$(ssh-agent -s)"'
 
 # fihs
 alias sp="systemctl suspend"
