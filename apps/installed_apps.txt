@@ -13,6 +13,7 @@ bspwm 0.9.10-4
 calibre 7.17.0-5
 capitaine-cursors 4-3
 chromium 131.0.6778.139-1
+cronie 1.7.2-1
 dbeaver 24.3.0-1
 docker 1:27.3.1-1
 docker-buildx 0.19.2-1
