@@ -20,8 +20,9 @@ extra_path=(
   /var/lib/flatpak/exports/bin/
   ~/.local/share/nvim/mason/bin/
   ~/.local/share/bob/nvim-bin/
-) 
-export PATH="$(printf "%s:" $extra_path)${PATH}"
+)
+extra_path_expanded=$(printf "%s:" "${extra_path[@]}")
+export PATH="${extra_path_expanded}${PATH}"
 
 # start software
 eval "$(fzf --zsh)"
