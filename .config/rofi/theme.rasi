@@ -14,7 +14,7 @@ background-alt: #333333; /* Dark gray */
 foreground:     #ffffff; /* Near black */
 selected:       #862d59; /* Even darker gray */
 
-    font: "Maple Mono SC NF Bold 9";
+    font: "Maple Mono NF CN SemiBold 10";
 }
 
 /*****----- Main Window -----*****/
