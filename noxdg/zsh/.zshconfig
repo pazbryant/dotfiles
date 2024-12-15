@@ -3,6 +3,10 @@ autoload -U compinit && compinit
 # set emacs keybind
 bindkey -e
 
+# custom keybind
+zle -N copy_terminal_buffer
+bindkey '^X' copy_terminal_buffer
+
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_FIND_NO_DUPS
@@ -18,7 +22,6 @@ extra_path=(
   ~/.local/share/bob/nvim-bin/
 ) 
 export PATH="$(printf "%s:" $extra_path)${PATH}"
-
 
 # start software
 eval "$(fzf --zsh)"

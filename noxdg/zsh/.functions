@@ -118,3 +118,8 @@ update_grub() {
 ssh_agent() {
   eval "$(ssh-agent -s)"
 }
+
+copy_terminal_buffer() {
+  echo "$BUFFER" | xclip -selection clipboard
+  zle reset-prompt
+}
