@@ -108,7 +108,7 @@ play() {
   esac
 
   # Run streamlink with mpv, adding the Twitch argument if needed
-  streamlink "$twitch_args" -p mpv "$1" "$quality"
+  streamlink "$twitch_args" -p mpv "$1" "$quality" &
 }
 
 update_grub() {
