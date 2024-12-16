@@ -6,13 +6,13 @@ Xft.rgba:	rgb
 Xft.lcdfilter:	lcddefault
 
 ! font family
-st.font: Maple Mono:pixelsize=15:style:regular
+st.font: Maple Mono:pixelsize=15:style:Medium
 
 ! window padding
 st.borderpx: 0
 
 ! font horizontal spacing
-st.cwscale: 1.25
+st.cwscale: 1.1
 
 ! transparency
 st.alpha: 1.0
