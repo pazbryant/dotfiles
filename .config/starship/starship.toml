@@ -6,14 +6,3 @@ disabled = true
 [directory]
 truncation_length = 2
 truncate_to_repo = false
-
-[character]                            
-success_symbol = "[](bold)"     
-error_symbol = "[!](bold)"
-vimcmd_symbol = "[](bold)"
-
-[git_branch]
-format = "[$branch]($style) "
-
-[git_status]
-disabled = true
