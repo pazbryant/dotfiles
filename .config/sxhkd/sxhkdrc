@@ -71,12 +71,12 @@ shift + alt + Return
 super + b
   ~/bin/wm/set_brightness
 
-super + w
-  bspc desktop -l next
+super + shift + w
+  bspc desktop -l next && notify-send "Switch modes"
 
 # -------- floating windows -----------
 
-super + shift + f
+super + w
   bspc node -t \~floating
 
 super + {Left,Down,Up,Right}
