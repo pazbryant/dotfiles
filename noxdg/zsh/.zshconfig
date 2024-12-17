@@ -5,7 +5,8 @@ bindkey -e
 
 # custom keybind
 zle -N copy_terminal_buffer
-bindkey '^X' copy_terminal_buffer
+
+bindkey '^X' copy_terminal_buffer # copy buffer terminal to clipboard
 
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_ALL_DUPS
