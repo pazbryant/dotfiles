@@ -1,5 +1,7 @@
-source /home/bryant/.aliases
-source /home/bryant/.functions
-source /home/bryant/.zshenv
-source /home/bryant/.zprofile
-source /home/bryant/.zshconfig
+#!/usr/bin/env sh
+
+. /home/bryant/.aliases
+. /home/bryant/.functions
+. /home/bryant/.zshenv
+. /home/bryant/.zprofile
+. /home/bryant/.zshconfig
