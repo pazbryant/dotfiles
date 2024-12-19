@@ -10,3 +10,7 @@ st.chscale: 0.9
 
 ! transparency
 st.alpha: 0.87
+
+! colorsl
+st.foreground: #ffffff
+st.cursorColor: #76ccbc
