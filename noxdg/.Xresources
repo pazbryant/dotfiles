@@ -1,5 +1,5 @@
 ! font family
-st.font: Maple Mono:pixelsize=15:style:Medium
+st.font: Maple Mono:pixelsize=13:style:Medium
 
 ! window padding
 st.borderpx: 0
