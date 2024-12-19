@@ -8,22 +8,10 @@ shape = "Block"
 TERM = "xterm-256color"
 
 [font]
-size = 11.5
-
-[font.bold]
-family = "Maple Mono Normal"
-style = "Bold"
-
-[font.bold_italic]
-family = "Maple Mono Normal"
-style = "BoldItalic"
-
-[font.italic]
-family = "Maple Mono Normal"
-style = "Italic"
+size = 12
 
 [font.normal]
-family = "Maple Mono Normal"
+family = "Maple Mono"
 style = "Medium"
 
 [font.offset]
