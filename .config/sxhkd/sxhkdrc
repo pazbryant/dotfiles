@@ -51,6 +51,9 @@ super + t
   st
 
 super + shift + t
+  alacritty
+
+super + shift + t
   st-light
 
 super + shift + space
