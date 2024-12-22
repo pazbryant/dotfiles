@@ -16,13 +16,14 @@ setopt HIST_FIND_NO_DUPS
 
 # extend path
 extra_path=(
-  ~/.cargo/bin/
-  ~/bin/global/
-  ~/.local/bin/
-  /usr/local/bin/
-  /var/lib/flatpak/exports/bin/
-  ~/.local/share/nvim/mason/bin/
-  ~/.local/share/bob/nvim-bin/
+~/.cargo/bin/
+~/bin/global/
+~/.local/bin/
+/usr/local/bin/
+~/bin/global/tmux/
+~/.local/share/bob/nvim-bin/
+/var/lib/flatpak/exports/bin/
+~/.local/share/nvim/mason/bin/
 )
 extra_path_expanded=$(printf "%s:" "${extra_path[@]}")
 export PATH="${extra_path_expanded}${PATH}"
