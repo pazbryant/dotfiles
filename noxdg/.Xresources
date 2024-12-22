@@ -5,12 +5,12 @@ st.font: Maple Mono:pixelsize=13.5:style:Medium
 st.borderpx: 0
 
 ! font horizontal spacing
-st.cwscale: 1.1
-st.chscale: 0.9
-
-! transparency
-st.alpha: 0.87
+st.cwscale: 1.15
+st.chscale: 1.00
 
 ! colorsl
 st.foreground: #ffffff
 st.cursorColor: #76ccbc
+
+! transparency
+st.alpha: 0.87
