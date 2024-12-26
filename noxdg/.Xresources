@@ -1,16 +1,16 @@
-! font family
-st.font: Maple Mono:pixelsize=13.5:style:Medium
+! Global font configuration
+*font: Maple Mono Normal:pixelsize=13:style:Medium
+*boldFont: Maple Mono Normal:pixelsize=13:style:Bold
+*italicFont: Maple Mono Normal:pixelsize=13:style:Italic
+*boldItalicFont: Maple Mono Normal:pixelsize=13:style:Bold Italic
 
-! window padding
+! Global colors
+st.background: #1d1f21
+st.foreground: #ffffff
+*cursorColor: #76ccbc
+
+! ST specific configurations
 st.borderpx: 0
-
-! font horizontal spacing
 st.cwscale: 1.15
 st.chscale: 1.00
-
-! colorsl
-st.foreground: #ffffff
-st.cursorColor: #76ccbc
-
-! transparency
 st.alpha: 0.87
