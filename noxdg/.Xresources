@@ -1,8 +1,8 @@
 ! Global font configuration
-*font: Maple Mono Normal:pixelsize=13:style:Medium
-*boldFont: Maple Mono Normal:pixelsize=13:style:Bold
-*italicFont: Maple Mono Normal:pixelsize=13:style:Italic
-*boldItalicFont: Maple Mono Normal:pixelsize=13:style:Bold Italic
+*font: Maple Mono Normal:pixelsize=14:style:Medium
+*boldFont: Maple Mono Normal:pixelsize=14:style:Bold
+*italicFont: Maple Mono Normal:pixelsize=14:style:Italic
+*boldItalicFont: Maple Mono Normal:pixelsize=14:style:Bold Italic
 
 ! Global colors
 st.background: #1d1f21
