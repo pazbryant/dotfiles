@@ -18,10 +18,10 @@ bspc config window_gap 0
 bspc config focus_follows_pointer false
 
 # app favorite desktop
-bspc rule -a Postman desktop=^3 follow=off
-bspc rule -a qBittorrent desktop=^7 follow=off
-bspc rule -a obsidian desktop=^6 follow=off
-bspc rule -a mpv desktop=^7 follow=off
+bspc rule -a Postman desktop=^4 follow=off
+bspc rule -a mpv desktop=^8 follow=off
+bspc rule -a obsidian desktop=^9 follow=off
+bspc rule -a qBittorrent desktop=^10 follow=off
 
 # app favorite mode
 bspc rule -a pavucontrol state=floating center=true

@@ -20,14 +20,11 @@ super + shift + {p,n}
   bspc desktop -f {prev,next}.local
 
 super + { bracketleft,braceleft,parenleft,percent,equal, \
-ampersand,parenright,braceright,bracketright}
-  bspc desktop -f '^{1-9}'
+ampersand,parenright,braceright,bracketright,exclam}
+  bspc desktop -f '^{1,2,3,4,5,6,7,8,9,10}'
 
-super + exclam
-  bspc desktop -f 10
-
-super + shift {1-7}
-  bspc node -d '^{1-7}'
+super + shift + {1,2,3,4,5,6,7,8,9,0}
+    bspc node -d '^{1,2,3,4,5,6,7,8,9,10}'
 
 super + {Tab,Escape}
   bspc {node,desktop} -f last.local
