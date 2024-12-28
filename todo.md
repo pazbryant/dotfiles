@@ -29,6 +29,7 @@ manually enable systemd-resolved service ( also manually download proton vpn con
 manually change the defaul dbeaver desktop application to execute this instead env GTK_THEME=Adwaita:dark dbeaver
 manually add my second disk to automount at start of my computer using `/etc/fstab` file config
 install manually zlibrari extension
+enable atd service
 
 # I would like to do in the future
 
