@@ -1,6 +1,7 @@
 7zip 24.09-2
 alacritty 0.14.0-1
 ansible 11.1.0-2
+at 3.2.5-4
 atuin 18.3.0-1
 bandwhich 0.23.1-1
 base 3-2
