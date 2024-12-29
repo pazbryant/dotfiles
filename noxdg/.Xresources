@@ -1,8 +1,8 @@
 ! Global font configuration
-*font: Maple Mono Normal:pixelsize=14:style:Medium
-*boldFont: Maple Mono Normal:pixelsize=14:style:Bold
-*italicFont: Maple Mono Normal:pixelsize=14:style:Italic
-*boldItalicFont: Maple Mono Normal:pixelsize=14:style:Bold Italic
+*font: Maple Mono Normal:pixelsize=13.5:style:Medium
+*boldFont: Maple Mono Normal:pixelsize=13.5:style:Bold
+*italicFont: Maple Mono Normal:pixelsize=13.5:style:Italic
+*boldItalicFont: Maple Mono Normal:pixelsize=13.5:style:Bold Italic
 
 ! Global colors
 st.background: #1d1f21
@@ -10,7 +10,7 @@ st.foreground: #ffffff
 *cursorColor: #76ccbc
 
 ! ST specific configurations
-st.borderpx: 0
-st.cwscale: 1.15
-st.chscale: 1.00
+st.borderpx: 10
+st.cwscale: 1.25
+st.chscale: 1.10
 st.alpha: 0.87
