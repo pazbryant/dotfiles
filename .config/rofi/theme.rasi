@@ -14,7 +14,7 @@ background-alt: #333333; /* Dark gray */
 foreground:     #ffffff; /* Near black */
 selected:       #862d59; /* Even darker gray */
 
-    font: "Overpass 10";
+    font: "Overpass SemiBold 10.5";
 }
 
 /*****----- Main Window -----*****/
