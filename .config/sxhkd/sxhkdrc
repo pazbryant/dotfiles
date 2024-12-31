@@ -53,9 +53,6 @@ super + t
 super + shift + t
   alacritty
 
-super + shift + t
-  st-light
-
 super + shift + space
   ~/bin/wm/switch_keyboard
 

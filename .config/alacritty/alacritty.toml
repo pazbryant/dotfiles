@@ -8,15 +8,19 @@ shape = "Block"
 TERM = "xterm-256color"
 
 [font]
-size = 12
+size = 10
 
 [font.normal]
-family = "Maple Mono"
+family = "Maple Mono Normal"
 style = "Medium"
 
+[font.bold]
+family = "Maple Mono Normal"
+style = "Bold"
+
 [font.offset]
-x = 1
-y = 0
+x = 2
+y = 1
 
 [[keyboard.bindings]]
 chars = "\u001B[27;5;9~"
@@ -40,15 +44,43 @@ mods = "Control|Shift"
 
 [[keyboard.bindings]]
 action = "ResetFontSize"
-key = "Equals"
+key = "!"
 mods = "Control"
 
 [mouse]
 hide_when_typing = true
 
 [window]
-decorations = "full"
+opacity = 0.87
 dynamic_padding = true
-opacity = 1
-startup_mode = "Windowed"
 padding = { x = 0, y = 0 }
+
+
+[colors]
+[colors.primary]
+background = "#1d1f21"
+foreground = "#ffffff"
+
+[colors.cursor]
+text = "#1d1f21"
+cursor = "#862d59"
+
+[colors.normal]
+black = "#1d1f21"
+red = "#cc6666"
+green = "#b5bd68"
+yellow = "#f0c674"
+blue = "#81a2be"
+magenta = "#b294bb"
+cyan = "#8abeb7"
+white = "#c5c8c6"
+
+[colors.bright]
+black = "#666666"
+red = "#d54e53"
+green = "#b9ca4a"
+yellow = "#e7c547"
+blue = "#7aa6da"
+magenta = "#c397d8"
+cyan = "#70c0b1"
+white = "#eaeaea"

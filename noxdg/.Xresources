@@ -7,10 +7,10 @@
 ! Global colors
 st.background: #1d1f21
 st.foreground: #ffffff
-*cursorColor: #76ccbc
+*cursorColor: #862d59
 
 ! ST specific configurations
 st.borderpx: 10
 st.cwscale: 1.20
-st.chscale: 1.10
+st.chscale: 1.00
 st.alpha: 0.87
