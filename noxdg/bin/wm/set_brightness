@@ -7,7 +7,7 @@ brightness=$(rofi -dmenu -p "Enter brightness (0-9 or 0.0-1.0):" -lines 1)
 
 # POSIX-compliant way to handle the mapping
 case "$brightness" in
-0) brightness="0.50" ;;
+0) brightness="0.45" ;;
 1) brightness="0.90" ;;
 2) brightness="0.85" ;;
 3) brightness="0.80" ;;
