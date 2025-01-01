@@ -6,5 +6,6 @@ if ! flock -n 9; then
   exit 1
 fi
 
-notify-send "Screenkey"
-screenkey --geometry 360x600+1540+490 -s small --opacity 0.4 --font "Maple Mono 16"
+screenkey --geometry 360x600+1540+490 \
+  --opacity 0.4 \
+  --font "Maple Mono 25"
