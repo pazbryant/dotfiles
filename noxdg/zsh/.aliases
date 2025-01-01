@@ -15,6 +15,7 @@ alias animedub="ani-cli -q 1080 --dub"
 alias c="xclip -selection clipboard"
 alias p="xclip -selection clipboard -o"
 alias trans="trans -p"
+alias cl="clear"
 
 alias sp="systemctl suspend"
 alias dh="rm ~/.history.db"

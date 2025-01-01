@@ -100,6 +100,7 @@ translate-shell 0.9.7.1-2
 tree 2.1.3-1
 udiskie 2.5.7-1
 ueberzugpp 2.9.6-6
+ufw 0.36.2-5
 unclutter 1:1.6-4
 vulkan-intel 1:24.3.2-1
 wireplumber 0.5.7-1
