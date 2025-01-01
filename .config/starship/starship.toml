@@ -5,14 +5,13 @@ $directory\
 $git_branch\
 $git_status\
 $cmd_duration\
-$line_break\
 $character"""
 
 # Directory configuration
 [directory]
-truncation_length = 3
+truncation_length = 2
 truncate_to_repo = true
-style = "blue"
+style = "bright-blue"
 
 # Git configuration
 [git_branch]
@@ -21,7 +20,7 @@ style = "bright-purple"
 
 [git_status]
 format = '([\[$all_status$ahead_behind\]]($style) )'
-style = "red"
+style = "yellow"
 
 # Command duration
 [cmd_duration]
@@ -31,7 +30,7 @@ format = "[$duration]($style) "
 # Prompt character
 [character]
 success_symbol = "[➜](green)"
-error_symbol = "[✗](red)"
+error_symbol = "[✗](bold red)"
 
 # Disable unused modules for better performance
 [aws]
