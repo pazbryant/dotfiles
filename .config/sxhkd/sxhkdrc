@@ -29,10 +29,6 @@ super + shift + {1,2,3,4,5,6,7,8,9,0}
 super + {Tab,Escape}
   bspc {node,desktop} -f last.local
 
-super + shift + s
-  notify-send "Entering standby mode"; sleep 1; xset dpms force standby
-
-
 # -------------- main keys -----------------------
 
 super + a
@@ -56,7 +52,7 @@ super + shift + t
 super + shift + space
   ~/bin/wm/switch_keyboard
 
-super + s
+super + shift + s
   ~/bin/wm/select_and_execute
 
 super + Return
@@ -70,6 +66,9 @@ shift + alt + Return
 
 super + b
   ~/bin/wm/set_brightness
+
+super + s
+  ~/bin/wm/screenkey
 
 super + shift + w
   bspc desktop -l next && notify-send "Switch modes"
