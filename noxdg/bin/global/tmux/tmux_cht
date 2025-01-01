@@ -1,0 +1,35 @@
+#!/bin/sh
+
+commands_file="$HOME/.tmux-cht-commands"
+languages_file="$HOME/.tmux-cht-languages"
+
+# Ensure required files exist
+if [ ! -f "$commands_file" ] || [ ! -f "$languages_file" ]; then
+    echo "Required files are missing!" >&2
+    exit 1
+fi
+
+# Select an option using `fzf`
+selected=$(bat "$commands_file" "$languages_file" | fzf)
+if [ $? -ne 0 ] || [ -z "$selected" ]; then
+    exit 0
+fi
+
+# Prompt for query
+printf "Enter Query: "
+IFS= read -r query
+
+# Check if the selection is in languages file
+if rg -qs -- "$selected" "$languages_file"; then
+    query=$(echo "$query" | tr ' ' '+')
+    tmux neww sh -c "
+     curl cht.sh/$(printf '%s' "$selected")/$(printf '%s' "$query");
+     echo 'Press Enter to exit...';
+     IFS= read -r
+    "
+else
+    tmux neww sh -c "
+    curl -s cht.sh/$(printf '%s' "$selected")~$(printf '%s' "$query") |
+    bat
+"
+fi
