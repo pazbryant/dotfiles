@@ -37,32 +37,22 @@ copy_terminal_buffer() {
 }
 
 sshadd() {
-  sshpass_add() {
-    echo "Checking if SSH keys are already loaded..."
-    if ssh-add -l >/dev/null 2>&1; then
-      echo "SSH keys are already loaded."
-      return 0
-    fi
-
-    if [ -z "$SSH_AUTH_SOCK" ]; then
-      echo "No SSH agent found. Starting a new agent..."
-      eval "$(ssh-agent -s)"
-
-      echo "Retrieving passphrase from pass..."
-      passphrase=$(pass ssh/personal_github) || {
-        echo "Failed to retrieve passphrase from pass." >&2
-        return 1
-      }
-
-      echo "Adding SSH key to agent..."
-      if ! sshpass -P "Enter passphrase" -p "$passphrase" ssh-add ~/.ssh/personal_github; then
-        echo "Failed to add SSH key." >&2
-        return 1
-      fi
-    fi
-
-    echo "SSH agent has been cached and SSH key added successfully."
+  if ssh-add -l >/dev/null 2>&1; then
+    echo "SSH keys are already loaded."
     return 0
-  }
-  sshpass_add
+  fi
+
+  if [ -z "$SSH_AUTH_SOCK" ]; then
+    eval "$(ssh-agent -s)" >/dev/null 2>&1
+
+    passphrase=$(pass ssh/personal_github) || {
+      echo "Failed to retrieve passphrase from pass." >&2
+      return 1
+    }
+
+    if ! sshpass -P "Enter passphrase" -p "$passphrase" ssh-add ~/.ssh/personal_github >/dev/null 2>&1; then
+      return 1
+    fi
+  fi
+  return 0
 }

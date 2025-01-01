@@ -11,19 +11,19 @@ zle -N copy_terminal_buffer
 bindkey '^X' copy_terminal_buffer # copy buffer terminal to clipboard
 
 setopt HIST_IGNORE_DUPS
-setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_ALL_DUPS
 
 # extend path
 extra_path=(
-~/.cargo/bin/
-~/bin/global/
-~/.local/bin/
-/usr/local/bin/
-~/bin/global/tmux/
-~/.local/share/bob/nvim-bin/
-/var/lib/flatpak/exports/bin/
-~/.local/share/nvim/mason/bin/
+  ~/bin/global/
+  ~/.cargo/bin/
+  ~/.local/bin/
+  ~/bin/global/tmux/
+  ~/.local/share/bob/nvim-bin/
+  ~/.local/share/nvim/mason/bin/
+  /usr/local/bin/
+  /var/lib/flatpak/exports/bin/
 )
 extra_path_expanded=$(printf "%s:" "${extra_path[@]}")
 export PATH="${extra_path_expanded}${PATH}"
@@ -31,6 +31,12 @@ export PATH="${extra_path_expanded}${PATH}"
 # start software
 eval "$(fzf --zsh)"
 eval "$(atuin init zsh)"
+eval "$(starship init zsh)"
 eval "$(fnm env --use-on-cd)"
 eval "$(zoxide init --cmd cd zsh)"
-eval "$(starship init zsh)"
+
+# only execute when it's a tmux session
+# function can be found in ~/.functions
+if [ -n "$TMUX" ] && [ -d ".git" ]; then
+  sshadd
+fi
