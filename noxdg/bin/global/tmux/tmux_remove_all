@@ -1,27 +1,35 @@
 #!/bin/env sh
 
-CURRENT_SESSION=$(tmux display-message -p "#S")
+home_session="$USER"
+
+exec 1>/tmp/tmux_debug.log 2>&1
 
 kill_sessions() {
-  tmux list-sessions -F "#S" | grep -v "^${1}$" | while read -r session; do
+  tmux list-sessions -F "#S" | rg -v "^${1}$" | while read -r session; do
     tmux kill-session -t "$session"
-    tmux display-message "All sessions have been killed"
   done
 }
 
 kill_windows() {
   current_window=$(tmux display-message -p "#I")
 
-  tmux list-windows -t "$1" -F "#I" | grep -v "^${current_window}$" | while read -r window; do
+  tmux list-windows -t "$1" -F "#I" | rg -v "^${current_window}$" | while read -r window; do
     tmux kill-window -t "${1}:${window}"
-    tmux display-message "All windows have been killed"
   done
+}
+
+go_home() {
+  tmux switch-client -t "$home_session"
+  tmux display-message "All has been killed but home session"
 }
 
 # Main execution
 main() {
-  kill_sessions "$CURRENT_SESSION"
-  kill_windows "$CURRENT_SESSION"
+
+  go_home
+  kill_sessions "$home_session"
+  kill_windows "$home_session"
+
 }
 
 main
