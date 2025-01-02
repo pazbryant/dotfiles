@@ -40,6 +40,11 @@ super + o
 super + e
   pcmanfm
 
+super + i
+  bspc rule -a St -o state=floating follow=on center=true \
+    rectangle=900x500+0+0 && st -e \ 
+    sh -c "yazi /home/bryant/Mega/personal/pc/images/wallpapers"
+
 super + d
   rofi -show run -show-icons
 
@@ -81,7 +86,7 @@ super + w
 super + {Left,Down,Up,Right}
   bspc node -v {-30 0,0 30,0 -30,30 0}
 
-super + shift + f
+super + u
   if [ "$(bspc query -N -n focused.floating)" ]; then \
       bspc node -f last.tiled.local; \
   else \
@@ -92,11 +97,11 @@ super + shift + f
 
 super + m
   bspc rule -a St -o state=floating follow=on center=true \
-    rectangle=700x350+0+0 && st -e zsh -c "ncmpcpp"
+    rectangle=700x350+0+0 && st -e sh -c "ncmpcpp"
 
 super + y
   bspc rule -a St -o state=floating follow=on center=true \
-    rectangle=800x400+0+0 && st -e zsh -c "yazi"
+    rectangle=800x400+0+0 && st -e sh -c "yazi"
 
 # -------------- print ---------------------------
 
