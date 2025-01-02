@@ -1,4 +1,7 @@
 find
+tmux
+ripgrep
+fzf
 fd
 man
 tldr
@@ -9,7 +12,6 @@ cp
 ls
 grep
 xargs
-rg
 ps
 mv
 kill

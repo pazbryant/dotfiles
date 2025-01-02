@@ -1,35 +1,34 @@
 #!/bin/sh
 
+defaults_file="$HOME/.tmux-cht-defaults"
 commands_file="$HOME/.tmux-cht-commands"
 languages_file="$HOME/.tmux-cht-languages"
 
-# Ensure required files exist
-if [ ! -f "$commands_file" ] || [ ! -f "$languages_file" ]; then
-    echo "Required files are missing!" >&2
-    exit 1
-fi
-
-# Select an option using `fzf`
-selected=$(bat "$commands_file" "$languages_file" | fzf)
-if [ $? -ne 0 ] || [ -z "$selected" ]; then
+selected=$(bat "$commands_file" "$languages_file" "$defaults_file" | fzf)
+if [ -z "$selected" ]; then
     exit 0
 fi
 
-# Prompt for query
+if rg -qs "$selected" "$defaults_file"; then
+    tmux neww sh -c "
+    curl -s cht.sh/$(printf '%s' ":$selected") | bat;
+    "
+    exit 1
+fi
+
 printf "Enter Query: "
 IFS= read -r query
 
-# Check if the selection is in languages file
-if rg -qs -- "$selected" "$languages_file"; then
+if rg -qs "$selected" "$languages_file"; then
     query=$(echo "$query" | tr ' ' '+')
+    echo "languages $query"
     tmux neww sh -c "
-     curl cht.sh/$(printf '%s' "$selected")/$(printf '%s' "$query");
-     echo 'Press Enter to exit...';
-     IFS= read -r
+     curl -s cht.sh/$(printf '%s' "$selected")/$(printf '%s' "$query") | bat;
     "
 else
+    echo 'I am here'
+    echo "$query"
     tmux neww sh -c "
-    curl -s cht.sh/$(printf '%s' "$selected")~$(printf '%s' "$query") |
-    bat
-"
+    curl -s cht.sh/$(printf '%s' "$selected")~$(printf '%s' "$query") | bat;
+    "
 fi
