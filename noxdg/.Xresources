@@ -6,7 +6,7 @@
 
 ! Global colors
 st.background: #1d1f21
-st.foreground: #dbdbdb
+st.foreground: #ffffff
 *cursorColor: #862d59
 
 ! ST specific configurations
