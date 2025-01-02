@@ -1,4 +1,5 @@
 # {{ enviroment variables
+
 export EDITOR="nvim"
 export VISUAL=$EDITOR
 export TERMINAL="st"
@@ -14,7 +15,6 @@ export MANPAGER='nvim +Man!'
 export GOPATH="/home/bryant/go/bin"
 export CM_LAUNCHER="rofi"
 export SXHKD_SHELL="zsh"
-export GPG_TTY=$(tty)
 export STARSHIP_CONFIG="/home/bryant/.config/starship/starship.toml"
 export PASSWORD_STORE_DIR="/home/bryant/Documents/github/pass"
 
@@ -26,11 +26,11 @@ export FZF_DEFAULT_OPTS=" \
 --preview-window noborder \
 --height=50%"
 
-
 export FZF_DEFAULT_COMMAND="fd \
   --type f \
   --strip-cwd-prefix \
   --hidden \
   --follow \
   --exclude=git"
+
 #}}

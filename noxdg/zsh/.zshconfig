@@ -35,6 +35,9 @@ eval "$(starship init zsh)"
 eval "$(fnm env --use-on-cd)"
 eval "$(zoxide init --cmd cd zsh)"
 
+GPG_TTY=$(tty)
+export GPG_TTY
+
 # only execute when it's a tmux session
 # function can be found in ~/.functions
 if [ -n "$TMUX" ] && [ -d ".git" ]; then
