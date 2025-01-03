@@ -40,6 +40,11 @@ super + o
 super + e
   pcmanfm
 
+super + minus
+  bspc rule -a St -o state=floating follow=on center=true \
+    rectangle=900x500+0+0 && st -e \ 
+    sh -c "yazi /run/media/bryant/tiagovault"
+
 super + i
   bspc rule -a St -o state=floating follow=on center=true \
     rectangle=900x500+0+0 && st -e \ 
