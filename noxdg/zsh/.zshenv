@@ -24,13 +24,13 @@ export PASSWORD_STORE_DIR="/home/bryant/Documents/github/pass"
 
 export FZF_DEFAULT_OPTS=" \
 --preview-window noborder \
---height=50%"
+--height=50% \
+--bind 'ctrl-o:execute(xdg-open {})'
+"
 
 export FZF_DEFAULT_COMMAND="fd \
   --type f \
   --strip-cwd-prefix \
   --hidden \
   --follow \
-  --exclude=git"
-
-#}}
+  --exclude=.git"
