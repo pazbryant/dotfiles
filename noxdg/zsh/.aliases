@@ -23,7 +23,7 @@ alias sht="shutdown now"
 alias reboot="systemctl reboot"
 alias fontcache="sudo fc-cache -f -v"
 alias motivation="mpv ~/Mega/personal/pc/videos/biy/cristiano.mp4"
-alias rel="xrdb merge ~/.Xresources && kill -USR1 \$(pidof st) && kill -USR1 \$(pidof st-light)"
+alias rel="xrdb merge ~/.Xresources && kill -USR1 \$(pidof st)"
 alias ff="fastfetch"
 
 alias gb="git branch"
