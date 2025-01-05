@@ -1,34 +1,43 @@
 #!/bin/sh
 
+# File paths
 defaults_file="$HOME/.tmux-cht-defaults"
 commands_file="$HOME/.tmux-cht-commands"
 languages_file="$HOME/.tmux-cht-languages"
 
+# Helper function to safely print strings
+safe_print() {
+    printf '%s' "$1"
+}
+
+# Helper function to create new tmux window with command
+tmux_curl() {
+    url="cht.sh/$1"
+    pager="${2:-bat}"
+    tmux neww sh -c "curl -s '$url' | $pager"
+}
+
 selected=$(bat "$commands_file" "$languages_file" "$defaults_file" | fzf)
-if [ -z "$selected" ]; then
-    exit 0
-fi
+[ -z "$selected" ] && exit 0
 
 if rg -qs "$selected" "$defaults_file"; then
-    tmux neww sh -c "
-    curl -s cht.sh/$(printf '%s' ":$selected") | bat;
-    "
+    tmux_curl ":$(safe_print "$selected")"
     exit 1
 fi
 
 printf "Enter Query: "
 IFS= read -r query
 
+# Handle languages
 if rg -qs "$selected" "$languages_file"; then
-    query=$(echo "$query" | tr ' ' '+')
-    echo "languages $query"
-    tmux neww sh -c "
-     curl -s cht.sh/$(printf '%s' "$selected")/$(printf '%s' "$query") | bat;
-    "
+    if [ -n "$query" ]; then
+        query=$(echo "$query" | tr ' ' '+')
+        tmux_curl "$(safe_print "$selected")/$(safe_print "$query")" "less -R"
+    else
+        tmux_curl "$(safe_print "$selected")" "less -R"
+    fi
 else
-    echo 'I am here'
-    echo "$query"
-    tmux neww sh -c "
-    curl -s cht.sh/$(printf '%s' "$selected")~$(printf '%s' "$query") | bat;
-    "
+    tmux_curl "$(safe_print "$selected")~$(safe_print "$query")" "less -R"
 fi
+
+exit 1
