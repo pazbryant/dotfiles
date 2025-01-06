@@ -31,11 +31,16 @@ manually add my second disk to automount at start of my computer using `/etc/fst
 install manually zlibrari extension
 enable atd service
 
-# I would like to do in the future
+<!-- # this is for some applications that use xterm as a default terminal. -->
+<!--so instead of use that terminal you only create a symbol link of your-->
+<!--terminal-->
+sudo ln -sf /usr/bin/your-terminal /usr/bin/xterm
+<!-- alternative -->
+gsettings set org.gnome.desktop.default-applications.terminal exec 'your-terminal'
 
+<!-- # I would like to do in the future -->
 manage secrets with some tool
 
-# Thins I need to do right now
-
+<!-- # Thins I need to do right now -->
 - Finalize scrit to manager volume
 - Create a vpn config (could wait)
