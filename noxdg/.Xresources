@@ -1,13 +1,17 @@
-! Global font configuration
-*font: Maple Mono NF:pixelsize=13:style:Medium
-*boldFont: Maple Mono NF:pixelsize=13:style:Bold
-*italicFont: Maple Mono NF:pixelsize=13:style:Italic
-*boldItalicFont: Maple Mono NF:pixelsize=13:style:Bold Italic
+Xft.antialias:	1
+Xft.hinting:	1
+Xft.autohint:	0
+Xft.hintstyle:	hintslight
+Xft.rgba:	rgb
+Xft.lcdfilter:	lcddefault
 
 ! Global colors
-*st.background: #1d1f21
-*st.foreground: #ffffff
+*background: #1d1f21
+*foreground: #ffffff
 *cursorColor: #862d59
+
+! Global font configuration
+st.font: Maple Mono NF:pixelsize=13:style:Medium
 
 ! ST specific configurations
 *st.borderpx: 10
