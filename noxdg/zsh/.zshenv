@@ -26,6 +26,7 @@ export FZF_DEFAULT_OPTS=" \
 --preview-window noborder \
 --height=50% \
 --bind 'ctrl-o:execute(xdg-open {})'
+--bind 'ctrl-x:execute(set-xdg-default {})'
 "
 
 export FZF_DEFAULT_COMMAND="fd \

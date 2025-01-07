@@ -17,7 +17,7 @@ main() {
 
   desktop=$(fd '.desktop' . /usr/share/applications --type=file |
     xargs -I {} basename '{}' |
-    rofi -dmenu) || {
+    fzf) || {
     printf 'Error: Failed to select desktop file\n'
     exit 1
   }
