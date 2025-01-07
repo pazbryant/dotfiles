@@ -60,10 +60,10 @@ super + shift + t
   alacritty
 
 super + shift + space
-  ~/bin/wm/switch_keyboard
+  ~/bin/wm/switch-keyboard
 
-super + shift + s
-  ~/bin/wm/select_and_execute
+super + s
+  ~/bin/wm/select-and-execute
 
 super + Return
   firefox -P Personal
@@ -75,9 +75,9 @@ shift + alt + Return
   firefox -P Personal --private-window 
 
 super + b
-  ~/bin/wm/set_brightness
+  ~/bin/wm/set-brightness
 
-super + s
+super + shift + s
   ~/bin/wm/screenkey
 
 super + shift + w
@@ -111,13 +111,13 @@ super + y
 # -------------- print ---------------------------
 
 Print
- ~/bin/wm/take_screenshots -m select && notify-send "Saved"
+ ~/bin/wm/take-screenshots -m select && notify-send "Saved"
 
 super + Print
- ~/bin/wm/take_screenshots -m full && notify-send "Saved"
+ ~/bin/wm/take-screenshots -m full && notify-send "Saved"
 
 shift + Print
- ~/bin/wm/take_screenshots -m win && notify-send "Saved"
+ ~/bin/wm/take-screenshots -m win && notify-send "Saved"
 
 # --------------- resize windows --------------------
 

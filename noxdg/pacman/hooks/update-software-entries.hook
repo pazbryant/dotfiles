@@ -1,4 +1,4 @@
-# /etc/pacman.d/hooks/update-list-apps.hook
+# /etc/pacman.d/hooks/update-software-entries.hook
 
 [Trigger]
 Operation = Remove
@@ -9,4 +9,4 @@ Target = *
 
 [Action]
 When = PostTransaction
-Exec = '/home/bryant/bin/global/update_app_list'
+Exec = '/home/bryant/bin/global/update-software-entries'
