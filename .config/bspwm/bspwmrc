@@ -29,7 +29,7 @@ xset s off -dpms &
 xsetroot -cursor_name left_ptr & # fix mouse
 
 ~/.fehbg &
-~/bin/wm/start_polybar &
+~/bin/wm/start-polybar &
 
 pgrep -x "picom" >/dev/null || picom &
 pgrep -x "udiskie" >/dev/null || udiskie &
