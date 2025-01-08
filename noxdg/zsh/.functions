@@ -44,10 +44,7 @@ sshadd() {
   if [ -z "$SSH_AUTH_SOCK" ]; then
     eval "$(ssh-agent -s)" >/dev/null 2>&1
 
-    passphrase=$(pass ssh/personal_github) || {
-      echo "Failed to retrieve passphrase from pass." >&2
-      return 1
-    }
+    passphrase=$(pass ssh/personal_github) 2>/dev/null || return 1
 
     if ! sshpass -P "Enter passphrase" -p "$passphrase" ssh-add ~/.ssh/personal_github >/dev/null 2>&1; then
       return 1
