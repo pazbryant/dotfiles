@@ -17,4 +17,4 @@ Xft.lcdfilter:	lcddefault
 *st.borderpx: 10
 *st.cwscale: 1.05
 *st.chscale: 1.00
-*st.alpha: 0.80
+*st.alpha: 0.85
