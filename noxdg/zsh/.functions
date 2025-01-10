@@ -36,6 +36,9 @@ copy_terminal_buffer() {
 }
 
 sshadd() {
+  # we're not in tmux nor git repository
+  [ -z "$TMUX" ] || [ ! -d ".git" ] && return 0
+
   if ssh-add -l >/dev/null 2>&1; then
     echo "SSH keys are already loaded."
     return 0

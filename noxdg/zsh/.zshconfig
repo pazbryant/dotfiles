@@ -41,8 +41,6 @@ eval "$(zoxide init --cmd cd zsh)"
 GPG_TTY=$(tty)
 export GPG_TTY
 
-# only execute when it's a tmux session
+# ssh private key autoload
 # function can be found in ~/.functions
-if [ -n "$TMUX" ] && [ -d ".git" ]; then
-  sshadd
-fi
+sshadd
