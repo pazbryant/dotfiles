@@ -1,0 +1,49 @@
+#!/bin/sh
+
+DIR="$HOME/.config/dunst/icons"
+
+get_volume() {
+    pactl get-sink-volume @DEFAULT_SINK@
+}
+
+is_mute() {
+    pactl get-sink-mute @DEFAULT_SINK@ | rg "yes"
+}
+
+send_notification() {
+    volume=$(get_volume)
+    if is_mute; then
+        icon_name="$DIR/notification-audio-volume-muted.svg"
+        dunstify "Muted  " -i "$icon_name" -t 1000 -r 5555 -u low -h string:synchronous:audio-volume
+    else
+        if [ "$volume" -eq 0 ]; then
+            icon_name="$DIR/notification-audio-volume-muted.svg"
+        elif [ "$volume" -lt 30 ]; then
+            icon_name="$DIR/notification-audio-volume-low.svg"
+        elif [ "$volume" -lt 70 ]; then
+            icon_name="$DIR/notification-audio-volume-medium.svg"
+        else
+            icon_name="$DIR/notification-audio-volume-high.svg"
+        fi
+        dunstify "$volume%  " -i "$icon_name" -t 1000 -r 5555 -u low -h int:value:"$volume"
+    fi
+}
+
+case $1 in
+up)
+    # Unmute and increase volume by 2%
+    pactl set-sink-mute @DEFAULT_SINK@ 0
+    pactl set-sink-volume @DEFAULT_SINK@ +2%
+    ;;
+down)
+    # Unmute and decrease volume by 2%
+    pactl set-sink-mute @DEFAULT_SINK@ 0
+    pactl set-sink-volume @DEFAULT_SINK@ -2%
+    ;;
+mute)
+    # Toggle mute
+    pactl set-sink-mute @DEFAULT_SINK@ toggle
+    ;;
+esac
+
+send_notification
