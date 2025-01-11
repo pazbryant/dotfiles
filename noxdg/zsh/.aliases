@@ -38,6 +38,7 @@ alias gaa="git add -A"
 alias gc="git commit"
 alias ggpush='git push origin $(git rev-parse --abbrev-ref HEAD)'
 alias ggpull='git pull origin $(git rev-parse --abbrev-ref HEAD)'
+alias gcc='git rev-list --count HEAD'
 
 alias lzd="lazydocker"
 
