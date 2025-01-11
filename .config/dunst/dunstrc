@@ -1,9 +1,9 @@
 [global]
     monitor = 0
-    width = 180
+    width =  (300,600)
     height = 60
     origin = top-right
-    offset = 10x10
+    offset = 33x66
     notification_limit = 0
     progress_bar = true
     progress_bar_height = 12
@@ -31,7 +31,7 @@
     ellipsize = middle
     stack_duplicates = true
     hide_duplicate_count = false
-    icon_position = off
+    icon_position = left
     ignore_newline = no
     show_indicators = no
     max_icon_size = 96
@@ -47,3 +47,25 @@
     force_xinerama = false
     mouse_left_click = close_current
     mouse_right_click = do_action, close_all
+
+
+[experimental]
+    per_monitor_dpi = true
+
+[urgency_low]
+    background = "#191724"
+    foreground = "#ffffff"
+    timeout = 10
+
+[urgency_normal]
+    background = "#575294"
+    foreground = "#ffffff"
+    timeout = 10
+
+[urgency_critical]
+    background = "#eb6f92"
+    foreground = "#ffffff"
+    frame_color = "#eb4e92"
+    timeout = 0
+
+# vim: ft=cfg

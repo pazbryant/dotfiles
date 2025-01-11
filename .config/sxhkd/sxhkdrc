@@ -139,10 +139,13 @@ super + alt + k
 # --------------- hide windows --------------------
 
 super + v
-    bspc node -g hidden
+  bspc node -g hidden
 
 # unhide window
 super + shift + v
-    bspc node {,$(bspc query -N -n .hidden | tail -n1)} -g hidden=off
+  bspc node {,$(bspc query -N -n .hidden | tail -n1)} -g hidden=off
 
 # ---------------- audio control ----------------------
+
+XF86Audio{LowerVolume,RaiseVolume,Mute}
+  ~/bin/wm/volume-dunst {down,up,mute}
