@@ -29,7 +29,7 @@ format = "[$duration]($style) "
 
 # Prompt character
 [character]
-success_symbol = "[➜](green)"
+success_symbol = "[󰁕](green)"
 error_symbol = "[✗](bold red)"
 
 # Disable unused modules for better performance
