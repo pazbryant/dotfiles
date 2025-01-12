@@ -35,6 +35,7 @@ export PATH="${extra_path_expanded}${PATH}"
 # function can be found in ~/.zshplugin
 repos=(
   z-shell/zsh-eza
+  zsh-users/zsh-autosuggestions
   zsh-users/zsh-syntax-highlighting
   hlissner/zsh-autopair
   jeffreytse/zsh-vi-mode
