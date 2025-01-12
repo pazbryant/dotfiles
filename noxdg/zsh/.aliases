@@ -3,10 +3,8 @@
 # main
 alias :q="exit"
 alias wg="sudo wg"
-alias zt="zathura"
 alias sudo="sudo "
 alias vi="nvim"
-alias chad="NVIM_APPNAME='nvchad' nvim"
 alias fvim="NVIM_APPNAME='fvim' nvim"
 alias yay="paru"
 alias btml="btm --theme=default-light"
