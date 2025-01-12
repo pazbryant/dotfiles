@@ -35,29 +35,26 @@ export PATH="${extra_path_expanded}${PATH}"
 # function can be found in ~/.zshplugin
 repos=(
   z-shell/zsh-eza
+  hlissner/zsh-autopair
   zsh-users/zsh-autosuggestions
   zsh-users/zsh-syntax-highlighting
-  hlissner/zsh-autopair
-  jeffreytse/zsh-vi-mode
 )
+# load plugins
+plugin-load $repos
+
+# start autopair
+autopair-init
 
 # zsh-autosuggestions strategy
 ZSH_AUTOSUGGEST_STRATEGY=(completion history)
-
-# load plugins
-plugin-load $repos
+bindkey '^Y' autosuggest-accept
 
 # start software
 eval "$(fzf --zsh)"
 eval "$(starship init zsh)"
 eval "$(fnm env --use-on-cd)"
 eval "$(zoxide init --cmd cd zsh)"
-
-# execute ater zsh-vim-mode k
-zvm_after_init_commands+=(
-  eval "$(atuin init zsh)"
-  autopair-init
-)
+eval "$(atuin init zsh)"
 
 # gpg tty session
 GPG_TTY=$(tty)
@@ -65,4 +62,4 @@ export GPG_TTY
 
 # ssh private key autoload
 # function can be found in ~/.functions
-sshadd
+ssh_add_private_key
