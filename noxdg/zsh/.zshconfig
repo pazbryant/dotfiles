@@ -41,6 +41,9 @@ repos=(
   jeffreytse/zsh-vi-mode
 )
 
+# zsh-autosuggestions strategy
+ZSH_AUTOSUGGEST_STRATEGY=(completion history)
+
 # load plugins
 plugin-load $repos
 
