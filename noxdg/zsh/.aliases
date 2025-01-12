@@ -45,3 +45,5 @@ alias lzd="lazydocker"
 alias ta="tmux attach"
 alias tk="tmux kill-server"
 alias tn='tmux new -s $USER'
+
+alias zls='ls $ZPLUGINDIR'
