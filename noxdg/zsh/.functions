@@ -35,7 +35,7 @@ copy_terminal_buffer() {
   zle reset-prompt
 }
 
-sshadd() {
+ssh_add_private_key() {
   # we're not in tmux nor git repository
   [ -z "$TMUX" ] || [ ! -d ".git" ] && return 0
 
