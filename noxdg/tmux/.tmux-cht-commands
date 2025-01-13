@@ -34,3 +34,9 @@ chown
 make
 unzip
 zip
+stylua
+prettier
+gofumpt
+black
+shellharden
+eslint
