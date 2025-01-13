@@ -146,3 +146,10 @@ super + shift + v
 
 XF86Audio{LowerVolume,RaiseVolume,Mute}
   ~/bin/wm/volume-dunst {down,up,mute}
+
+
+# ---------------- audio control ----------------------
+
+super + c
+  bspc rule -a mpv -o state=fullscreen follow=on \
+    && mpv --volume=100 ~/Mega/personal/pc/videos/biy/cristiano.mp4
