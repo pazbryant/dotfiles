@@ -36,7 +36,6 @@ export PATH="${extra_path_expanded}${PATH}"
 repos=(
   z-shell/zsh-eza
   hlissner/zsh-autopair
-  zsh-users/zsh-autosuggestions
   zsh-users/zsh-syntax-highlighting
 )
 # load plugins
@@ -44,10 +43,6 @@ plugin-load $repos
 
 # start autopair
 autopair-init
-
-# zsh-autosuggestions strategy
-ZSH_AUTOSUGGEST_STRATEGY=(completion history)
-bindkey '^Y' autosuggest-accept
 
 # start software
 eval "$(fzf --zsh)"
