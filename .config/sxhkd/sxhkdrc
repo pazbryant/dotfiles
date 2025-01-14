@@ -116,7 +116,7 @@ Print
 super + Print
  ~/bin/wm/take-screenshots -m full && notify-send "Saved"
 
-shift + Print
+alt + Print
  ~/bin/wm/take-screenshots -m win && notify-send "Saved"
 
 # --------------- resize windows --------------------
