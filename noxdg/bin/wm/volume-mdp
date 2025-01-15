@@ -1,0 +1,41 @@
+#!/bin/sh
+
+get_volume() {
+    mpc volume | awk -F' ' '{print $2}' | tr -d ' %'
+}
+
+is_paused() {
+    mpc | rg "paused"
+}
+
+send_notification() {
+    volume=$(get_volume)
+    if is_paused; then
+        icon="✖"
+    else
+        icon="✔"
+    fi
+
+    dunstify -h string:x-dunst-stack-tag:volume \
+        -h int:value:"$volume" \
+        -t 2000 \
+        "$icon mpd"
+}
+
+case $1 in
+up)
+    # Unmute and increase volume by 2%
+    mpc play
+    mpc volume +5
+    ;;
+down)
+    # Unmute and decrease volume by 2%
+    mpc play
+    mpc volume -5
+    ;;
+mute) 
+    mpc toggle
+    ;;
+esac
+
+send_notification

@@ -1,4 +1,8 @@
-#!/bin/sh
+#!/bin/env sh
+
+set -x
+
+# NOTE: need to add a play/stop option
 
 get_volume() {
     pactl get-sink-volume @DEFAULT_SINK@ |
@@ -21,16 +25,18 @@ send_notification() {
     dunstify -h string:x-dunst-stack-tag:volume \
         -h int:value:"$volume" \
         -t 2000 \
-        "$icon volume"
+        "$icon system"
 }
 
 case $1 in
 up)
+    echo "up here"
     # Unmute and increase volume by 2%
     pactl set-sink-mute @DEFAULT_SINK@ 0
     pactl set-sink-volume @DEFAULT_SINK@ +2%
     ;;
 down)
+    echo "down here"
     # Unmute and decrease volume by 2%
     pactl set-sink-mute @DEFAULT_SINK@ 0
     pactl set-sink-volume @DEFAULT_SINK@ -2%

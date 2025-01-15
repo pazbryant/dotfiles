@@ -40,11 +40,6 @@ super + o
 super + e
   pcmanfm
 
-super + minus
-  bspc rule -a St -o state=floating follow=on center=true \
-    rectangle=900x500+0+0 && st -e \ 
-    sh -c "yazi /run/media/bryant/tiagovault"
-
 super + i
   bspc rule -a St -o state=floating follow=on center=true \
     rectangle=900x500+0+0 && st -e \ 
@@ -147,8 +142,10 @@ super + shift + v
 XF86Audio{LowerVolume,RaiseVolume,Mute}
   ~/bin/wm/volume-dunst {down,up,mute}
 
+super + {minus,plus,BackSpace}
+  ~/bin/wm/volume-mdp {down,up,mute}
 
-# ---------------- audio control ----------------------
+# ----------------  Cristiano Ronaldo ----------------------
 
 super + c
   bspc rule -a mpv -o state=fullscreen follow=on \
