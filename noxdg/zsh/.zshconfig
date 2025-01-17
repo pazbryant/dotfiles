@@ -51,6 +51,9 @@ eval "$(fnm env --use-on-cd)"
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(atuin init zsh)"
 
+# add luarocks
+eval $(luarocks path)
+
 # gpg tty session
 GPG_TTY=$(tty)
 export GPG_TTY
