@@ -1,0 +1,42 @@
+#!/usr/bin/env sh
+
+note_dir="$HOME/Documents/github/notes"
+youtube_dir="$HOME/Documents/github/youtube"
+
+dirs="$note_dir $youtube_dir"
+
+backup_with_git() {
+  dir="$1"
+
+  if [ ! -d "$dir" ]; then
+    echo "Error: Directory '$dir' not found or inaccessible"
+    return 1
+  fi
+
+  is_up_to_date="up to date"
+  if git -C "$dir" status | rg "$is_up_to_date"; then
+    echo "Info: Nothing new to add to $dir"
+    echo ""
+    return 0
+  fi
+
+  currDate=$(date '+%Y-%m-%d %H:%M:%S')
+
+  # Run Git commands in the specified directory
+  if git -C "$dir" add -A &&
+    git -C "$dir" commit -m "vault backup: $currDate" &&
+    git -C "$dir" push origin "$(git -C "$dir" rev-parse --abbrev-ref HEAD)"; then
+    echo "Backup for '$dir' committed and updated successfully at $currDate"
+  else
+    echo "Error: Git operations failed for '$dir'"
+    exit 1
+  fi
+}
+
+main() {
+  for dir in $dirs; do
+    backup_with_git "$dir"
+  done
+}
+
+main "$@"
