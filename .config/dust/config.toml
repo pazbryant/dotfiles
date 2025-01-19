@@ -8,7 +8,7 @@ display-full-paths=false
 display-apparent-size=true
 
 # No colors will be printed
-no-colors=true
+no-colors=false
 
 # No percent bars or percentages will be displayed
 no-bars=true
