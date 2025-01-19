@@ -13,7 +13,7 @@ backup_with_git() {
     return 1
   fi
 
-  is_up_to_date="up to date"
+  is_up_to_date="clean"
   if git -C "$dir" status | rg "$is_up_to_date"; then
     echo "Info: Nothing new to add to $dir"
     echo ""
