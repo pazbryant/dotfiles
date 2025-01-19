@@ -12,7 +12,7 @@ size = 10
 
 [font.normal]
 family = "Maple Mono NF"
-style = "Medium"
+style = "Bold"
 
 [font.bold]
 family = "Maple Mono NF"
