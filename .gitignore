@@ -21,3 +21,4 @@ noxdg/ssh/known_hosts
 
 # mpv
 .config/mpv/mpvHistory.log
+noxdg/ssh/private
