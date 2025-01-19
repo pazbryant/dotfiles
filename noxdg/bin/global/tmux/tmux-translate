@@ -19,7 +19,7 @@ tmux_translate() {
   trans_opts="-verbose -no-warn -speak"
 
   trans_from=""
-  if [ "$source" = "spanish" ]; then
+  if [ "$source" = "en:spanish" ]; then
     trans_from="en:es" # from English to Spanish
   else
     trans_from="es:en" # from Spanish to English
