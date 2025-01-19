@@ -36,7 +36,7 @@ copy_terminal_buffer() {
 }
 
 ssh_add_private_key() {
-  # we're not in tmux nor git repository
+  # exit if we're not in a tumux and git repo
   [ -z "$TMUX" ] || [ ! -d ".git" ] && return 0
 
   if ssh-add -l >/dev/null 2>&1; then
@@ -48,7 +48,8 @@ ssh_add_private_key() {
 
     passphrase=$(pass ssh/personal_github) 2>/dev/null || return 1
 
-    if ! sshpass -P "Enter passphrase" -p "$passphrase" ssh-add ~/.ssh/personal_github >/dev/null 2>&1; then
+    if ! sshpass -P "Enter passphrase" -p "$passphrase" \
+      ssh-add ~/.ssh/private/personal_github >/dev/null 2>&1; then
       return 1
     fi
   fi
