@@ -1,9 +1,5 @@
 #!/bin/env sh
 
-home_session="$USER"
-
-exec 1>/tmp/tmux_debug.log 2>&1
-
 kill_sessions() {
   tmux list-sessions -F "#S" | rg -v "^${1}$" | while read -r session; do
     tmux kill-session -t "$session"
@@ -19,17 +15,18 @@ kill_windows() {
 }
 
 go_home() {
-  tmux switch-client -t "$home_session"
+  tmux switch-client -t "$1"
   tmux display-message "All has been killed but home session"
 }
 
 # Main execution
 main() {
+  session_name="$1"
 
-  go_home
-  kill_sessions "$home_session"
-  kill_windows "$home_session"
+  go_home "$session_name"
+  kill_sessions "$session_name"
+  kill_windows "$session_name"
 
 }
 
-main
+main "$1"
