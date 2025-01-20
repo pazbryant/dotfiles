@@ -40,3 +40,5 @@ gofumpt
 black
 shellharden
 eslint
+printf
+echo
