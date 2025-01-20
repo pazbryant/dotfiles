@@ -31,15 +31,15 @@ send_notification() {
 case $1 in
 up)
     echo "up here"
-    # Unmute and increase volume by 2%
+    # Unmute and increase volume by 5%
     pactl set-sink-mute @DEFAULT_SINK@ 0
-    pactl set-sink-volume @DEFAULT_SINK@ +2%
+    pactl set-sink-volume @DEFAULT_SINK@ +5%
     ;;
 down)
     echo "down here"
-    # Unmute and decrease volume by 2%
+    # Unmute and decrease volume by 5%
     pactl set-sink-mute @DEFAULT_SINK@ 0
-    pactl set-sink-volume @DEFAULT_SINK@ -2%
+    pactl set-sink-volume @DEFAULT_SINK@ -5%
     ;;
 mute)
     # Toggle mute
