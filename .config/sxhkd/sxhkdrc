@@ -103,11 +103,6 @@ super + y
   bspc rule -a St -o state=floating follow=on center=true \
     rectangle=800x400+0+0 && st -e sh -c "yazi"
 
-super + u
-  bspc rule -a St -o state=floating follow=on center=true \
-    rectangle=900x500+0+0 && st -e \ 
-    sh -c "yazi /run/media/bryant/tiagovault"
-
 # -------------- print ---------------------------
 
 Print
