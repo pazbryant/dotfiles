@@ -20,14 +20,9 @@ sync_address = "https://api.atuin.sh"
 
 sync_frequency = "1h"
 
-history_filter = [
-  "^clear",
-  "^ls",
-]
+history_filter = ["clear", "ls"]
 
-cwd_filter = [
-  "^/very/secret/area"
-]
+cwd_filter = ["^/very/secret/area"]
 
 max_preview_height = 4
 
@@ -37,15 +32,7 @@ secrets_filter = true
 
 enter_accept = true
 
-common_subcommands = [
- "cargo",
- "go",
- "git",
- "npm",
- "yarn",
- "pnpm",
- "kubectl",
-]
+common_subcommands = ["cargo", "go", "git", "npm", "yarn", "pnpm", "kubectl"]
 
 common_prefix = ["sudo"]
 
