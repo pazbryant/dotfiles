@@ -9,5 +9,5 @@ Host personal.github
 Host work.github
    HostName github.com
    AddKeysToAgent yes
-   IdentityFile ~/.ssh/public/work_github
+   IdentityFile ~/.ssh/private/work_github
    IdentitiesOnly yes
