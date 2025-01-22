@@ -58,9 +58,5 @@ eval "$(zoxide init --cmd cd zsh)"
 GPG_TTY=$(tty)
 export GPG_TTY
 
-# ssh private key autoload
-# function can be found in ~/.functions
-ssh_add_private_key
-
 # disable "c-s delay"
 stty -ixon

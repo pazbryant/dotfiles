@@ -30,27 +30,9 @@ update_grub() {
   sudo grub-mkconfig -o /boot/grub/grub.cfg
 }
 
+# NOTE: this function is used in ~/.zshconfig file
+# is attached to ^X keybind
 copy_terminal_buffer() {
   echo "$BUFFER" | xclip -selection clipboard
   zle reset-prompt
-}
-
-ssh_add_private_key() {
-  # exit if we're not in a tumux and git repo
-  [ -z "$TMUX" ] || [ ! -d ".git" ] && return 1
-
-  if ssh-add -l >/dev/null 2>&1; then
-    return 1
-  fi
-
-  if [ -z "$SSH_AUTH_SOCK" ]; then
-    eval "$(ssh-agent -s)" >/dev/null 2>&1
-
-    passphrase=$(pass ssh/personal_github) 2>/dev/null || return 1
-
-    if ! sshpass -P "Enter passphrase" -p "$passphrase" \
-      ssh-add ~/.ssh/private/personal_github >/dev/null 2>&1; then
-      return 0
-    fi
-  fi
 }
