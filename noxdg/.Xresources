@@ -20,12 +20,17 @@ Xft.lcdfilter:	lcddefault
 /* st.font: Rec Mono Casual/SemiCasual/Duotone:pixelsize=13:style:Medium */
 
 /* PERF: Alternative font */
-/*st.font: Maple Mono:pixelsize=13:style:Bold*/
+/* st.font: Recursive Mn Csl St Smb:pixelsize=13:style:SemiBold */
 
-st.font: Recursive Mn Csl St Smb:pixelsize=13:style:SemiBold 
+/* TEST: Another maple mono alternative font */
+/* st.font: Maple Mono Normal:pixelsize=13:style:Bold */
+
+/* st.font: Maple Mono:pixelsize=13.5:style:Bold */
+st.font: Recursive Mn Csl St Smb:pixelsize=13:style:SemiBold
+/* st.font: Rec Mono Casual:pixelsize=13:style:Bold */
 
 ! ST specific configurations
 st.borderpx: 0px
-st.cwscale: 1.13
+st.cwscale: 1.05
 st.chscale: 1.00
-st.alpha: 0.87
+st.alpha: 0.88
