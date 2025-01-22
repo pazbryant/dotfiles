@@ -8,6 +8,7 @@ else
     --type d . \
     ~/Documents/github/ \
     ~/Documents/ \
+    ~/Downloads/ \
     ~/Downloads/ 2>/dev/null | fzf)
 fi
 
