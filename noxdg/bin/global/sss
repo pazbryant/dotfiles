@@ -3,14 +3,6 @@
 SSH_DIR="$HOME/.ssh/private"
 
 get_passphrase() {
-  # WARN: The way passphrase is named is the same as my github ssh-private keys,
-  # in this case I use, `personal/work_plataform`.
-  # Example: 'personal_github' or 'work_github'
-
-  # NOTE: 'ssh/my_passphrase' is how I have structured my default `pass`
-  # folder and their files, where my_passphrase is the `.gpg` file that get
-  # decrypted and then returned as a string text.
-
   selected_passphrase=$(pass show "ssh/$1")
   echo "$selected_passphrase"
 }
@@ -44,9 +36,6 @@ main() {
     exit 1
   fi
 
-  # NOTE: you need to have a ssh-agen session started, you can do that putting
-  # this line of code in your `.zshrc` file. `eval "$(ssh-agent -s)"` or if you
-  # preffer, this one, to avoid logs. `eval "$(ssh-agent -s)" >/dev/null 2>&1`
   authenticate "$passphrase" "$private_key"
 
   unset "$passphrase" # make sure passphrase is not saved in memory
