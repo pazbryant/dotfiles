@@ -42,7 +42,7 @@ super + e
 
 super + i
   bspc rule -a St -o state=floating follow=on center=true \
-    rectangle=900x500+0+0 && st -e \ 
+    rectangle=900x500+0+0 && st -e \
     sh -c "yazi /home/bryant/Mega/personal/pc/images/wallpapers"
 
 super + d
@@ -67,7 +67,7 @@ super + shift + Return
   firefox -P Work
 
 shift + alt + Return
-  firefox -P Personal --private-window 
+  firefox -P Personal --private-window
 
 super + b
   ~/bin/wm/set-brightness
@@ -148,5 +148,5 @@ super + {minus,plus,BackSpace}
 # ----------------  Cristiano Ronaldo ----------------------
 
 super + c
-  bspc rule -a mpv -o state=fullscreen follow=on \
-    && mpv --volume=100 ~/Mega/personal/pc/videos/biy/cristiano.mp4
+  bspc rule -a mpv -o state=floating follow=on center=true \
+    rectangle=800x450+0+0 && mpv --volume=100 ~/Mega/personal/pc/videos/biy/cristiano.mp4
