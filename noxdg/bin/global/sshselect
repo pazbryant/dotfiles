@@ -10,8 +10,8 @@ get_passphrase() {
   # Example: 'personal_github' or 'work_github'
 
   # NOTE: 'ssh/my_passphrase' is how I have structured my default `pass`
-  # folder and their files, whene my_passphrase is the `.gpg` file that get
-  # decripted and then returned as a string text.
+  # folder and their files, where my_passphrase is the `.gpg` file that get
+  # decrypted and then returned as a string text.
 
   selected_passphrase=$(pass show "ssh/$1")
   echo "$selected_passphrase"
