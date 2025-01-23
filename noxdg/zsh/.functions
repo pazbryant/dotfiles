@@ -36,3 +36,12 @@ copy_terminal_buffer() {
   echo "$BUFFER" | xclip -selection clipboard
   zle reset-prompt
 }
+
+load_ssh_agent() {
+  [ -n "$TMUX" ] && [ -d ".git" ] && {
+    eval "$(ssh-agent -s)" >/dev/null 2>&1
+    if ssh-add -l >/dev/null 2>&1; then
+      return 1
+    fi
+  }
+}
