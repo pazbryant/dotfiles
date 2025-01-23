@@ -1,7 +1,5 @@
 #!/usr/bin/env sh
 
-set -x
-
 SSH_DIR="$HOME/.ssh/private"
 
 get_passphrase() {
