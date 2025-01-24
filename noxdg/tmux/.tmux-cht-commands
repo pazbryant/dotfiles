@@ -43,3 +43,4 @@ eslint
 printf
 echo
 7za
+journalctl
