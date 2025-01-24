@@ -19,12 +19,11 @@
     text_icon_padding = 0
     frame_width = 1
     sort = yes
-    font = Maple Mono NF 8
+    font = Maple Mono NF 10
     line_height = 4
     markup = full
     # default
     # format = "<b>%a</b>: %s\n%b"
-    format = "<span size='110%' font_desc='Maple Mono NF' weight='600'>%s</span>\n%b"
     alignment = center
     vertical_alignment = center
     show_age_threshold = 60
