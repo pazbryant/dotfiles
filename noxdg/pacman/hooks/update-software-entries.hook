@@ -1,3 +1,4 @@
+# NOTE: the hook have to have the `.hook` prefix
 # /etc/pacman.d/hooks/update-software-entries.hook
 
 [Trigger]
