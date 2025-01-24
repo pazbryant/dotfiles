@@ -26,7 +26,7 @@ ampersand,parenright,braceright,bracketright,exclam}
 super + shift + {1,2,3,4,5,6,7,8,9,0}
     bspc node -d '^{1,2,3,4,5,6,7,8,9,10}'
 
-super + {Tab,Escape}
+super + {Escape,Tab}
   bspc {node,desktop} -f last.local
 
 # -------------- main keys -----------------------
