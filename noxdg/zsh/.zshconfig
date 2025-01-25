@@ -26,9 +26,9 @@ extra_path=(
   ~/.cargo/bin/
   ~/bin/global/tmux/
   ~/.local/bin/
-  /usr/local/bin/
   ~/.local/share/bob/nvim-bin/
   ~/.local/share/nvim/mason/bin/
+  /usr/local/bin/
   /var/lib/flatpak/exports/bin/
 )
 extra_path_expanded=$(printf "%s:" "${extra_path[@]}")
@@ -53,6 +53,9 @@ eval "$(atuin init zsh)"
 eval "$(starship init zsh)"
 eval "$(fnm env --use-on-cd)"
 eval "$(zoxide init --cmd cd zsh)"
+
+# broot alias
+source ~/.config/broot/launcher/bash/br
 
 # gpg tty session
 GPG_TTY=$(tty)
