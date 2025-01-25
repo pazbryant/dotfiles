@@ -7,9 +7,7 @@ else
     --max-depth 1 \
     --type d . \
     ~/Documents/github/ \
-    ~/Documents/github-others/ \
-    ~/Documents/ \
-    ~/Downloads/ \
+    ~/Documents/temp/ \
     ~/Downloads/ 2>/dev/null | fzf)
 fi
 
