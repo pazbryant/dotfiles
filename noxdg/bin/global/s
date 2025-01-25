@@ -23,6 +23,19 @@ authenticate() {
 }
 
 main() {
+  identity=$(ssh-add -l | awk -F ' ' '{print $3}')
+  if [ -n "$identity" ]; then
+
+    printf "Identity found: %s \n" "$identity"
+
+    printf "Would you like change it (y/n)? "
+    read -r response
+
+    if [ "$response" != "y" ]; then
+      exit 1
+    fi
+  fi
+
   private_key=$(get_private_key_name)
 
   if [ -z "$private_key" ]; then

@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+set -x
+
 note_dir="$HOME/Documents/github/notes"
 youtube_dir="$HOME/Documents/github/youtube"
 
@@ -11,6 +13,10 @@ backup_with_git() {
   if [ ! -d "$dir" ]; then
     echo "Error: Directory '$dir' not found or inaccessible"
     return 1
+  fi
+
+  if git -C "$dir" cherry -v origin/main; then
+    git -C "$dir" push origin main
   fi
 
   is_up_to_date="clean"
@@ -34,6 +40,9 @@ backup_with_git() {
 }
 
 main() {
+
+  ~/bin/global/s # select a ssh private key
+
   for dir in $dirs; do
     backup_with_git "$dir"
   done
