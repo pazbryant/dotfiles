@@ -23,3 +23,5 @@ noxdg/ssh/known_hosts
 .config/mpv/mpvHistory.log
 noxdg/ssh/private
 noxdg/ssh/public/work_github.pub
+noxdg/ssh/known_hosts.old
+noxdg/ssh/public/personal_github.pub
