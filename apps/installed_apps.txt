@@ -1,6 +1,4 @@
 7zip 24.09-3
-alacritty 0.15.0-1
-ansible 11.1.0-2
 atuin 18.4.0-2
 bandwhich 0.23.1-1
 base 3-2
@@ -74,7 +72,6 @@ pipewire 1:1.2.7-1
 pipewire-alsa 1:1.2.7-1
 pipewire-jack 1:1.2.7-1
 pipewire-pulse 1:1.2.7-1
-podman 5.3.2-1
 polybar 3.7.2-2
 poppler 25.01.0-1
 python-pipx 1.7.1-2
