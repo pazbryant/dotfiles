@@ -3,7 +3,7 @@ atuin 18.4.0-2
 bandwhich 0.23.1-1
 base 3-2
 base-devel 1-2
-bat 0.25.0-2
+bat 0.25.0-4
 bob 4.0.2-1
 bottom 0.10.2-1
 breeze-gtk 6.2.5-1
@@ -13,13 +13,13 @@ calibre 7.24.0-1
 capitaine-cursors 4-3
 chromium 132.0.6834.110-1
 cronie 1.7.2-1
-dbeaver 24.3.2-1
+dbeaver 24.3.3-1
 docker 1:27.3.1-1
 docker-buildx 0.20.1-1
 docker-compose 2.32.4-1
 dunst 1.12.1-1
 dust 1.1.1-1
-eza 0.20.15-1
+eza 0.20.18-1
 fastfetch 2.34.1-1
 fd 10.2.0-1
 feh 3.10.3-1
@@ -54,7 +54,7 @@ maim 5.8.0-2
 man-db 2.13.0-1
 miniserve 0.28.0-1
 mpc 0.35-1
-mpd 0.23.16-3
+mpd 0.23.16-4
 mpv 1:0.39.0-4
 ncmpcpp 0.10.1-1
 neovim 0.10.3-1
@@ -91,7 +91,7 @@ streamlink 7.1.2-1
 sxhkd 0.6.2-4
 syncthing 1.29.2-1
 tealdeer 1.7.1-1
-telegram-desktop 5.10.4-1
+telegram-desktop 5.10.5-1
 terminus-font 4.49.1-7
 tmux 3.5_a-1
 translate-shell 0.9.7.1-2
