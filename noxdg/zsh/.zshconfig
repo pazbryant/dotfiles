@@ -54,9 +54,6 @@ eval "$(starship init zsh)"
 eval "$(fnm env --use-on-cd)"
 eval "$(zoxide init --cmd cd zsh)"
 
-# broot alias
-source ~/.config/broot/launcher/bash/br
-
 # gpg tty session
 GPG_TTY=$(tty)
 export GPG_TTY
