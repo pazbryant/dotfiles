@@ -16,7 +16,13 @@ if [ -z "$selected" ]; then
 fi
 
 selected_name=$(basename "$selected" | tr . _)
+current_attached_session=$(tmux display-message -p '#S')
 tmux_running=$(pgrep tmux)
+
+if [ "$current_attached_session" = "$selected_name" ]; then
+  tmux display-message "You are currently attached to this session."
+  exit 0
+fi
 
 if [ -z "$TMUX" ] && [ -z "$tmux_running" ]; then
   tmux new-session -s "$selected_name" -c "$selected"
@@ -28,9 +34,3 @@ if ! tmux has-session -t="$selected_name" 2>/dev/null; then
 fi
 
 tmux switch-client -t "$selected_name"
-
-selected_path="/home/bryant/Documents/github/notes/"
-
-if [ "$selected" = "$selected_path" ]; then
-  tmux send-keys "nvim Todo.md" Enter
-fi
