@@ -22,4 +22,3 @@ if ! tmux has-session -t="$selected_session" 2>/dev/null; then
 fi
 
 tmux switch-client -t "$selected_session"
-tmux display-message "Switched successfully."
