@@ -8,7 +8,7 @@ github() {
       fi
       if git -C "$dir" remote get-url origin >/dev/null 2>&1; then
         if git -C "$dir" rev-parse --abbrev-ref "@{u}" >/dev/null 2>&1; then
-          if git -C "$dir" cherry -v >/dev/null 2>&1; then
+          if [ -n "$(git -C "$dir" log "@{u}"..HEAD --oneline)" ]; then
             printf "%s\n" "$1"
           fi
         fi
