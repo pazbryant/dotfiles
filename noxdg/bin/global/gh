@@ -3,12 +3,15 @@
 github() {
   check_git_status() {
     if [ -d "$1/.git" ]; then
-      short_path="${1#/*/*/*/*}"
       if [ "$(git -C "$1" status --porcelain)" != "" ]; then
-        printf "⁉️ %s\n" "$short_path"
+        printf "%s\n" "$1"
       fi
-      if git -C "$dir" cherry -v >/dev/null 2>&1; then
-        printf "⚡ %s\n" "$short_path"
+      if git -C "$dir" remote get-url origin >/dev/null 2>&1; then
+        if git -C "$dir" rev-parse --abbrev-ref "@{u}" >/dev/null 2>&1; then
+          if git -C "$dir" cherry -v >/dev/null 2>&1; then
+            printf "%s\n" "$1"
+          fi
+        fi
       fi
     fi
   }
@@ -30,7 +33,8 @@ github() {
   }
 
   dirs="/home/bryant/Documents/work /home/bryant/Documents/github"
-  traverse_all_directories "$dirs"
+  traverse_all_directories "$dirs" | sort | uniq | fzf --bind \
+    "ctrl-u:execute($HOME/bin/global/tmux/tmux-new-session {})"
 }
 
 github
