@@ -8,9 +8,6 @@ if [ -z "$TMUX" ] && [ -z "$tmux_running" ]; then
   exit 0
 fi
 
-echo "$selected_session"
-echo "$current_attached_session"
-
 if [ "$current_attached_session" = "$selected_session" ]; then
   tmux display-message "You are currently attached to this session."
   exit 0
