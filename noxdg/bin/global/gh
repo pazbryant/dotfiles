@@ -3,8 +3,12 @@
 github() {
   check_git_status() {
     if [ -d "$1/.git" ]; then
+      short_path="${1#/*/*/*/*}"
       if [ "$(git -C "$1" status --porcelain)" != "" ]; then
-        printf "%s\n" "$1" | rev | cut -d/ -f1-2 | rev
+        printf "⁉️ %s\n" "$short_path"
+      fi
+      if git -C "$dir" cherry -v >/dev/null 2>&1; then
+        printf "⚡ %s\n" "$short_path"
       fi
     fi
   }
