@@ -2,26 +2,31 @@
 
 github() {
   check_git_status() {
-    dir="$1"
-    if [ -d "$dir/.git" ]; then
-      if [ "$(git -C "$dir" status --porcelain)" != "" ]; then
-        printf "%s\n" "$dir"
+    if [ -d "$1/.git" ]; then
+      if [ "$(git -C "$1" status --porcelain)" != "" ]; then
+        printf "%s\n" "$1" | rev | cut -d/ -f1-2 | rev
       fi
     fi
   }
 
   traverse_directories() {
-    dir="$1"
-    for item in "$dir"*/; do
-      if [ -d "$item" ]; then
-        check_git_status "$item"
-        traverse_directories "$item"
+    for dir in "$1"/*; do
+      if [ -d "$dir" ]; then
+        check_git_status "$dir"
+        traverse_directories "$dir"
       fi
+    done
+
+  }
+
+  traverse_all_directories() {
+    for parent_dir in $1; do
+      traverse_directories "$parent_dir"
     done
   }
 
-  repositories_path="/home/bryant/Documents/github/"
-  traverse_directories "$repositories_path"
+  dirs="/home/bryant/Documents/work /home/bryant/Documents/github"
+  traverse_all_directories "$dirs"
 }
 
 github
