@@ -19,11 +19,11 @@ authenticate() {
     return 1
   fi
 
-  echo "key was added susccessfully"
+  echo "Identity was added susccessfully"
 }
 
 main() {
-  identity=$(ssh-add -l | awk -F ' ' '{print $3}')
+  identity=$(ssh-add -l | rg '@' | awk -F ' ' '{print $3}')
   if [ -n "$identity" ]; then
 
     printf "Identity found: %s \n" "$identity"
@@ -34,6 +34,8 @@ main() {
     if [ "$response" != "y" ]; then
       exit 1
     fi
+
+    ssh-add -D # remove all identities
   fi
 
   private_key=$(get_private_key_name)
