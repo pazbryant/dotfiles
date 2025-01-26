@@ -1,7 +1,5 @@
 #!/usr/bin/env sh
 
-set -x
-
 note_dir="$HOME/Documents/github/notes"
 youtube_dir="$HOME/Documents/github/youtube"
 
