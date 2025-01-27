@@ -1,5 +1,6 @@
 #!/bin/sh
 
+options_file="$HOME/.tmux-cht-options"
 defaults_file="$HOME/.tmux-cht-defaults"
 commands_file="$HOME/.tmux-cht-commands"
 languages_file="$HOME/.tmux-cht-languages"
@@ -13,33 +14,37 @@ tmux_curl() {
     tmux neww sh -c "curl -s '$url' | bat --paging=always"
 }
 
-rg_query() {
-    selected="$1"
-    file_path="$2"
+search_option=$(bat "$defaults_file" "$options_file" | fzf)
 
-    # NOTE: --quiet --word-regexp --case-sensitive
-    # more info `man rg`
-
-    rg -qsw "$selected" "$file_path"
-}
-
-selected=$(bat "$commands_file" "$languages_file" "$defaults_file" | fzf)
-[ -z "$selected" ] && exit 0
-
-if rg -qsw "$selected" "$defaults_file"; then
-    tmux_curl ":$(safe_print "$selected")"
+selected=""
+if rg -qsw "$search_option" "$defaults_file"; then
+    tmux_curl ":$(safe_print "$search_option")"
+    exit 1
+elif [ "$search_option" = "language" ]; then
+    selected=$(bat "$languages_file" | fzf --print-query)
+elif [ "$search_option" = "command" ]; then
+    selected=$(bat "$commands_file" | fzf --print-query)
+else
     exit 1
 fi
+
+item=$(echo "$selected" | awk 'NR==1')
+
+if [ -z "$selected" ]; then
+    item=$(echo "$item" | awk 'NR==2')
+fi
+
+[ -z "$item" ] && exit 1
 
 printf "Enter Query: " && read -r query
 query=$(safe_print "$query" | tr ' ' '+')
 
-if [ -n "$query" ] && rg_query "$selected" "$languages_file"; then
-    tmux_curl "$(safe_print "$selected")/$(safe_print "$query")"
-elif rg_query "$selected" "$languages_file"; then
-    tmux_curl "$(safe_print "$selected")$(safe_print "$query")"
+if [ -n "$query" ] && [ "$search_option" = "language" ]; then
+    tmux_curl "$(safe_print "$item")/$(safe_print "$query")"
+elif [ "$search_option" = "language" ]; then
+    tmux_curl "$(safe_print "$item")$(safe_print "$query")"
 else
-    tmux_curl "$(safe_print "$selected")~$(safe_print "$query")"
+    tmux_curl "$(safe_print "$item")~$(safe_print "$query")"
 fi
 
-exit 1
+exit 0
