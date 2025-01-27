@@ -17,7 +17,6 @@ export CM_LAUNCHER="rofi"
 export SXHKD_SHELL="zsh"
 export STARSHIP_CONFIG="/home/bryant/.config/starship/starship.toml"
 export PASSWORD_STORE_DIR="/home/bryant/Documents/github/pass"
-export YSU_MESSAGE_POSITION="after"
 
 # }}
 
