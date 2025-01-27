@@ -1,0 +1,84 @@
+#!/bin/sh
+
+confirm() {
+    printf "%s" "$1 (y/n): "
+    read -r response
+    if [ "$response" != "y" ]; then
+        return 1
+    fi
+    return 0
+}
+
+if confirm "Do you want to remove orphaned packages?"; then
+    echo "Removing orphaned packages..."
+    sudo pacman -Rns "$(pacman -Qdtq)"
+fi
+
+if confirm "Do you want to clear the package cache?"; then
+    echo "Clearing package cache..."
+    sudo pacman -Sc
+fi
+
+if confirm "Do you want to remove unused config files?"; then
+    echo "Removing unused config files..."
+    sudo pacman -Rns "$(pacman -Qttq)"
+fi
+
+if confirm "Do you want to clean up log files?"; then
+    echo "Clearing log files..."
+    sudo truncate -s 0 /var/log/*.log
+fi
+
+if confirm "Do you want to clean up temporary files?"; then
+    echo "Clearing temporary files..."
+    sudo rm -rf /tmp/*
+    sudo rm -rf /var/tmp/*
+fi
+
+if confirm "Do you want to check for broken symlinks?"; then
+    echo "Checking for broken symlinks..."
+    fd -tl --base-directory /home/bryant | while read -r link; do
+        if ! readlink -e "$link" >/dev/null 2>&1; then
+            echo "$link"
+        fi
+    done
+fi
+
+if confirm "Do you want to check for failed systemd services?"; then
+    echo "Checking for failed systemd services..."
+    systemctl --failed
+fi
+
+if confirm "Do you want to clean up user cache?"; then
+    echo "Clearing user cache..."
+    rm -rf ~/.cache/*
+fi
+
+if command -v paru >/dev/null 2>&1; then
+    if confirm "Do you want to clean up unused AUR packages?"; then
+        echo "Cleaning up AUR packages..."
+        paru -c
+    fi
+else
+    echo "paru is not installed. Skipping AUR cleanup."
+fi
+
+if command -v docker >/dev/null 2>&1; then
+    if confirm "Do you want to clean up Docker?"; then
+        echo "Cleaning up Docker..."
+        docker system prune -a
+    fi
+else
+    echo "Docker is not installed. Skipping Docker cleanup."
+fi
+
+if command -v flatpak >/dev/null 2>&1; then
+    if confirm "Do you want to clean up Flatpak?"; then
+        echo "Cleaning up Flatpak..."
+        flatpak uninstall --unused
+    fi
+else
+    echo "Flatpak is not installed. Skipping Flatpak cleanup."
+fi
+
+echo "System maintenance complete!"
