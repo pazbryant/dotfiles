@@ -15,7 +15,7 @@ xkb_symbols "bryant-dvorak-itl" {
     key <AE09> {[ bracketright,               9,        leftsinglequotemark,    dead_breve            ]};
     key <AE10> {[       exclam,               0,        rightsinglequotemark,   dead_abovering        ]};
     key <AE11> {[     asterisk,          dollar,        guillemotleft,          leftdoublequotemark   ]};
-    key <AE12> {[           at,      numbersign,        guillemotright,         rightdoublequotemark                   ] };
+    key <AE12> {[   numbersign,               at,       guillemotright,         rightdoublequotemark  ]};
 
     key <AD01> {[   dead_acute,   dead_diaeresis,       apostrophe,             quotedbl              ]};
     key <AD02> {[        comma,             less,       ccedilla,               Ccedilla              ]};

@@ -5,7 +5,7 @@ xkb_symbols "bryant-dvorak" {
     name[Group1]= "English (Bryant Dvorak)";
 
     key <TLDE>	{[  grave,             asciitilde,    dead_grave,        dead_tilde        ]};
-    key <AE01>	{[  bracketleft,       1                                                   ]};                                 
+    key <AE01>	{[  bracketleft,       1                                                   ]};
     key <AE02>	{[  braceleft,         2                                                   ]};
     key <AE03>	{[  parenleft,         3                                                   ]};
     key <AE04>	{[  percent,           4                                                   ]};
@@ -14,8 +14,8 @@ xkb_symbols "bryant-dvorak" {
     key <AE07>	{[  parenright,        7                                                   ]};
     key <AE08>	{[  braceright,        8                                                   ]};
     key <AE09>	{[  bracketright,      9,             dead_grave,        dead_breve        ]};
-    key <AE10>	{[  exclam,            0                                                   ]};    
-    key <AE11>	{[  dollar,            asterisk                                            ]};
+    key <AE10>	{[  exclam,            0                                                   ]};
+    key <AE11>	{[  asterisk,          dollar                                              ]};
     key <AE12>	{[  numbersign,        at,            dead_tilde                           ]};
 
     key <AD01>	{[  apostrophe,        quotedbl,      dead_acute,        dead_diaeresis    ]};
