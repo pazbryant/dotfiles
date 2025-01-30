@@ -16,6 +16,7 @@ alias p="xclip -selection clipboard -o"
 alias transes="trans en:es"
 alias cl="clear"
 alias open="xdg-open"
+alias z="zathura"
 
 alias sp="systemctl suspend"
 alias dh="rm ~/.history.db"
