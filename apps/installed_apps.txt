@@ -1,4 +1,7 @@
 7zip 24.09-3
+alacritty 0.15.0-1
+ansible 11.2.0-1
+ansible-lint 25.1.1-1
 atuin 18.4.0-2
 bandwhich 0.23.1-1
 base 3-2
@@ -75,7 +78,9 @@ pipewire-jack 1:1.2.7-1
 pipewire-pulse 1:1.2.7-1
 polybar 3.7.2-2
 poppler 25.01.0-1
+python-pip 25.0-1
 python-pipx 1.7.1-2
+python-watchdog 3.0.0-2
 qbittorrent 5.0.3-1
 rclone 1.69.0-1
 ripgrep 14.1.1-1
