@@ -7,7 +7,7 @@ super + shift + {e,r}
 super + control + Escape
 	pkill -USR1 -x sxhkd && notify-send "Sxhkd reloaded"
 
-super + z
+super + f
   bspc node -t {fullscreen,tiled}
 
 super + {_,shift + }{h,j,k,l}
@@ -86,7 +86,7 @@ super + w
 super + {Left,Down,Up,Right}
   bspc node -v {-30 0,0 30,0 -30,30 0}
 
-super + f
+super + u
   if [ "$(bspc query -N -n focused.floating)" ]; then \
       bspc node -f last.tiled.local; \
   else \

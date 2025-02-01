@@ -4,6 +4,5 @@ lazydocker 0.24.1-1
 obinskit 1.2.11-2
 paru 2.0.4-1
 paru-debug 2.0.4-1
-sdl2 2.30.11-1
 ttf-maple 6.4-2
 vesktop-bin 1.5.4-2
