@@ -12,8 +12,9 @@
 .config/qBittorrent/rss
 
 # ssh
-noxdg/ssh/personal_github
-noxdg/ssh/known_hosts
+.ssh/private/personal_github
+.ssh/private/work_github
+.ssh/known_hosts
 
 # calibre
 .config/calibre/gui.json
@@ -21,7 +22,3 @@ noxdg/ssh/known_hosts
 
 # mpv
 .config/mpv/mpvHistory.log
-noxdg/ssh/private
-noxdg/ssh/public/work_github.pub
-noxdg/ssh/known_hosts.old
-noxdg/ssh/public/personal_github.pub
