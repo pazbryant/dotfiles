@@ -15,6 +15,7 @@
 .ssh/private/personal_github
 .ssh/private/work_github
 .ssh/known_hosts
+.ssh/known_hosts.old
 
 # calibre
 .config/calibre/gui.json
