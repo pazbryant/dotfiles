@@ -1,9 +1,9 @@
 #!/bin/sh
 
-options_file="$HOME/.tmux-cht-options"
-defaults_file="$HOME/.tmux-cht-defaults"
-commands_file="$HOME/.tmux-cht-commands"
-languages_file="$HOME/.tmux-cht-languages"
+options_file="$HOME/.tmux/tmux-cht-options"
+defaults_file="$HOME/.tmux/tmux-cht-defaults"
+commands_file="$HOME/.tmux/tmux-cht-commands"
+languages_file="$HOME/.tmux/tmux-cht-languages"
 
 safe_print() {
     printf '%s' "$1"
