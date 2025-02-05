@@ -34,7 +34,7 @@ github() {
 
   dirs="/home/bryant/Documents/work /home/bryant/Documents/github"
   traverse_all_directories "$dirs" | sort | uniq | fzf --bind \
-    "enter:execute($HOME/bin/global/tmux/tmux-new-session {})"
+    "enter:execute($HOME/bin/tmux/tmux-new-session {})"
 }
 
 github
