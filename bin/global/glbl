@@ -1,5 +1,0 @@
-#!/usr/bin/env sh
-
-global_dir="$HOME/bin/global"
-
-tree "$global_dir" | bat
