@@ -76,7 +76,7 @@ super + shift + s
   ~/bin/wm/screenkey
 
 super + shift + w
-  bspc desktop -l next && notify-send "Switch modes"
+  ~/bin/wm/toggle-bspwm-full-screen
 
 # -------- floating windows -----------
 
