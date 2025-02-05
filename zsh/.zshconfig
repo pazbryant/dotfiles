@@ -49,7 +49,10 @@ autopair-init
 
 # start software
 eval "$(fzf --zsh)"
+
 eval "$(atuin init zsh)"
+bindkey '^p' atuin-up-search
+
 eval "$(starship init zsh)"
 eval "$(fnm env --use-on-cd)"
 eval "$(zoxide init --cmd cd zsh)"
