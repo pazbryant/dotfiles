@@ -11,9 +11,9 @@ Xft.lcdfilter:	lcddefault
 *cursorColor: #862d59
 
 ! Global font configuration
-/* st.font: Recursive Mn Csl St:pixelsize=13:style:Bold*/
+/* st.font: Recursive Mn Csl St:pixelsize=13.5:style:Bold*/
 /* st.font: Maple Mono:pixelsize=13.5:style:Bold*/
- st.font: Recursive Mn Csl St Smb:pixelsize=13:style:SemiBold
+ st.font: Recursive Mn Csl St Smb:pixelsize=13.5:style:SemiBold
 
 ! ST specific configurations
 st.borderpx: 0px
