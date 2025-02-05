@@ -3,9 +3,11 @@
 if [ $# -eq 1 ]; then
   selected="$1"
 else
-  selected=$(fd --min-depth 1 \
+  selected=$(fd . \
     --max-depth 1 \
-    --type d . \
+    --type=directory \
+    --type=symlink \
+    --follow \
     ~/Documents/github/ \
     ~/Documents/temp/ \
     ~/Downloads/ 2>/dev/null | fzf)
