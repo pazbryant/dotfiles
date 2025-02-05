@@ -1,7 +1,8 @@
-apps
-fonts
 img
+apps
+.git
 noxdg
+fonts
 todo.md
-.gitignore
 README.md
+.gitignore
