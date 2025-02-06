@@ -38,9 +38,6 @@ backup_with_git() {
 }
 
 main() {
-
-  ~/bin/global/s # select a ssh private key
-
   for dir in $dirs; do
     backup_with_git "$dir"
   done
