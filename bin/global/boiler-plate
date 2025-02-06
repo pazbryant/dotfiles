@@ -78,7 +78,7 @@ main() {
 		[ -n "$CREATED_MESSAGE" ] &&
 			printf "%s" "$CREATED_MESSAGE"
 
-    echo ""
+		echo ""
 		echo "" # add blank space between actions
 
 	done
