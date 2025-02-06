@@ -8,6 +8,11 @@ g.maplocalleader = ' '
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
 
+opt.clipboard = 'unnamedplus'
+
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1
+
 opt.showmode = true
 opt.showtabline = 0
 
@@ -42,7 +47,7 @@ opt.termguicolors = true
 -- for obsidian
 opt.conceallevel = 2
 
-opt.spell = false
+opt.spell = true
 opt.spelllang = { 'en_us', 'es_mx' }
 
 -- set spell file
@@ -53,3 +58,19 @@ opt.statusline = ' %f%m%r%h%w'
 
 -- disable nvim startup screen
 opt.shortmess:append('sI')
+
+-- neovide
+if v.g.neovide then
+	v.o.guifont = 'Maple Mono NF:h9.5:w1.2:#h-none'
+	v.g.neovide_refresh_rate = 60
+	v.g.neovide_cursor_vfx_mode = 'railgun'
+end
+
+-- snacks options
+_G.dd = function(...)
+	Snacks.debug.inspect(...)
+end
+_G.bt = function()
+	Snacks.debug.backtrace()
+end
+vim.print = _G.dd
