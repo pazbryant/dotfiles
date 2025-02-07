@@ -51,10 +51,27 @@ autocmd('BufReadPost', {
 	end,
 })
 
+autocmd({ 'BufNewFile', 'BufRead' }, {
+	desc = 'Ignore diagnostics in some directories',
+	pattern = {
+		'**/node_modules/**',
+		'node_modules',
+		'/node_modules/*',
+	},
+	callback = function()
+		vim.diagnostic.enable(false)
+	end,
+})
+
 autocmd('FileType', {
 	desc = 'Disable auto-comment',
 	command = 'set formatoptions-=o',
 	group = bryant_group,
+})
+
+autocmd('TermOpen', {
+	desc = 'remove colucmns in terminal',
+	command = 'setlocal signcolumn=no',
 })
 
 autocmd('RecordingEnter', {
@@ -94,7 +111,6 @@ autocmd('FileType', {
 		'man',
 		'checkhealth',
 		'tsplayground',
-		'markdown',
 		'dap-float',
 		'empty',
 		'noice',
@@ -119,6 +135,17 @@ autocmd('BufHidden', {
 			vim.schedule(function()
 				pcall(vim.api.nvim_buf_delete, event.buf, {})
 			end)
+		end
+	end,
+})
+
+autocmd('BufEnter', {
+	desc = 'Wrap lines in no file type',
+	group = bryant_group,
+	callback = function()
+		if vim.bo.buftype == 'nofile' then
+			vim.opt_local.wrap = true
+			vim.opt_local.textwidth = 80
 		end
 	end,
 })
@@ -151,6 +178,7 @@ autocmd('BufWritePre', {
 
 autocmd({ 'FileType' }, {
 	desc = 'enable_editorconfig_syntax',
+	group = bryant_group,
 	pattern = { 'editorconfig' },
 	callback = function()
 		vim.opt_local.syntax = 'editorconfig'

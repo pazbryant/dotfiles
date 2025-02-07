@@ -32,8 +32,8 @@ opt.numberwidth = 1
 
 opt.hlsearch = true
 opt.incsearch = true
-opt.smartcase = true
-opt.ignorecase = true
+opt.smartcase = false
+opt.ignorecase = false
 
 opt.scrolloff = 5
 opt.signcolumn = 'yes:1'
@@ -47,7 +47,7 @@ opt.termguicolors = true
 -- for obsidian
 opt.conceallevel = 2
 
-opt.spell = true
+opt.spell = false
 opt.spelllang = { 'en_us', 'es_mx' }
 
 -- set spell file
@@ -65,12 +65,3 @@ if v.g.neovide then
 	v.g.neovide_refresh_rate = 60
 	v.g.neovide_cursor_vfx_mode = 'railgun'
 end
-
--- snacks options
-_G.dd = function(...)
-	Snacks.debug.inspect(...)
-end
-_G.bt = function()
-	Snacks.debug.backtrace()
-end
-vim.print = _G.dd
