@@ -31,15 +31,17 @@ extra_path=(
   /usr/local/bin/
   /var/lib/flatpak/exports/bin/
 )
+
+PROMPT='%F{white}%2~%f '
+
 extra_path_expanded=$(printf "%s:" "${extra_path[@]}")
 export PATH="${(j/:/)extra_path}:${PATH}"
 
 # custom plugin manager
 # function can be found in ~/.zshplugin
 repos=(
-  z-shell/zsh-eza
   hlissner/zsh-autopair
-  zsh-users/zsh-syntax-highlighting
+  # zsh-users/zsh-syntax-highlighting
 )
 # load plugins
 plugin-load $repos
@@ -53,7 +55,6 @@ eval "$(fzf --zsh)"
 eval "$(atuin init zsh)"
 bindkey '^p' atuin-up-search
 
-eval "$(starship init zsh)"
 eval "$(fnm env --use-on-cd)"
 eval "$(zoxide init --cmd cd zsh)"
 
