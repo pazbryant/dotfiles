@@ -38,12 +38,8 @@ super + o
   ~/bin/wm/passmenu --otp && notify-send "2FAS to clipboard."
 
 super + e
-  pcmanfm
-
-super + i
   bspc rule -a St -o state=floating follow=on center=true \
-    rectangle=900x500+0+0 && st -e \
-    sh -c "yazi /home/bryant/Mega/personal/pc/images/wallpapers"
+    rectangle=800x400+0+0 && st -e sh -c "yazi"
 
 super + d
   rofi -show run -show-icons
@@ -98,10 +94,6 @@ super + u
 super + m
   bspc rule -a St -o state=floating follow=on center=true \
     rectangle=700x350+0+0 && st -e sh -c "ncmpcpp"
-
-super + y
-  bspc rule -a St -o state=floating follow=on center=true \
-    rectangle=800x400+0+0 && st -e sh -c "yazi"
 
 # -------------- print ---------------------------
 
