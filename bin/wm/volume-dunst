@@ -1,6 +1,6 @@
 #!/bin/env sh
 
-set -x
+MAX_VOLUME=150
 
 # NOTE: need to add a play/stop option
 
@@ -14,37 +14,47 @@ is_mute() {
     pactl get-sink-mute @DEFAULT_SINK@ | rg "yes"
 }
 
+handle_volume() {
+    case $1 in
+    up)
+        pactl set-sink-mute @DEFAULT_SINK@ 0
+        if awk "BEGIN {exit !($(get_volume) >= $MAX_VOLUME)}"; then
+            return 0
+        fi
+        pactl set-sink-volume @DEFAULT_SINK@ +5%
+        ;;
+    down)
+        pactl set-sink-mute @DEFAULT_SINK@ 0
+        pactl set-sink-volume @DEFAULT_SINK@ -5%
+        ;;
+    mute)
+        pactl set-sink-mute @DEFAULT_SINK@ toggle
+        ;;
+    esac
+}
+
 send_notification() {
-    volume=$(get_volume)
+    volume="$(get_volume)"
+
     if is_mute; then
         icon="✖"
     else
         icon="✔"
     fi
 
+    dunst_volume=$(awk "BEGIN {print ($volume / $MAX_VOLUME) * 100}")
+
     dunstify -h string:x-dunst-stack-tag:volume \
-        -h int:value:"$volume" \
+        -h int:value:"$dunst_volume" \
         -t 2000 \
         "$icon system"
 }
 
-case $1 in
-up)
-    echo "up here"
-    # Unmute and increase volume by 5%
-    pactl set-sink-mute @DEFAULT_SINK@ 0
-    pactl set-sink-volume @DEFAULT_SINK@ +5%
-    ;;
-down)
-    echo "down here"
-    # Unmute and decrease volume by 5%
-    pactl set-sink-mute @DEFAULT_SINK@ 0
-    pactl set-sink-volume @DEFAULT_SINK@ -5%
-    ;;
-mute)
-    # Toggle mute
-    pactl set-sink-mute @DEFAULT_SINK@ toggle
-    ;;
-esac
+main() {
+    action="$1"
+    handle_volume "$action"
 
-send_notification
+    send_notification
+}
+
+main "$1"
