@@ -71,13 +71,13 @@ super + b
 super + shift + s
   ~/bin/wm/screenkey
 
-super + shift + w
-  ~/bin/wm/toggle-bspwm-full-screen
+super + w
+	bspc desktop -l next
 
 # -------- floating windows -----------
 
-super + w
-  bspc node -t {tiled,floating}
+super + shift + w
+  bspc node focused.tiled -t floating || bspc node focused.floating -t tiled
 
 super + {Left,Down,Up,Right}
   bspc node -v {-30 0,0 30,0 -30,30 0}
