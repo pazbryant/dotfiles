@@ -2,42 +2,14 @@ add_newline = false
 
 format = """
 $directory\
-$git_branch\
-$git_status\
-$cmd_duration\
 $character"""
 
 # Directory configuration
 [directory]
 truncation_length = 2
-truncate_to_repo = true
-style = "bright-blue"
+truncate_to_repo = false
+style = "white"
 
-# Git configuration
-[git_branch]
-format = "[$branch]($style) "
-style = "bright-purple"
-
-[git_status]
-format = '([\[$all_status$ahead_behind\]]($style) )'
-style = "yellow"
-
-# Command duration
-[cmd_duration]
-min_time = 5000
-format = "[$duration]($style) "
-
-# Prompt character
 [character]
-success_symbol = "[󰁕](green)"
-error_symbol = "[✗](bold red)"
-
-# Disable unused modules for better performance
-[aws]
-disabled = true
-
-[nodejs]
-disabled = true
-
-[package]
-disabled = true
+success_symbol = "[󰁕](#aa759f)"
+error_symbol = "[✗](#aa759f)"
