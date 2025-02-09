@@ -17,15 +17,6 @@ rez() {
 	. /home/bryant/.zshrc
 }
 
-ds() {
-	if [ "$1" = "" ]; then
-		echo "Usage: check_disk_space /dev/sdax"
-		return 1
-	fi
-
-	df -h "$1" | awk 'NR==2 {print "Total space on", $1, ":", $2, "| Free space:", $4}'
-}
-
 update_grub() {
 	sudo grub-mkconfig -o /boot/grub/grub.cfg
 }
