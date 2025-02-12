@@ -5,4 +5,8 @@ noxdg
 fonts
 todo.md
 README.md
+
+# git
+.git
 .gitignore
+.gitmodules
