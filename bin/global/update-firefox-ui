@@ -7,7 +7,6 @@ update_firefox() {
 }
 
 main() {
-  check_xh
   update_firefox
 }
 
