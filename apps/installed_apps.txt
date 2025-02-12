@@ -20,6 +20,7 @@ cronie 1.7.2-1
 docker 1:27.5.1-1
 docker-buildx 0.20.1-1
 docker-compose 2.32.4-1
+dunst 1.12.1-1
 dust 1.1.1-1
 efibootmgr 18-3
 eza 0.20.20-1
