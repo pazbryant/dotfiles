@@ -7,15 +7,15 @@
 .config/lazygit/state.yml
 
 # qBittorrent
-.config/qBittorrent/qBittorrent-data.conf
-.config/qBittorrent/lockfile
 .config/qBittorrent/rss
+.config/qBittorrent/lockfile
+.config/qBittorrent/qBittorrent-data.conf
 
 # ssh
-.ssh/private/personal_github
-.ssh/private/work_github
 .ssh/known_hosts
 .ssh/known_hosts.old
+.ssh/private/work_github
+.ssh/private/personal_github
 
 # calibre
 .config/calibre/gui.json
@@ -23,3 +23,9 @@
 
 # mpv
 .config/mpv/mpvHistory.log
+
+# extras
+.gnupg
+.config/go
+.config/zsh
+.config/pavucontrol.ini
