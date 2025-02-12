@@ -1,7 +1,8 @@
 [submodule ".config/nvim"]
-	path = .config/nvim
-	url = https://github.com/pazbryant/nvim.git
+    path = .config/nvim
+    url = git@personal.github:pazbryant/nvim.git
+
 [submodule "fvim"]
-	path = .config/fvim
-	url = https://github.com/pazbryant/nvim.git
-	branch = fvim
+    path = .config/fvim
+    url = git@personal.github:pazbryant/nvim.git
+    branch = fvim
