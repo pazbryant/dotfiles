@@ -32,5 +32,6 @@ xsetroot -cursor_name left_ptr & # fix mouse
 ~/bin/wm/start-polybar &
 
 pgrep -x "picom" >/dev/null || picom &
-pgrep -x "unclutter" >/dev/null || unclutter &
+pgrep -x "dunst" >/dev/null || dunst &
 pgrep -x "sxhkd" >/dev/null || sxhkd -m -1 &
+pgrep -x "unclutter" >/dev/null || unclutter &
