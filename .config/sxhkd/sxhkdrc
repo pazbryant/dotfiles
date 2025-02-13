@@ -65,7 +65,7 @@ super + shift + Return
 shift + alt + Return
   firefox -P Personal --private-window
 
-suprr + b
+super + b
   ~/bin/wm/set-brightness
 
 super + shift + s
