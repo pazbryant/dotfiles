@@ -11,7 +11,7 @@ exclude_folders="
   /home/bryant/Desktop /home/bryant/Documents /home/bryant/Downloads
   /home/bryant/Mega /home/bryant/Pictures /home/bryant/Calibre Library
   /home/bryant/Music /home/bryant/Videos /home/bryant/.tealdeer-cache
-  /home/bryant/.cache /home/bryant/.local/share/ 
+  /home/bryant/.cache /home/bryant/.local/share/
   /home/bryant/share
 "
 
