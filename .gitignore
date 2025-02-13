@@ -32,4 +32,5 @@
 .config/pulse
 .config/ObinsKit
 .config/lazydocker
+.config/systemd/user
 .config/pavucontrol.ini
