@@ -65,11 +65,14 @@ super + shift + Return
 shift + alt + Return
   firefox -P Personal --private-window
 
-super + b
+suprr + b
   ~/bin/wm/set-brightness
 
 super + shift + s
   ~/bin/wm/screenkey
+
+super + r
+  ~/bin/wm/read
 
 super + w
 	bspc desktop -l next
@@ -140,5 +143,5 @@ super + {minus,plus,BackSpace}
 # ----------------  Cristiano Ronaldo ----------------------
 
 super + c
-  bspc rule -a mpv -o state=floating follow=on center=true \
-    rectangle=800x450+0+0 && mpv --volume=100 ~/Mega/personal/pc/videos/biy/cristiano.mp4
+  bspc rule -a mpv -o state=floating follow=on center=true rectangle=800x450+0+0 && \
+    mpv --volume=100 ~/Documents/github/media/videos/biy/cristiano.mp4
