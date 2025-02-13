@@ -28,5 +28,8 @@
 .gnupg
 .config/go
 .config/zsh
-.config/pavucontrol.ini
+.config/dconf
+.config/pulse
 .config/ObinsKit
+.config/lazydocker
+.config/pavucontrol.ini
