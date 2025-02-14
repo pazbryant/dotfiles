@@ -1,0 +1,15 @@
+#!/bin/env sh
+
+BAR_NAME="mainbar-bspwm"
+PID_FILE="/tmp/polybar_$BAR_NAME.pid"
+
+if [ -f "$PID_FILE" ]; then
+  rm -f "$PID_FILE"
+  killall -q polybar
+  bspc config bottom_padding 0
+else
+  # Start Polybar and store the PID
+  polybar "$BAR_NAME" &
+  echo $! >"$PID_FILE"
+  bspc config bottom_padding 14
+fi
