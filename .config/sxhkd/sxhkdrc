@@ -75,7 +75,7 @@ super + r
   ~/bin/wm/read
 
 super + w
-	bspc desktop -l next
+  ~/bin/wm/toggle_polybar
 
 # -------- floating windows -----------
 
