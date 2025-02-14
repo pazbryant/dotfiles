@@ -1,0 +1,4 @@
+[mounts "extra"]
+	path = /home/bryant/Documents/github/pass-programming
+[mounts]
+	path = /home/bryant/Documents/github/pass
