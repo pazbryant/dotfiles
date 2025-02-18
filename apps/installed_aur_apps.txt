@@ -6,3 +6,4 @@ paru 2.0.4-1
 paru-debug 2.0.4-1
 ttf-maple 6.4-2
 vesktop-bin 1.5.5-1
+zen-browser-bin 1.7.6b-1

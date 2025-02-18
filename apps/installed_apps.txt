@@ -88,6 +88,7 @@ telegram-desktop 5.11.1-1
 terminus-font 4.49.1-7
 tmux 3.5_a-1
 translate-shell 0.9.7.1-2
+tree 2.2.1-1
 udiskie 2.5.7-1
 ueberzugpp 2.9.6-8
 ufw 0.36.2-5
