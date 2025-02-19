@@ -63,8 +63,5 @@ eval "$(zoxide init --cmd cd zsh)"
 GPG_TTY=$(tty)
 export GPG_TTY
 
-# test
-load_ssh_agent
-
 # disable "c-s delay"
 stty -ixon
