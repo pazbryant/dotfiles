@@ -8,15 +8,12 @@ brightness=$(rofi -dmenu -p "Enter brightness (0-9 or 0.0-1.0):" -lines 1)
 # POSIX-compliant way to handle the mapping
 case "$brightness" in
 0) brightness="0.30" ;;
-1) brightness="0.90" ;;
-2) brightness="0.85" ;;
-3) brightness="0.80" ;;
-4) brightness="0.75" ;;
-5) brightness="0.70" ;;
-6) brightness="0.65" ;;
-7) brightness="0.45" ;;
-8) brightness="0.40" ;;
-9) brightness="0.35" ;;
+1) brightness="1.00" ;;
+2) brightness="0.80" ;;
+3) brightness="0.60" ;;
+4) brightness="0.40" ;;
+5) brightness="0.20" ;;
+6) brightness="0.10" ;;
 esac
 
 xrandr --output HDMI-2 --brightness "$brightness"
