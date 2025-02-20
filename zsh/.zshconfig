@@ -12,12 +12,14 @@ zle -N self-insert url-quote-magic
 bindkey -e # set to emacs binds
 bindkey '^[e' edit-command-line
 bindkey '^X' copy_terminal_buffer
+bindkey '^[[Z' reverse-menu-complete
 
 # zsh options
 setopt AUTO_CD HIST_FIND_NO_DUPS HIST_IGNORE_ALL_DUPS
 
 # completion configuration
 zstyle ':completion:*' menu select
+
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 # extend path
@@ -53,7 +55,7 @@ autopair-init
 eval "$(fzf --zsh)"
 
 eval "$(atuin init zsh)"
-bindkey '^s' atuin-up-search
+bindkey '^p' atuin-up-search
 
 eval "$(starship init zsh)"
 eval "$(fnm env --use-on-cd)"
