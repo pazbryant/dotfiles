@@ -53,7 +53,7 @@ autopair-init
 eval "$(fzf --zsh)"
 
 eval "$(atuin init zsh)"
-bindkey '^f' atuin-up-search
+bindkey '^s' atuin-up-search
 
 eval "$(starship init zsh)"
 eval "$(fnm env --use-on-cd)"
