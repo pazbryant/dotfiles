@@ -84,7 +84,6 @@ stow 2.4.1-1
 sudo 1.9.16.p2-2
 sxhkd 0.6.2-4
 syncthing 1.29.2-1
-telegram-desktop 5.11.1-1
 terminus-font 4.49.1-7
 tmux 3.5_a-1
 translate-shell 0.9.7.1-2
