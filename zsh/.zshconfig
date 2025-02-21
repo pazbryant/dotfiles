@@ -59,7 +59,7 @@ bindkey '^p' atuin-up-search
 
 eval "$(starship init zsh)"
 eval "$(fnm env --use-on-cd)"
-eval "$(zoxide init --cmd cd zsh)"
+eval "$(zoxide init zsh)"
 
 # gpg tty session
 GPG_TTY=$(tty)

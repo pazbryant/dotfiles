@@ -4,7 +4,6 @@
 alias :q="exit"
 alias yay="paru"
 alias cl="clear"
-alias z="zathura"
 alias wg="sudo wg"
 alias sudo="sudo "
 alias pass='gopass'
