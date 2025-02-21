@@ -28,9 +28,12 @@
 .gnupg
 .config/go
 .config/zsh
-.config/dconf
 .config/pulse
+.config/dconf
+.config/libfm
+.config/pypoetry
 .config/ObinsKit
+.config/chromium
 .config/lazydocker
 .config/systemd/user
 .config/pavucontrol.ini
