@@ -38,8 +38,7 @@ super + o
   ~/bin/wm/passmenu --otp && notify-send "2FAS to clipboard."
 
 super + e
-  bspc rule -a St -o state=floating follow=on center=true \
-    rectangle=800x400+0+0 && st -e sh -c "yazi"
+  st -e sh -c "yazi"
 
 super + d
   rofi -show run -show-icons
