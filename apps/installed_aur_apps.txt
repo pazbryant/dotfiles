@@ -1,9 +1,11 @@
 ani-cli 4.9-1
 bun-bin 1.2.2-1
+dragon-drop 1.2.0-2
 lazydocker 0.24.1-1
 obinskit 1.2.11-2
 paru 2.0.4-1
 paru-debug 2.0.4-1
+postman-bin 11.33.4-1
 ttf-maple 6.4-2
 vesktop-bin 1.5.5-1
 zen-browser-bin 1.7.6b-1
