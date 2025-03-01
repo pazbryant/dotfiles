@@ -3,47 +3,23 @@
 set -x
 set -e
 
-backup_source="$HOME/Documents/books"
-backup_destination="/run/media/bryant/tiagovault/backups/books"
+BACKUP_SOURCE="$HOME/Documents/books"
+BACKUP_DESTINATION="/run/media/bryant/tiagovault/backups"
+BACKUP_DIR_NAME="books"
 
 backup() {
-  backup_date=$(date +%Y-%m-%d)
-  backup_folder="$backup_destination/$backup_date"
+	backup_folder="$BACKUP_DESTINATION/$BACKUP_DIR_NAME"
 
-  mkdir -p "$backup_folder"
+	mkdir -p "$backup_folder"
 
-  rsync -aAXv --delete --progress $1 "$backup_source/" "$backup_folder"
-
-  if [ $? -ne 0 ]; then
-    notify-send "Rsync failed" "Backup not completed"
-    exit 1
-  fi
-
-  sync
-
-  if [ $? -ne 0 ]; then
-    notify-send "Sync failed" "Some data might not be written to the disk"
-    exit 1
-  fi
-
-  notify-send "Backup books" "finalized successfully"
-  send-sound-alert
+	if rsync -a --delete "$BACKUP_SOURCE/" "$backup_folder/"; then
+		sync
+		notify-send "Backup books" "finalized successfully"
+		sound-alert
+	else
+		notify-send "Backup books" "failed"
+		return 1
+	fi
 }
 
-get_exclude_folders() {
-  exclude_folders=""
-
-  exclude_params=""
-  for folder in $exclude_folders; do
-    exclude_params="$exclude_params --exclude=$folder"
-  done
-
-  echo "$exclude_params"
-}
-
-main() {
-  exclude_params=$(get_exclude_folders)
-  backup "$exclude_params"
-}
-
-main
+backup

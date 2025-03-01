@@ -1,46 +1,53 @@
 #!/usr/bin/env sh
 
-note_dir="$HOME/Documents/github/notes"
-youtube_dir="$HOME/Documents/github/youtube"
+set -x
+set -e
 
-dirs="$note_dir $youtube_dir"
+DIRS="$NOTE_DIR $YOUTUBE_DIR"
+NOTE_DIR="$HOME/Documents/github/notes"
+YOUTUBE_DIR="$HOME/Documents/github/youtube"
 
 backup_with_git() {
-  dir="$1"
+	dir="$1"
 
-  if [ ! -d "$dir" ]; then
-    echo "Error: Directory '$dir' not found or inaccessible"
-    return 1
-  fi
+	if [ ! -d "$dir" ]; then
+		echo "Error: Directory '$dir' not found or inaccessible"
+		return 1
+	fi
 
-  if git -C "$dir" cherry -v origin/main; then
-    git -C "$dir" push origin main
-  fi
+	if git -C "$dir" cherry -v origin/main 2>/dev/null | grep -q .; then
+		echo "Pushing existing commits for $dir"
+		git -C "$dir" push origin main
+	fi
 
-  is_up_to_date="clean"
-  if git -C "$dir" status | rg "$is_up_to_date"; then
-    echo "Info: Nothing new to add to $dir"
-    echo ""
-    return 0
-  fi
+	if git -C "$dir" status | grep -q "working tree clean"; then
+		echo "Info: Nothing new to add to $dir"
+		echo ""
+		return 0
+	fi
 
-  currDate=$(date '+%Y-%m-%d %H:%M:%S')
+	curr_date=$(date '+%Y-%m-%d %H:%M:%S')
+	current_branch=$(git -C "$dir" rev-parse --abbrev-ref HEAD)
 
-  # Run Git commands in the specified directory
-  if git -C "$dir" add -A &&
-    git -C "$dir" commit -m "vault backup: $currDate" &&
-    git -C "$dir" push origin "$(git -C "$dir" rev-parse --abbrev-ref HEAD)"; then
-    echo "Backup for '$dir' committed and updated successfully at $currDate"
-  else
-    echo "Error: Git operations failed for '$dir'"
-    exit 1
-  fi
+	if git -C "$dir" add -A; then
+		if git -C "$dir" commit -m "vault backup: $curr_date"; then
+			if git -C "$dir" push origin "$current_branch"; then
+				echo "Backup for '$dir' committed and updated successfully at $curr_date"
+				return 0
+			else
+				echo "Error: Failed to push to remote for '$dir'"
+			fi
+		else
+			echo "Error: Failed to commit changes for '$dir'"
+		fi
+	else
+		echo "Error: Failed to stage changes for '$dir'"
+	fi
+
+	return 1
 }
 
-main() {
-  for dir in $dirs; do
-    backup_with_git "$dir"
-  done
-}
-
-main "$@"
+for dir in $DIRS; do
+	echo "Processing $dir"
+	backup_with_git "$dir" || echo "Backup failed for $dir"
+done
