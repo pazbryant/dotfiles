@@ -40,7 +40,7 @@ super + o
 super + e
   st -e sh -c "yazi"
 
-super + d
+super + s
   rofi -show run -show-icons
 
 super + t
@@ -51,9 +51,6 @@ super + shift + t
 
 super + shift + space
   ~/bin/wm/switch-keyboard
-
-super + s
-  ~/bin/wm/select-and-execute
 
 super + Return
   firefox -P Personal
@@ -67,7 +64,7 @@ shift + alt + Return
 super + b
   ~/bin/wm/set-brightness
 
-super + shift + s
+super + s
   ~/bin/wm/screenkey
 
 super + r
@@ -132,9 +129,6 @@ super + shift + v
   bspc node {,$(bspc query -N -n .hidden | tail -n1)} -g hidden=off
 
 # ---------------- audio control ----------------------
-
-XF86Audio{LowerVolume,RaiseVolume,Mute}
-  ~/bin/wm/volume-dunst {down,up,mute}
 
 super + {minus,plus,BackSpace}
   ~/bin/wm/volume-mdp {down,up,mute}
