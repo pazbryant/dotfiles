@@ -3,9 +3,9 @@
 set -x
 set -e
 
-DIRS="$NOTE_DIR $YOUTUBE_DIR"
 NOTE_DIR="$HOME/Documents/github/notes"
 YOUTUBE_DIR="$HOME/Documents/github/youtube"
+DIRS="$NOTE_DIR $YOUTUBE_DIR"
 
 backup_with_git() {
 	dir="$1"
