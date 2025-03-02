@@ -97,13 +97,13 @@ super + m
 # -------------- print ---------------------------
 
 Print
- ~/bin/wm/take-screenshots -m select && notify-send "Saved"
+ ~/bin/wm/take-screenshots -m select -s clip && notify-send "Saved"
 
 super + Print
- ~/bin/wm/take-screenshots -m full && notify-send "Saved"
+ ~/bin/wm/take-screenshots -m select -s save && notify-send "Saved"
 
 alt + Print
- ~/bin/wm/take-screenshots -m win && notify-send "Saved"
+ ~/bin/wm/take-screenshots -m full -s clip && notify-send "Saved"
 
 # --------------- resize windows --------------------
 
@@ -130,8 +130,8 @@ super + shift + v
 
 # ---------------- audio control ----------------------
 
-super + {minus,plus,BackSpace}
-  ~/bin/wm/volume-mdp {down,up,mute}
+XF86Audio{LowerVolume,RaiseVolume,Mute}
+  ~/bin/wm/volume-dunst {down,up,mute}
 
 # ----------------  Cristiano Ronaldo ----------------------
 
