@@ -14,7 +14,6 @@ breeze-icons 6.11.0-1
 bspwm 0.9.10-4
 calibre 7.26.0-2
 capitaine-cursors 4-3
-chromium 133.0.6943.126-2
 code 1.97.2-1
 cronie 1.7.2-1
 docker 1:27.5.1-1
