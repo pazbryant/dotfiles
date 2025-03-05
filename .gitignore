@@ -28,15 +28,17 @@
 .gnupg
 .config/go
 .config/zsh
-.config/pulse
-.config/dconf
 .config/libfm
+.config/dconf
+.config/pulse
 .config/pcmanfm
-.config/ObinsKit
-.config/pypoetry
 .config/chromium
-.config/lazydocker
+.config/pypoetry
+.config/ObinsKit
+.config/pgcli/log
 .config/Code - OSS
+.config/lazydocker
+.config/litecli/log
 .config/yarn/global
 .config/systemd/user
 .config/QtProject.conf
