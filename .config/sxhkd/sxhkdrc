@@ -41,7 +41,7 @@ super + e
   st -e sh -c "yazi"
 
 super + s
-  rofi -show run -show-icons
+  rofi -show drun -show-icons
 
 super + t
   st
