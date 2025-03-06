@@ -72,6 +72,7 @@ polybar 3.7.2-2
 python-pip 25.0.1-1
 python-pipx 1.7.1-2
 qbittorrent 5.0.4-3
+qrencode 4.1.1-3
 rclone 1.69.1-1
 ripgrep 14.1.1-1
 rofi 1.7.8-2
@@ -107,7 +108,6 @@ yarn 1.22.22-2
 yazi 25.2.11-1
 zathura 0.5.11-1
 zathura-pdf-mupdf 0.4.4-12
-zbar 0.23.93-4
 zoxide 0.9.7-1
 zram-generator 1.2.1-1
 zsh 5.9-5
