@@ -47,4 +47,17 @@
     mouse_left_click = close_current
     mouse_right_click = do_action, close_all
 
+
+[urgency_low]
+    background = "#4921ad"
+    foreground = "#888888"
+
+[urgency_normal]
+    background = "#4921ad"
+    foreground = "#ffffff"
+
+[urgency_critical]
+    background = "#4921ad"
+    foreground = "#ffffff"
+
 # vim: ft=cfg

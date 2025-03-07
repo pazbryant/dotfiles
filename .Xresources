@@ -8,7 +8,7 @@ Xft.lcdfilter:	lcddefault
 ! Global colors
 *background: #1d1f21
 *foreground: #ffffff
-*cursorColor: #862d59
+*cursorColor: #4921ad
 
 ! Global font configuration
 /* st.font: Recursive Mn Csl St:pixelsize=13.5:style:Bold*/

@@ -9,12 +9,11 @@
 
 /*****----- Global Properties -----*****/
 * {
-background:     #404040; /* Very dark gray */
-background-alt: #333333; /* Dark gray */
-foreground:     #ffffff; /* Near black */
-selected:       #862d59; /* Even darker gray */
-
-    font: "Overpass SemiBold 10";
+background		:     #1d1f21; /* Very dark gray */
+background-alt:			#4921ad; /* Dark gray */
+foreground		:     #ffffff; /* Near black */
+selected			:     #5e5e5e; /* Even darker gray */
+font					:			"Overpass SemiBold 10";
 }
 
 /*****----- Main Window -----*****/
@@ -32,7 +31,7 @@ window {
     margin:                      0px;
     padding:                     0px;
     border:                      2px solid;
-    border-radius:               0px;
+    border-radius:               8px;
     border-color:                @selected;
     background-color:            @background;
     cursor:                      "default";

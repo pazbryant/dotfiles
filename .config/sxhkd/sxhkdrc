@@ -40,7 +40,7 @@ super + o
 super + e
   st -e sh -c "yazi"
 
-super + s
+super + d
   rofi -show drun -show-icons
 
 super + t
