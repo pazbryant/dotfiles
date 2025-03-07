@@ -53,13 +53,10 @@ autopair-init
 
 # start software
 eval "$(fzf --zsh)"
-
 eval "$(atuin init zsh)"
-bindkey '^p' atuin-up-search
-
+eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 eval "$(fnm env --use-on-cd)"
-eval "$(zoxide init zsh)"
 
 # gpg tty session
 GPG_TTY=$(tty)
