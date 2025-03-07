@@ -135,6 +135,6 @@ XF86Audio{LowerVolume,RaiseVolume,Mute}
 
 # ----------------  Cristiano Ronaldo ----------------------
 
-super + c
+super + shift + c
   bspc rule -a mpv -o state=floating follow=on center=true rectangle=800x450+0+0 && \
     mpv --volume=100 ~/Documents/github/media/videos/biy/cristiano.mp4
