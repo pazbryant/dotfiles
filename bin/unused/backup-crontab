@@ -1,1 +1,6 @@
+#Ansible: backup notes
 0 */2 * * * /home/bryant/bin/crontab/backup-notes
+#Ansible: backup books
+0 */5 * * * /home/bryant/bin/crontab/backup-books
+#Ansible: backup music
+0 */5 * * * /home/bryant/bin/crontab/backup-music
