@@ -14,10 +14,20 @@ kill_windows() {
   done
 }
 
+#!/bin/bash
+
 go_home() {
-  tmux switch-client -t "$1"
+  if ! tmux has-session -t "bryant" 2>/dev/null; then
+    tmux new-session -s "bryant" -d
+    tmux switch-client -t "bryant"
+  else
+    tmux switch-client -t "bryant"
+  fi
   tmux display-message "All has been killed but home session"
 }
+
+# Call the function
+go_home
 
 # Main execution
 main() {
