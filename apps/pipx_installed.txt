@@ -1,3 +1,2 @@
 bunx
 litecli
-poetry
