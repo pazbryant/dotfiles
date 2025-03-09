@@ -33,10 +33,3 @@ copy_terminal_buffer() {
 	echo "$BUFFER" | xclip -selection clipboard
 	zle reset-prompt
 }
-
-install_poetry_shell() {
-	if ! command -v poetry >/dev/null 2>&1; then
-		echo "Poetry not found, install it with pipx"
-	fi
-	poetry self add poetry-plugin-shell
-}
