@@ -2,6 +2,8 @@ return {
 	'ibhagwan/fzf-lua',
 	cmd = 'FzfLua',
 	opts = function()
+		local actions = require('fzf-lua').actions
+
 		local file_ignore_patterns = {
 			'tags',
 			'*.pyc',
@@ -48,22 +50,31 @@ return {
 				height = 0.70,
 				width = 0.70,
 			},
+			actions = {
+				files = {
+					['ctrl-s'] = actions.file_split,
+					['ctrl-v'] = actions.file_vsplit,
+					['ctrl-i'] = actions.toggle_ignore,
+					['ctrl-h'] = actions.toggle_hidden,
+					['enter'] = actions.file_edit_or_qf,
+					['ctrl-q'] = actions.file_sel_to_qf,
+				},
+			},
 			files = {
 				fd_opts = '--color=never --type f' .. fd_exclude_args,
 			},
 			grep = {
-				rg_opts = '--column --line-number --no-heading --color=always --smart-case'
-					.. rg_exclude_args,
+				rg_opts = '--column --line-number --no-heading --color=always --smart-case' .. rg_exclude_args,
 			},
 			live_grep = {
-				rg_opts = '--column --line-number --no-heading --color=always --smart-case'
-					.. rg_exclude_args,
+				rg_opts = '--column --line-number --no-heading --color=always --smart-case' .. rg_exclude_args,
 			},
 		}
 	end,
   -- stylua: ignore start
   keys = {
     { '<c-p>', function() require('fzf-lua').files() end, desc = 'FzfLua Files' },
+    { '<c-b>', function() require('fzf-lua').buffers() end, desc = 'FzfLua buffers' },
     { '<leader>ht', function() require('fzf-lua').help_tags() end, desc = 'FzfLua Help tags' },
     { '<leader>k', function() require('fzf-lua').keymaps() end, desc = 'FzfLua show keymaps' },
     { '<c-t>', function() require('fzf-lua').live_grep_native() end, desc = 'FzfLua Live grep' },
