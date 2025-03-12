@@ -53,13 +53,13 @@ super + shift + space
   ~/bin/wm/switch-keyboard
 
 super + Return
-  firefox -P Personal
+  librewolf -P Personal
 
 super + shift + Return
-  firefox -P Work
+  librewolf -P Work
 
 shift + alt + Return
-  firefox -P Personal --private-window
+  librewolf -P Personal --private-window
 
 super + b
   ~/bin/wm/set-brightness

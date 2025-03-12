@@ -2,6 +2,7 @@ ani-cli 4.9-1
 bun-bin 1.2.2-1
 dragon-drop 1.2.0-2
 lazydocker 0.24.1-1
+librewolf-bin 1:136.0.0_2-1
 paru 2.0.4-1
 paru-debug 2.0.4-1
 postman-bin 11.33.4-1
