@@ -27,7 +27,6 @@ fastfetch 2.38.0-1
 fd 10.2.0-1
 feh 3.10.3-1
 ffmpegthumbnailer 2.2.3-3
-firefox 136.0-1
 fzf 0.60.3-1
 git 2.48.1-2
 go 2:1.24.1-1
