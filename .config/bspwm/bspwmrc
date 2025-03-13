@@ -23,6 +23,7 @@ xset s off -dpms &
 xsetroot -cursor_name left_ptr & # fix mouse
 
 ~/.fehbg &
+~/bin/wm/toggle_polybar &
 
 pgrep -x "picom" >/dev/null || picom &
 pgrep -x "dunst" >/dev/null || dunst &
