@@ -28,18 +28,19 @@
 .gnupg
 .config/go
 .config/zsh
-.config/libfm
 .config/dconf
+.config/libfm
 .config/pulse
 .config/pcmanfm
+.config/thorium
 .config/chromium
-.config/pypoetry
 .config/ObinsKit
 .config/pgcli/log
 .config/Code - OSS
 .config/lazydocker
-.config/litecli/log
 .config/yarn/global
+.config/litecli/log
 .config/systemd/user
+.config/content_shell
 .config/QtProject.conf
 .config/pavucontrol.ini
