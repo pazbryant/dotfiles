@@ -53,13 +53,13 @@ super + shift + space
   ~/bin/wm/switch-keyboard
 
 super + Return
-  librewolf -P Personal
+  thorium-browser
 
 super + shift + Return
-  librewolf -P Work
+	thorium-browser --user-data-dir=~/.conf/thorium-work
 
-shift + alt + Return
-  librewolf -P Personal --private-window
+super + alt + Return
+  thorium-browser --incognito
 
 super + b
   ~/bin/wm/set-brightness
