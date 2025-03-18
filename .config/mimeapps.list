@@ -14,6 +14,6 @@ inode/directory=yazi.desktop
 application/json=nvim.desktop
 x-scheme-handler/http=firefox.desktop
 x-scheme-handler/https=firefox.desktop
-application/zip=org.pwmt.zathura.desktop
+application/zip=org.pwmt.zathura-pdf-mupdf.desktop
 application/pdf=org.pwmt.zathura.desktop
 application/epub+zip=org.pwmt.zathura-pdf-mupdf.desktop
