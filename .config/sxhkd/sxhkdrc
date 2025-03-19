@@ -49,7 +49,7 @@ super + t
 super + shift + t
   alacritty
 
-super + shift + space
+super + space
   ~/bin/wm/switch-keyboard
 
 super + Return
