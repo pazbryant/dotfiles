@@ -19,8 +19,8 @@ family = "Maple Mono NF"
 style = "Bold"
 
 [font.offset]
-x = 1
-y = 1
+x = 0
+y = 0
 
 [[keyboard.bindings]]
 chars = "\u001B[27;5;9~"
