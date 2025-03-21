@@ -107,7 +107,6 @@ autocmd('FileType', {
 		'help',
 		'startuptime',
 		'qf',
-		'lspinfo',
 		'man',
 		'checkhealth',
 		'tsplayground',
