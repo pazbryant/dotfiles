@@ -43,7 +43,6 @@ export PATH="${(j/:/)extra_path}:${PATH}"
 # function can be found in ~/.zshplugin
 repos=(
   hlissner/zsh-autopair
-  # zsh-users/zsh-syntax-highlighting
 )
 # load plugins
 plugin-load $repos
