@@ -23,13 +23,14 @@ dunst 1.12.2-1
 dust 1.1.2-1
 efibootmgr 18-3
 eza 0.20.24-1
-fastfetch 2.38.0-1
+fastfetch 2.39.1-1
 fd 10.2.0-1
 feh 3.10.3-1
 ffmpegthumbnailer 2.2.3-3
 firefox 136.0.2-1
 fzf 0.60.3-1
 git 2.49.0-1
+glow 2.1.0-1
 go 2:1.24.1-1
 gopass 1.15.15-1
 grub 2:2.12.r226.g56ccc5ed-1
@@ -85,6 +86,7 @@ stow 2.4.1-1
 sudo 1.9.16.p2-2
 sxhkd 0.6.2-4
 syncthing 1.29.3-1
+tealdeer 1.7.2-1
 terminus-font 4.49.1-7
 tmux 3.5_a-1
 translate-shell 0.9.7.1-2
@@ -94,7 +96,7 @@ udiskie 2.5.7-1
 ueberzugpp 2.9.6-8
 ufw 0.36.2-5
 unclutter 1:1.6-4
-uv 0.6.8-1
+uv 0.6.9-1
 wireplumber 0.5.8-1
 xclip 0.13-6
 xcolor 0.5.1-4
