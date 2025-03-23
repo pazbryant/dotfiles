@@ -22,7 +22,7 @@ toggle_polybar() {
 		rm -f "$PID_FILE"
 	else
 		start_polybar
-		bspc config bottom_padding 14
+		bspc config bottom_padding 15
 	fi
 }
 
