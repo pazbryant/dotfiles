@@ -31,6 +31,7 @@
 .config/dconf
 .config/libfm
 .config/pulse
+.config/vesktop
 .config/pcmanfm
 .config/thorium
 .config/chromium
