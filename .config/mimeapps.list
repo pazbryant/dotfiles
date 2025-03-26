@@ -17,3 +17,4 @@ x-scheme-handler/https=firefox.desktop
 application/zip=org.pwmt.zathura-pdf-mupdf.desktop
 application/pdf=org.pwmt.zathura.desktop
 application/epub+zip=org.pwmt.zathura-pdf-mupdf.desktop
+x-scheme-handler/discord=vesktop.desktop
