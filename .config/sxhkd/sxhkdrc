@@ -38,6 +38,9 @@ super + o
   ~/bin/wm/passmenu --otp && notify-send "2FAS to clipboard."
 
 super + e
+	pcmanfm
+
+super + y
   st -e sh -c "yazi"
 
 super + d
