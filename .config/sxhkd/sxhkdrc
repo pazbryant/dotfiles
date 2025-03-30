@@ -40,6 +40,9 @@ super + o
 super + e
 	pcmanfm
 
+super + i
+	pavucontrol
+
 super + y
   st -e sh -c "yazi"
 
