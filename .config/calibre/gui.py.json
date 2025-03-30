@@ -56,6 +56,7 @@
     "cover"
   ],
   "save_to_disk_template_history": [
+    "{title}",
     "{title} - {authors}",
     "{title}/{title} - {authors}",
     "{title}/{title}",
