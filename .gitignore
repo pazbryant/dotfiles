@@ -28,19 +28,21 @@
 .gnupg
 .config/go
 .config/zsh
-.config/dconf
-.config/libfm
 .config/pulse
-.config/vesktop
-.config/pcmanfm
+.config/libfm
+.config/dconf
 .config/thorium
-.config/chromium
+.config/pcmanfm
+.config/vesktop
+.config/Postman
 .config/ObinsKit
+.config/GIMP/3.0
+.config/chromium
 .config/pgcli/log
-.config/Code - OSS
 .config/lazydocker
-.config/yarn/global
+.config/Code - OSS
 .config/litecli/log
+.config/yarn/global
 .config/systemd/user
 .config/content_shell
 .config/QtProject.conf
