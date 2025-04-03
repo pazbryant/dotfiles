@@ -64,9 +64,6 @@ super + Return
 super + shift + Return
 	thorium-browser --user-data-dir=~/.conf/thorium-work
 
-super + alt + Return
-  thorium-browser --incognito
-
 super + b
   ~/bin/wm/set-brightness
 
