@@ -46,3 +46,6 @@ map('n', '<C-z>', '<Nop>', { desc = "Disable neovim suspend" })
 
 -- toggle spell
 map('n', '<leader>ts', '<cmd>SpellToggle<CR>', { desc =  "Toggle spell" })
+
+-- custom tmux script
+map("n", "<C-f>", "<cmd>silent !tmux neww /home/bryant/bin/tmux/tmux-new-session<CR>", { desc = "Custom tmux script" })
