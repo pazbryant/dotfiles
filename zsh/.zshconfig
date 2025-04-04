@@ -26,7 +26,6 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 extra_path=(
   ~/bin/global/
   ~/.cargo/bin/
-  ~/bin/global/tmux/
   ~/.local/bin/
   ~/.local/share/bob/nvim-bin/
   ~/.local/share/nvim/mason/bin/
