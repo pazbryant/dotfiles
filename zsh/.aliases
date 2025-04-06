@@ -10,11 +10,11 @@ alias pass='gopass'
 alias open="xdg-open"
 alias bb="btm --basic"
 alias transes="trans en:es"
-alias wanime="ani-cli -q 1080"
+alias anime="ani-cli -q 1080"
 alias zshconfig="vi ~/.zshconfig"
 alias vi="NVIM_APPNAME='vim' nvim"
 alias c="xclip -selection clipboard"
-alias wanimed="ani-cli -q 1080 --dub"
+alias anime_dub="ani-cli -q 1080 --dub"
 alias p="xclip -selection clipboard -o"
 
 alias ff="fastfetch"
