@@ -8,23 +8,23 @@
 language_list="$HOME/.tmux/tmux-translate-languages"
 
 safe_print() {
-  printf '%s' "$1"
+	printf '%s' "$1"
 }
 
 tmux_translate() {
-  source="$1"
-  paragraph="$2"
+	source="$1"
+	paragraph="$2"
 
-  # `man trans` for more details
-  trans_opts="-verbose -no-warn -speak"
+	# `man trans` for more details
+	trans_opts="-verbose -no-warn -speak"
 
-  trans_from=""
-  if [ "$source" = "en:spanish" ]; then
-    trans_from="en:es" # from English to Spanish
-  else
-    trans_from="es:en" # from Spanish to English
-  fi
-  tmux neww sh -c "trans $trans_opts $trans_from '$paragraph'; \
+	trans_from=""
+	if [ "$source" = "en:spanish" ]; then
+		trans_from="en:es" # from English to Spanish
+	else
+		trans_from="es:en" # from Spanish to English
+	fi
+	tmux neww sh -c "trans $trans_opts $trans_from '$paragraph'; \
     echo
     echo
     echo '⚡⚡⚡⚡⚡'; read -n 1"
@@ -33,14 +33,14 @@ tmux_translate() {
 selected_source=$(bat "$language_list" | fzf)
 
 if [ -z "$selected_source" ]; then
-  exit 0
+	exit 0
 fi
 
 printf "Enter text: "
 IFS= read -r query
 
 if rg -qs "$selected_source" "$language_list"; then
-  tmux_translate "$(safe_print "$selected_source")" "$(safe_print "$query")"
+	tmux_translate "$(safe_print "$selected_source")" "$(safe_print "$query")"
 fi
 
 exit 0

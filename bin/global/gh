@@ -1,40 +1,40 @@
 #!/bin/env sh
 
 github() {
-  check_git_status() {
-    if [ -d "$1/.git" ]; then
-      if [ "$(git -C "$1" status --porcelain)" != "" ]; then
-        printf "%s\n" "$1"
-      fi
-      if git -C "$dir" remote get-url origin >/dev/null 2>&1; then
-        if git -C "$dir" rev-parse --abbrev-ref "@{u}" >/dev/null 2>&1; then
-          if [ -n "$(git -C "$dir" log "@{u}"..HEAD --oneline)" ]; then
-            printf "%s\n" "$1"
-          fi
-        fi
-      fi
-    fi
-  }
+	check_git_status() {
+		if [ -d "$1/.git" ]; then
+			if [ "$(git -C "$1" status --porcelain)" != "" ]; then
+				printf "%s\n" "$1"
+			fi
+			if git -C "$dir" remote get-url origin >/dev/null 2>&1; then
+				if git -C "$dir" rev-parse --abbrev-ref "@{u}" >/dev/null 2>&1; then
+					if [ -n "$(git -C "$dir" log "@{u}"..HEAD --oneline)" ]; then
+						printf "%s\n" "$1"
+					fi
+				fi
+			fi
+		fi
+	}
 
-  traverse_directories() {
-    for dir in "$1"/*; do
-      if [ -d "$dir" ]; then
-        check_git_status "$dir"
-        traverse_directories "$dir"
-      fi
-    done
+	traverse_directories() {
+		for dir in "$1"/*; do
+			if [ -d "$dir" ]; then
+				check_git_status "$dir"
+				traverse_directories "$dir"
+			fi
+		done
 
-  }
+	}
 
-  traverse_all_directories() {
-    for parent_dir in $1; do
-      traverse_directories "$parent_dir"
-    done
-  }
+	traverse_all_directories() {
+		for parent_dir in $1; do
+			traverse_directories "$parent_dir"
+		done
+	}
 
-  dirs="/home/bryant/Documents/work /home/bryant/Documents/github"
-  traverse_all_directories "$dirs" | sort | uniq | fzf --bind \
-    "enter:execute($HOME/bin/tmux/tmux-new-session {})"
+	dirs="/home/bryant/Documents/work /home/bryant/Documents/github"
+	traverse_all_directories "$dirs" | sort | uniq | fzf --bind \
+		"enter:execute($HOME/bin/tmux/tmux-new-session {})"
 }
 
 github
