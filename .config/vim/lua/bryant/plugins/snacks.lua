@@ -18,7 +18,6 @@ return {
 		animate = { enabled = false },
 		profiler = { enabled = false },
 		terminal = { enabled = false },
-		notifier = { enabled = false },
 		gitbrowse = { enabled = false },
 
 		scope = { enabled = true },
@@ -31,6 +30,15 @@ return {
 			enabled = true,
 			toggles = { dim = false },
 			win = { width = 100, backdrop = { transparent = false, blend = 99 } },
+		},
+		notifier = {
+			enabled = true,
+			timeout = 1000,
+			style = 'fancy', -- compact/fancy/minimal
+			width = { min = 30, max = 0.3 },
+			height = { min = 1, max = 0.6 },
+			margin = { top = 1, right = 1, bottom = 1 },
+			padding = true,
 		},
 		styles = {
 			float = {
