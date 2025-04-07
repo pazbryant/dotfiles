@@ -31,6 +31,7 @@ firefox 137.0-1
 fzf 0.60.3-1
 gimp 3.0.2-2
 git 2.49.0-1
+github-cli 2.69.0-1
 glow 2.1.0-1
 go 2:1.24.2-1
 gopass 1.15.15-1
