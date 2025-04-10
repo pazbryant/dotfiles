@@ -43,7 +43,7 @@ super + e
 super + i
 	pavucontrol
 
-super + y
+super + minus
   st -e sh -c "yazi"
 
 super + d
