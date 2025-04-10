@@ -1,18 +1,15 @@
 #!/usr/bin/sh
 
 # main
-alias :q="exit"
 alias yay="paru"
 alias cl="clear"
-alias wg="sudo wg"
 alias sudo="sudo "
 alias pass='gopass'
-alias open="xdg-open"
 alias bb="btm --basic"
 alias transes="trans en:es"
 alias anime="ani-cli -q 1080"
-alias zshconfig="vi ~/.zshconfig"
 alias vi="NVIM_APPNAME='vim' nvim"
+alias wg="sudo wg" # for custom vpn
 alias c="xclip -selection clipboard"
 alias anime_dub="ani-cli -q 1080 --dub"
 alias p="xclip -selection clipboard -o"
@@ -22,15 +19,14 @@ alias sht="shutdown now"
 alias dh="rm ~/.history.db"
 alias sp="systemctl suspend"
 alias reboot="systemctl reboot"
-alias shell="poetry shell"
 alias fontcache="sudo fc-cache -f -v"
 alias rex="xrdb -merge ~/.Xresources && kill -USR1 \$(pidof st)"
-alias motivation="mpv ~/Mega/personal/pc/videos/biy/cristiano.mp4"
+alias motivation="mpv ~/Documents/github/media/videos/biy/cristiano.mp4"
 
 alias gd="git diff"
 alias lzg="lazygit"
-alias gc="git commit"
 alias gb="git branch"
+alias gc="git commit"
 alias gaa="git add -A"
 alias gco="git checkout"
 alias gdc="git diff --cached"
