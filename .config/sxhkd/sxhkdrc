@@ -76,6 +76,9 @@ super + r
 super + w
   ~/bin/wm/toggle_polybar
 
+super + c
+  mpv --fullscreen ~/Documents/github/media/videos/biy/cristiano.mp4
+
 # -------- floating windows -----------
 
 super + shift + w
