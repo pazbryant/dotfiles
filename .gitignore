@@ -27,21 +27,22 @@
 # extras
 .gnupg
 .config/go
-.config/zsh
 .Xresources
+.config/zsh
+.config/libfm
 .config/dconf
 .config/pulse
-.config/libfm
-.config/pcmanfm
+.config/bruno
+.config/thorium
 .config/Postman
 .config/vesktop
-.config/thorium
-.config/ObinsKit
-.config/GIMP/3.0
+.config/pcmanfm
 .config/chromium
+.config/GIMP/3.0
+.config/ObinsKit
 .config/pgcli/log
-.config/lazydocker
 .config/Code - OSS
+.config/lazydocker
 .config/litecli/log
 .config/yarn/global
 .config/systemd/user
