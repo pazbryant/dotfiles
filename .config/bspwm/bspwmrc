@@ -35,6 +35,5 @@ xsetroot -cursor_name left_ptr & # fix mouse
 
 pgrep -x "picom" >/dev/null || picom &
 pgrep -x "dunst" >/dev/null || dunst &
-pgrep -x "udiskie" >/dev/null || udiskie &
 pgrep -x "sxhkd" >/dev/null || sxhkd -m -1 &
 pgrep -x "unclutter" >/dev/null || unclutter &
