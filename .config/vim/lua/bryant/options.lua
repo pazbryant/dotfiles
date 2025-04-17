@@ -14,6 +14,8 @@ g.loaded_netrwPlugin = 1
 opt.showmode = true
 opt.showtabline = 0
 
+opt.guicursor = ''
+
 opt.swapfile = false
 opt.undofile = true
 opt.wrap = false
@@ -63,6 +65,5 @@ if v.g.neovide then
 	v.g.neovide_refresh_rate = 60
 	v.g.neovide_cursor_vfx_mode = 'railgun'
 end
-
 
 vim.cmd.colorscheme('habamax')
