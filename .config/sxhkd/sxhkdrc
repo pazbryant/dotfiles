@@ -103,13 +103,16 @@ super + m
 # -------------- print ---------------------------
 
 Print
- ~/bin/wm/take-screenshots -m select -s clip && notify-send "Saved"
-
-super + Print
- ~/bin/wm/take-screenshots -m select -s save && notify-send "Saved"
+ ~/bin/wm/take-screenshots -m select -s clip && notify-send "Saved in clipboard"
 
 alt + Print
- ~/bin/wm/take-screenshots -m full -s clip && notify-send "Saved"
+ ~/bin/wm/take-screenshots -m select -s save && notify-send "Saved in disk"
+
+super + Print
+ ~/bin/wm/take-screenshots -m full -s clip && notify-send "Saved in clipboard"
+
+control + Print
+ ~/bin/wm/take-screenshots -m full -s save && notify-send "Saved in disk"
 
 # --------------- resize windows --------------------
 
