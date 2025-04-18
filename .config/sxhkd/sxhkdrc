@@ -32,10 +32,10 @@ super + {Tab,Escape}
 # -------------- main keys -----------------------
 
 super + a
-  ~/bin/wm/passmenu && notify-send "Password to clipboard."
+  ~/bin/wm/passmenu
 
 super + o
-  ~/bin/wm/passmenu --otp && notify-send "2FAS to clipboard."
+  ~/bin/wm/passmenu --otp
 
 super + e
 	pcmanfm
