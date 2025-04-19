@@ -50,3 +50,4 @@
 .config/content_shell
 .config/QtProject.conf
 .config/pavucontrol.ini
+.config/calibre/metadata-sources-cache.json
