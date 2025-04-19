@@ -3,10 +3,10 @@ bruno-bin 2.0.1-1
 bun-bin 1.2.2-1
 dragon-drop 1.2.0-2
 lazydocker 0.24.1-1
+maplemono-ttf-autohint 7.0-1
 paru 2.0.4-1
 paru-debug 2.0.4-1
 postman-bin 11.33.4-1
 thorium-browser-bin 130.0.6723.174-1
-ttf-maple 6.4-2
 vesktop-bin 1.5.5-1
 wego 2.3-2
