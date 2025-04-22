@@ -46,14 +46,18 @@ else
 	retrieve_command="gopass show \"$password\""
 fi
 
-retrieved_value=$(eval "$retrieve_command" 2>/dev/null | head -n 1)
+user_password=$(eval "$retrieve_command" 2>/dev/null | head -n 1)
+
+username=$(eval "$retrieve_command" 2>/dev/null | grep -oP 'username: \K.*')
 
 if [ "$typeit" -eq 1 ]; then
 	original_layout=$(setxkbmap -query | awk '/layout/ {print $2}')
 	setxkbmap us
 	trap 'setxkbmap "$original_layout"' EXIT
-	printf '%s' "$retrieved_value" | $typecommand
+	printf '%s' "$user_password" | $typecommand
 else
-	printf '%s' "$retrieved_value" | xclip -selection clipboard
+	printf '%s' "$user_password" | xclip -selection clipboard
 	echo "Password copied to clipboard."
 fi
+
+notify-send "username" "$username"
