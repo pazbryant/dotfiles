@@ -25,29 +25,30 @@
 .config/mpv/mpvHistory.log
 
 # extras
-.gnupg
-.config/go
 .Xresources
-.config/zsh
-.config/libfm
-.config/dconf
-.config/pulse
-.config/bruno
-.config/thorium
-.config/Postman
-.config/vesktop
-.config/pcmanfm
-.config/chromium
+.config/Code - OSS
 .config/GIMP/3.0
 .config/ObinsKit
-.config/pgcli/log
-.config/Code - OSS
-.config/lazydocker
-.config/litecli/log
-.config/yarn/global
-.config/systemd/user
-.config/gh/hosts.yml
-.config/content_shell
+.config/Postman
 .config/QtProject.conf
-.config/pavucontrol.ini
+.config/bruno
 .config/calibre/metadata-sources-cache.json
+.config/chromium
+.config/content_shell
+.config/dconf
+.config/gh/hosts.yml
+.config/go
+.config/lazydocker
+.config/libfm
+.config/litecli/log
+.config/pavucontrol.ini
+.config/pcmanfm
+.config/pgcli/log
+.config/pulse
+.config/ripgrep-all
+.config/systemd/user
+.config/thorium
+.config/vesktop
+.config/yarn/global
+.config/zsh
+.gnupg
