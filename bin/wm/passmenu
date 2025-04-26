@@ -60,4 +60,4 @@ else
 	echo "Password copied to clipboard."
 fi
 
-notify-send "username" "$username"
+notify-send "Login" "$username"
