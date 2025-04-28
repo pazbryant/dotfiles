@@ -1,7 +1,6 @@
 #!/bin/env sh
 
 set -e
-set -x
 
 typeit=0
 use_otp=0
@@ -46,18 +45,23 @@ else
 	retrieve_command="gopass show \"$password\""
 fi
 
-user_password=$(eval "$retrieve_command" 2>/dev/null | head -n 1)
+entry=$(eval "$retrieve_command" 2>/dev/null)
 
-username=$(eval "$retrieve_command" 2>/dev/null | grep -oP 'username: \K.*')
+password=$(echo "$entry" | head -n 1)
+username=$(echo "$entry" | rg "username" | awk '{print $2}')
 
 if [ "$typeit" -eq 1 ]; then
 	original_layout=$(setxkbmap -query | awk '/layout/ {print $2}')
 	setxkbmap us
 	trap 'setxkbmap "$original_layout"' EXIT
-	printf '%s' "$user_password" | $typecommand
+	printf '%s' "$password" | $typecommand
 else
-	printf '%s' "$user_password" | xclip -selection clipboard
+	printf '%s' "$password" | xclip -selection clipboard
 	echo "Password copied to clipboard."
+fi
+
+if [ -z "$username" ]; then
+	return 0
 fi
 
 notify-send "Login" "$username"
