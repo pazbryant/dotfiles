@@ -106,6 +106,7 @@ ueberzugpp 2.9.6-8
 ufw 0.36.2-5
 unclutter 1:1.6-4
 uv 0.6.17-1
+wget 1.25.0-2
 wireplumber 0.5.8-1
 xclip 0.13-6
 xcolor 0.5.1-4
