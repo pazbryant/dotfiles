@@ -52,3 +52,5 @@
 .config/yarn/global
 .config/zsh
 .gnupg
+.config/litecli/history
+.config/pgcli/history
