@@ -13,6 +13,8 @@ bspc config focus_follows_pointer false
 bspc config focused_border_color "#757575"
 
 # app favorite desktop
+bspc rule -a jetbrains-datagrip desktop=^4 follow=off
+
 bspc rule -a Postman desktop=^5 follow=off
 bspc rule -a bruno desktop=^5 follow=off
 
