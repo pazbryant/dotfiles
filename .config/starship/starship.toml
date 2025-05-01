@@ -11,5 +11,5 @@ truncate_to_repo = false
 style = "white"
 
 [character]
-success_symbol = "[󰁕](#55392c)"
-error_symbol = "[✗](#55392c)"
+success_symbol = "[󰁕](#49385d)"
+error_symbol = "[✗](#49385d)"

@@ -10,7 +10,7 @@
 /*****----- Global Properties -----*****/
 * {
 background		:     #1d1f21; /* Very dark gray */
-background-alt:			#55392c; /* Dark gray */
+background-alt:			#4921ad; /* Dark gray */
 foreground		:     #ffffff; /* Near black */
 selected			:     #5e5e5e; /* Even darker gray */
 font					:			"Overpass SemiBold 10";
