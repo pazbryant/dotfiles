@@ -15,6 +15,9 @@ return {
 					updateevents = 'TextChanged,TextChangedI',
 					enable_autosnippets = true,
 				})
+				require('luasnip.loaders.from_vscode').lazy_load({
+					exclude = { 'sh', 'bash' },
+				})
 				require('luasnip.loaders.from_lua').lazy_load({
 					paths = { './snippets' },
 				})
@@ -22,7 +25,7 @@ return {
 		},
 	},
 	opts = {
-		cmdline = { enabled = false },
+		cmdline = { enabled = true },
 		completion = {
 			documentation = { auto_show = false },
 			menu = {
@@ -36,10 +39,52 @@ return {
 		},
 		sources = {
 			default = {
+				'lazydev',
 				'snippets',
+				'lsp',
 				'path',
 				'buffer',
+				'obsidian',
+				'obsidian_new',
+				'obsidian_tags',
 			},
+			providers = {
+				lazydev = {
+					name = 'LazyDev',
+					module = 'lazydev.integrations.blink',
+					score_offset = 100,
+				},
+				snippets = {
+					min_keyword_length = 2,
+				},
+				obsidian = {
+					name = 'obsidian',
+					module = 'blink.compat.source',
+				},
+				obsidian_new = {
+					name = 'obsidian_new',
+					module = 'blink.compat.source',
+				},
+				obsidian_tags = {
+					name = 'obsidian_tags',
+					module = 'blink.compat.source',
+				},
+			},
+			transform_items = function(_, items)
+				local wanted = {}
+				for _, item in ipairs(items) do
+					if
+						not (
+							item.kind
+								== require('blink.cmp.types').CompletionItemKind.Snippet
+							and item.source_id == 'lsp'
+						)
+					then
+						wanted[#wanted + 1] = item
+					end
+				end
+				return wanted
+			end,
 		},
 		fuzzy = { implementation = 'prefer_rust_with_warning' },
 		snippets = { preset = 'luasnip' },
@@ -50,9 +95,7 @@ return {
 			['<C-y>'] = { 'select_and_accept' },
 			['<Up>'] = { 'select_prev', 'fallback' },
 			['<Down>'] = { 'select_next', 'fallback' },
-			['<C-l>'] = { 'snippet_forward', 'fallback' },
 			['<Tab>'] = { 'snippet_forward', 'fallback' },
-			['<C-h>'] = { 'snippet_backward', 'fallback' },
 			['<S-Tab>'] = { 'snippet_backward', 'fallback' },
 			['<C-n>'] = { 'select_next', 'fallback_to_mappings' },
 			['<C-p>'] = { 'select_prev', 'fallback_to_mappings' },

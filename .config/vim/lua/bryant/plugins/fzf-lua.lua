@@ -1,9 +1,7 @@
 return {
 	'ibhagwan/fzf-lua',
-	cmd = 'FzfLua',
 	opts = function()
 		local actions = require('fzf-lua').actions
-
 		local file_ignore_patterns = {
 			'tags',
 			'*.pyc',
@@ -53,31 +51,46 @@ return {
 				files = {
 					['ctrl-s'] = actions.file_split,
 					['ctrl-v'] = actions.file_vsplit,
-					['ctrl-i'] = actions.toggle_ignore,
 					['ctrl-h'] = actions.toggle_hidden,
+					['ctrl-i'] = actions.toggle_ignore,
 					['enter'] = actions.file_edit_or_qf,
-					['ctrl-q'] = actions.file_sel_to_qf,
+					['ctrl-q'] = { fn = actions.file_sel_to_qf, prefix = 'select-all' },
+				},
+			},
+			previewers = {
+				builtin = {
+					extensions = {
+						['png'] = { 'chafa', '{file}' },
+						['jpg'] = { 'chafa', '{file}' },
+						['jpeg'] = { 'chafa', '{file}' },
+						['gif'] = { 'chafa', '{file}' },
+						['webp'] = { 'chafa', '{file}' },
+						['svg'] = { 'chafa', '{file}' },
+					},
 				},
 			},
 			files = {
 				fd_opts = '--color=never --type f' .. fd_exclude_args,
 			},
 			grep = {
-				rg_opts = '--column --line-number --no-heading --color=always --smart-case' .. rg_exclude_args,
+				rg_opts = '--column --line-number --no-heading --color=always --smart-case'
+					.. rg_exclude_args,
 			},
 			live_grep = {
-				rg_opts = '--column --line-number --no-heading --color=always --smart-case' .. rg_exclude_args,
+				rg_opts = '--column --line-number --no-heading --color=always --smart-case'
+					.. rg_exclude_args,
 			},
 		}
 	end,
   -- stylua: ignore start
-  keys = {
+	keys = {
+    { '<leader>fz', "<cmd> FzfLua <CR>" , desc = 'FzfLua' },
     { '<c-p>', function() require('fzf-lua').files() end, desc = 'FzfLua Files' },
     { '<m-c>', function() require('fzf-lua').buffers() end, desc = 'FzfLua buffers' },
-    { '<leader>ht', function() require('fzf-lua').help_tags() end, desc = 'FzfLua Help tags' },
     { '<leader>k', function() require('fzf-lua').keymaps() end, desc = 'FzfLua show keymaps' },
-    { '<c-y>', function() require('fzf-lua').live_grep_native() end, desc = 'FzfLua Live grep' },
+    { '<leader>ht', function() require('fzf-lua').help_tags() end, desc = 'FzfLua Help tags' },
+    { '<c-t>', function() require('fzf-lua').live_grep_native() end, desc = 'FzfLua Live grep' },
     { 'z=', function() require('fzf-lua').spell_suggest() end, desc = 'FzfLua spell suggestions' },
     { '<leader>th', function() require('fzf-lua').colorschemes() end, desc = 'FzfLua Switch colorschemes' },
-  },
+	},
 }
