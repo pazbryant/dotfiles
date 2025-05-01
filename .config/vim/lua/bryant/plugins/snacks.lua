@@ -8,20 +8,21 @@ return {
 		git = { enabled = false },
 		util = { enabled = false },
 		image = { enabled = false },
+		indent = { enabled = false },
+		rename = { enabled = false },
+		toggle = { enabled = false },
+		scroll = { enabled = false },
 		notify = { enabled = false },
 		layout = { enabled = false },
-		toggle = { enabled = false },
-		rename = { enabled = false },
-		scroll = { enabled = false },
 		scratch = { enabled = false },
 		animate = { enabled = false },
 		profiler = { enabled = false },
 		terminal = { enabled = false },
+		dashboard = { enabled = false },
 		gitbrowse = { enabled = false },
 
 		debug = { enabled = true },
 		scope = { enabled = true },
-		indent = { enabled = true },
 		lazygit = { enable = true },
 		bigfile = { enabled = true },
 		quickfile = { enabled = true },
@@ -49,6 +50,13 @@ return {
 	},
 	keys = {
 		{
+			'<leader>N',
+			function()
+				Snacks.notifier.show_history()
+			end,
+			desc = 'Snacks notifier',
+		},
+		{
 			'<leader>gg',
 			function()
 				Snacks.lazygit()
@@ -75,7 +83,7 @@ return {
 				Snacks.bufdelete()
 				vim.notify('Buffer has been deleted', vim.log.levels.INFO)
 			end,
-			desc = 'Snacks bufdelete',
+			desc = 'Snacks remove buffer',
 		},
 		{
 			'<leader>bD',
@@ -83,13 +91,13 @@ return {
 				Snacks.bufdelete.all()
 				vim.notify('All buffers has been deleted', vim.log.levels.INFO)
 			end,
-			desc = 'Snacks bufdelete all',
+			desc = 'Snacks remove all buffers',
 		},
 		{
 			'<leader>bC',
 			function()
 				Snacks.bufdelete.other()
-				vim.notify('Others buffers has been deleted', vim.log.levels.INFO)
+				vim.notify('Snacks remove all buffers but current', vim.log.levels.INFO)
 			end,
 			desc = 'Snacks bufdelete all but current',
 		},

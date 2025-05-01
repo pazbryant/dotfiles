@@ -39,14 +39,9 @@ return {
 		},
 		sources = {
 			default = {
-				'lazydev',
 				'snippets',
-				'lsp',
 				'path',
 				'buffer',
-				'obsidian',
-				'obsidian_new',
-				'obsidian_tags',
 			},
 			providers = {
 				lazydev = {
@@ -57,29 +52,11 @@ return {
 				snippets = {
 					min_keyword_length = 2,
 				},
-				obsidian = {
-					name = 'obsidian',
-					module = 'blink.compat.source',
-				},
-				obsidian_new = {
-					name = 'obsidian_new',
-					module = 'blink.compat.source',
-				},
-				obsidian_tags = {
-					name = 'obsidian_tags',
-					module = 'blink.compat.source',
-				},
 			},
 			transform_items = function(_, items)
 				local wanted = {}
 				for _, item in ipairs(items) do
-					if
-						not (
-							item.kind
-								== require('blink.cmp.types').CompletionItemKind.Snippet
-							and item.source_id == 'lsp'
-						)
-					then
+					if not (item.kind == require('blink.cmp.types').CompletionItemKind.Snippet and item.source_id == 'lsp') then
 						wanted[#wanted + 1] = item
 					end
 				end
