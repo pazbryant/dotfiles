@@ -13,7 +13,6 @@ g.loaded_netrwPlugin = 1
 
 opt.showmode = true
 opt.showtabline = 0
-
 opt.guicursor = ''
 
 opt.swapfile = false
@@ -44,6 +43,16 @@ opt.updatetime = 50
 
 opt.termguicolors = true
 
+-- folding options
+vim.o.foldenable = true
+vim.o.foldcolumn = '0'
+opt.foldmethod = 'expr'
+opt.foldexpr = 'nvim_treesitter#foldexpr()' -- "v:lua.vim.lsp.foldexpr()"
+vim.o.fillchars = 'eob: ,fold: ,foldopen:,foldsep: ,foldclose:'
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.opt.foldlevelstart = 99
+
 -- for obsidian
 opt.conceallevel = 2
 
@@ -54,16 +63,24 @@ opt.spelllang = { 'en_us', 'es_mx' }
 opt.spellfile = '/home/bryant/.config/spell/en.utf-8.add'
 
 -- update statusline
-opt.statusline = ' %f%m%r%h%w'
+opt.laststatus = 0
+-- opt.statusline = ' %f%m%r%h%w'
 
 -- disable nvim startup screen
 opt.shortmess:append('sI')
 
 -- neovide
 if v.g.neovide then
-	v.o.guifont = 'Maple Mono NF:h9.5:w1.2:#h-none'
+	v.o.guifont = 'Maple Mono:h9.5:w1.2:#h-none'
 	v.g.neovide_refresh_rate = 60
 	v.g.neovide_cursor_vfx_mode = 'railgun'
 end
 
-vim.cmd.colorscheme('habamax')
+-- snacks aliases
+_G.dd = function(...)
+	Snacks.debug.inspect(...)
+end
+_G.bt = function()
+	Snacks.debug.backtrace()
+end
+vim.print = _G.dd

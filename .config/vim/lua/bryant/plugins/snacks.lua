@@ -7,7 +7,6 @@ return {
 		dim = { enabled = false },
 		git = { enabled = false },
 		util = { enabled = false },
-		debug = { enabled = false },
 		image = { enabled = false },
 		notify = { enabled = false },
 		layout = { enabled = false },
@@ -20,6 +19,7 @@ return {
 		terminal = { enabled = false },
 		gitbrowse = { enabled = false },
 
+		debug = { enabled = true },
 		scope = { enabled = true },
 		indent = { enabled = true },
 		lazygit = { enable = true },
