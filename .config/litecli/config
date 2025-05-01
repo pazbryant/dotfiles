@@ -125,4 +125,4 @@ output.even-row = ""
 # some of them will require you to have a database attached.
 # they will be executed in the same order as they appear in the list.
 [startup_commands]
-#commands = ".tables", "pragma foreign_keys = ON;"
+# commands = ".tables", "pragma foreign_keys = ON;"
