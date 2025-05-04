@@ -1,4 +1,3 @@
-# vi: ft=dosini
 [main]
 
 # Multi-line mode allows breaking up the sql statements into multiple lines. If
@@ -67,8 +66,8 @@ autocompletion = True
 # \r - The current time, standard 12-hour time (1-12)
 # \s - Seconds of the current time
 # \x1b[...m - insert ANSI escape sequence
-prompt = '\d> '
-prompt_continuation = '-> '
+prompt = "\d> "
+prompt_continuation = "-> "
 
 # Show/hide the informational toolbar with function keymap at the footer.
 show_bottom_toolbar = True
@@ -81,48 +80,41 @@ login_path_as_host = False
 
 # Cause result sets to be displayed vertically if they are too wide for the current window,
 # and using normal tabular format otherwise. (This applies to statements terminated by ; or \G.)
-auto_vertical_output = False
+auto_vertical_output = True
 
 # keyword casing preference. Possible values "lower", "upper", "auto"
 keyword_casing = upper
 
 # disabled pager on startup
 enable_pager = True
-
-# Custom colors for the completion menu, toolbar, etc.
 [colors]
-completion-menu.completion.current = 'bg:#ffffff #000000'
-completion-menu.completion = 'bg:#008888 #ffffff'
-completion-menu.meta.completion.current = 'bg:#44aaaa #000000'
-completion-menu.meta.completion = 'bg:#448888 #ffffff'
-completion-menu.multi-column-meta = 'bg:#aaffff #000000'
-scrollbar.arrow = 'bg:#003333'
-scrollbar = 'bg:#00aaaa'
-selected = '#ffffff bg:#6666aa'
-search = '#ffffff bg:#4444aa'
-search.current = '#ffffff bg:#44aa44'
-bottom-toolbar = 'bg:#222222 #aaaaaa'
-bottom-toolbar.off = 'bg:#222222 #888888'
-bottom-toolbar.on = 'bg:#222222 #ffffff'
-search-toolbar = 'noinherit bold'
-search-toolbar.text = 'nobold'
-system-toolbar = 'noinherit bold'
-arg-toolbar = 'noinherit bold'
-arg-toolbar.text = 'nobold'
-bottom-toolbar.transaction.valid = 'bg:#222222 #00ff5f bold'
-bottom-toolbar.transaction.failed = 'bg:#222222 #ff005f bold'
+completion-menu.completion.current = "bg:#ffffff #000000"
+completion-menu.completion = "bg:#008888 #ffffff"
+completion-menu.meta.completion.current = "bg:#44aaaa #000000"
+completion-menu.meta.completion = "bg:#448888 #ffffff"
+completion-menu.multi-column-meta = "bg:#aaffff #000000"
+scrollbar.arrow = "bg:#003333"
+scrollbar = "bg:#00aaaa"
+selected = "#ffffff bg:#6666aa"
+search = "#ffffff bg:#4444aa"
+search.current = "#ffffff bg:#44aa44"
+bottom-toolbar = "bg:#222222 #aaaaaa"
+bottom-toolbar.off = "bg:#222222 #888888"
+bottom-toolbar.on = "bg:#222222 #ffffff"
+search-toolbar = noinherit bold
+search-toolbar.text = nobold
+system-toolbar = noinherit bold
+arg-toolbar = noinherit bold
+arg-toolbar.text = nobold
+bottom-toolbar.transaction.valid = "bg:#222222 #00ff5f bold"
+bottom-toolbar.transaction.failed = "bg:#222222 #ff005f bold"
 
 # style classes for colored table output
 output.header = "#00ff5f bold"
 output.odd-row = ""
 output.even-row = ""
 
-# Favorite queries.
-[favorite_queries]
-
-# Startup commands
-# litecli commands or sqlite commands to be executed on startup.
-# some of them will require you to have a database attached.
-# they will be executed in the same order as they appear in the list.
+# startup_commands
 [startup_commands]
-# commands = ".tables", "pragma foreign_keys = ON;"
+
+[favorite_queries]
