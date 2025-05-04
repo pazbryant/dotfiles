@@ -72,7 +72,7 @@ alias_map_file =
 log_file = default
 
 # keyword casing preference. Possible values: "lower", "upper", "auto"
-keyword_casing = auto
+keyword_casing = upper
 
 # casing_file location.
 # In Unix/Linux: ~/.config/pgcli/casing
