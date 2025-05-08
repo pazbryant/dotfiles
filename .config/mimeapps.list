@@ -17,3 +17,4 @@ application/pdf=org.pwmt.zathura.desktop
 application/epub+zip=org.pwmt.zathura-pdf-mupdf.desktop
 x-scheme-handler/discord=vesktop.desktop
 x-scheme-handler/bruno=bruno.desktop
+text/html=thorium-browser.desktop
