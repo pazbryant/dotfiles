@@ -1,5 +1,6 @@
 7zip 24.09-3
 alacritty 0.15.1-1
+android-tools 35.0.2-15
 ansible 11.5.0-2
 ansible-lint 25.4.0-1
 atuin 18.6.0-1
