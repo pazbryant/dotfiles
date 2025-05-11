@@ -40,14 +40,9 @@ export PATH="${(j/:/)extra_path}:${PATH}"
 
 # custom plugin manager
 # function can be found in ~/.zshplugin
-repos=(
-  hlissner/zsh-autopair
-)
+repos=()
 # load plugins
 plugin-load $repos
-
-# start autopair
-autopair-init
 
 # start software
 eval "$(fzf --zsh)"
