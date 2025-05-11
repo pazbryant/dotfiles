@@ -74,7 +74,7 @@ super + r
   ~/bin/wm/read
 
 super + w
-  ~/bin/wm/toggle_polybar
+  ~/bin/wm/start-polybar
 
 super + c
   mpv --fullscreen ~/Documents/github/media/videos/biy/cristiano.mp4
