@@ -12,7 +12,7 @@ alias anime="ani-cli -q 1080"
 alias vi="NVIM_APPNAME='vim' nvim"
 alias wg="sudo wg" # for custom vpn
 alias c="xclip -selection clipboard"
-alias anime_dub="ani-cli -q 1080 --dub"
+alias ani-cli-dub="ani-cli -q 1080 --dub"
 alias p="xclip -selection clipboard -o"
 
 alias ff="fastfetch"
