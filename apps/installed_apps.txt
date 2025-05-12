@@ -3,7 +3,7 @@ alacritty 0.15.1-1
 android-tools 35.0.2-15
 ansible 11.5.0-2
 ansible-lint 25.4.0-1
-atuin 18.6.0-1
+atuin 18.6.1-1
 bandwhich 0.23.1-1
 base 3-2
 base-devel 1-2
@@ -11,9 +11,9 @@ bat 0.25.0-4
 bob 4.0.3-1
 bottom 0.10.2-1
 breeze-gtk 6.3.5-1
-breeze-icons 6.13.0-1
+breeze-icons 6.14.0-1
 bspwm 0.9.10-4
-calibre 8.3.0-1
+calibre 8.4.0-1
 capitaine-cursors 4-3
 code 1.100.0-1
 cronie 1.7.2-1
@@ -29,7 +29,7 @@ fd 10.2.0-1
 feh 3.10.3-1
 ffmpegthumbnailer 2.2.3-3
 firefox 138.0.1-1
-fzf 0.61.3-1
+fzf 0.62.0-1
 gimp 3.0.2-3
 git 2.49.0-1
 github-cli 2.72.0-1
@@ -44,11 +44,11 @@ hyperfine 1.19.0-1
 imv 4.5.0-5
 jq 1.7.1-2
 lazygit 0.50.0-1
-linux 6.14.5.arch1-1
-linux-firmware 20250408.c1a774f3-1
-linux-headers 6.14.5.arch1-1
-linux-lts 6.12.27-1
-linux-lts-headers 6.12.27-1
+linux 6.14.6.arch1-1
+linux-firmware 20250508.788aadc8-1
+linux-headers 6.14.6.arch1-1
+linux-lts 6.12.28-1
+linux-lts-headers 6.12.28-1
 lua51 5.1.5-12
 luarocks 3.11.1-2
 lxappearance 0.6.4-1
@@ -64,7 +64,7 @@ networkmanager 1.52.0-1
 noto-fonts-emoji 1:2.047-1
 npm 11.3.0-1
 obsidian 1.8.10-1
-openresolv 3.16.2-1
+openresolv 3.16.3-1
 openssh 10.0p1-3
 otf-overpass 3.0.5-2
 pavucontrol 1:6.1-1
