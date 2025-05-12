@@ -4,6 +4,11 @@ local map = v.keymap.set
 
 -- stylua: ignore start
 -- custom keymaps
+
+-- better change inner word
+map('n', '<C-c>', 'ciw', { desc = 'Better Change Inner Word' })
+
+-- movement left and right
 map({ 'n', 'v', 'o' }, 'H', '^', { desc = 'Start of the line' })
 map({ 'n', 'v', 'o' }, 'L', 'g_', { desc = 'End of the line' })
 
