@@ -1,7 +1,6 @@
 #!/usr/bin/sh
 
 # main
-alias pp="pnpm "
 alias yay="paru"
 alias cl="clear"
 alias sudo="sudo "
