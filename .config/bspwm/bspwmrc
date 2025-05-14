@@ -13,11 +13,6 @@ bspc config focus_follows_pointer false
 bspc config focused_border_color "#4921ad"
 
 # rules
-
-bspc rule -a mpv border=off
-bspc rule -a thorium-browser border=off
-
-
 bspc rule -a jetbrains-datagrip desktop=^4 follow=off
 
 bspc rule -a Postman desktop=^5 follow=off
