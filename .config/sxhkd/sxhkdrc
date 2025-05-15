@@ -62,7 +62,7 @@ super + Return
   thorium-browser
 
 super + shift + Return
-	thorium-browser --user-data-dir=~/.conf/thorium-work
+	thorium-browser --user-data-dir=/home/bryant/.config/thorium-work
 
 super + b
   ~/bin/wm/set-brightness
