@@ -1,0 +1,22 @@
+Xft.rgba:	rgb
+Xft.hinting:	1
+Xft.autohint:	0
+Xft.antialias:	1
+Xft.hintstyle:	hintslight
+Xft.lcdfilter:	lcddefault
+
+! Global colors
+*background: #1d1f21
+*foreground: #ffffff
+*cursorColor: #4921ad
+
+
+! ST specific configurations
+! st.font: Maple Mono:pixelsize=14.5:style:Bold
+! st.font: CaskaydiaCove Nerd Font Mono:pixelsize=14:style:SemiBold
+st.font: Recursive Mn Csl St Smb:pixelsize=14.5:style:SemiBold
+
+st.alpha: 0.85
+st.chscale: 1.00
+st.cwscale: 1.00
+st.borderpx: 0px
