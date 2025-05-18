@@ -12,9 +12,9 @@ Xft.lcdfilter:	lcddefault
 
 
 ! ST specific configurations
-! st.font: Maple Mono:pixelsize=14.5:style:Bold
+st.font: Maple Mono:pixelsize=14.5:style:Bold
 ! st.font: CaskaydiaCove Nerd Font Mono:pixelsize=14:style:SemiBold
-st.font: Recursive Mn Csl St Smb:pixelsize=14.5:style:SemiBold
+! st.font: Recursive Mn Csl St Smb:pixelsize=14.5:style:SemiBold
 
 st.alpha: 0.85
 st.chscale: 1.00
