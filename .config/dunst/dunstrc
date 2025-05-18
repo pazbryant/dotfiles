@@ -49,15 +49,15 @@
 
 
 [urgency_low]
-    background = "#4921ad"
+    background = "#5f1f53"
     foreground = "#000000"
 
 [urgency_normal]
-    background = "#4921ad"
+    background = "#5f1f53"
     foreground = "#000000"
 
 [urgency_critical]
-    background = "#4921ad"
+    background = "#5f1f53"
     foreground = "#000000"
 
 # vim: ft=cfg

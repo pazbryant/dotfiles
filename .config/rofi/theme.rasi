@@ -10,8 +10,8 @@
 /*****----- Global Properties -----*****/
 * {
 background		:     #1d1f21;
-background-alt:			#4921ad;
-foreground		:     #ffffff;
+background-alt:			#5f1f53;
+foreground		:     #000000;
 selected			:     #5e5e5e;
 font					:			"Overpass SemiBold 10";
 }

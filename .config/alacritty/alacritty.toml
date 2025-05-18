@@ -61,7 +61,7 @@ foreground = "#ffffff"
 
 [colors.cursor]
 text = "#1d1f21"
-cursor = "#4921ad"
+cursor = "#5f1f53"
 
 [colors.normal]
 black = "#1d1f21"

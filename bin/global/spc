@@ -1,0 +1,157 @@
+#!/usr/bin/env sh
+
+set -e
+
+# Log file for debugging
+LOG_FILE="${HOME}/.theme_update.log"
+
+# Function to log errors
+log_error() {
+	echo "$(date '+%Y-%m-%d %H:%M:%S') - ERROR: $1" >>"$LOG_FILE"
+}
+
+# Function to select a color using xcolor
+select_color() {
+	xcolor || {
+		log_error "Failed to select color with xcolor"
+		echo "Failed to select color" >&2
+		exit 1
+	}
+}
+
+# Function to update config files
+update_config() {
+	file="$1"
+	pattern="$2"
+	replacement="$3"
+
+	if [ -f "$file" ]; then
+		sed -i "s|$pattern|$replacement|" "$file" || {
+			log_error "Failed to update $file"
+			echo "Failed to update $file" >&2
+			return 1
+		}
+	else
+		log_error "File not found: $file"
+		echo "Warning: File not found: $file" >&2
+		return 1
+	fi
+
+	return 0
+}
+
+# Update functions for each configuration file
+update_bspwm() {
+	color="$1"
+	bspwmrc="$HOME/.config/bspwm/bspwmrc"
+
+	update_config "$bspwmrc" \
+		'focused_border_color "#[0-9a-fA-F]\{6\}"' \
+		"focused_border_color \"$color\""
+}
+
+update_rofi() {
+	color="$1"
+	theme_rasi="$HOME/.config/rofi/theme.rasi"
+
+	update_config "$theme_rasi" \
+		'background-alt:\s*#[0-9a-fA-F]\{6\};' \
+		"background-alt:\t\t\t$color;"
+}
+
+update_xresources() {
+	color="$1"
+	xresources="$HOME/.Xresources"
+
+	update_config "$xresources" \
+		'\*cursorColor: #[0-9a-fA-F]\{6\}' \
+		"*cursorColor: $color"
+}
+
+update_alacritty() {
+	color="$1"
+	alacritty_config="$HOME/.config/alacritty/alacritty.toml"
+
+	update_config "$alacritty_config" \
+		'cursor = "#[0-9a-fA-F]\{6\}"' \
+		"cursor = \"$color\""
+}
+
+update_dunst() {
+	color="$1"
+	dunstrc="$HOME/.config/dunst/dunstrc"
+
+	update_config "$dunstrc" \
+		'background = "#[0-9a-fA-F]\{6\}"' \
+		"background = \"$color\""
+}
+
+update_starship() {
+	color="$1"
+	starship="$HOME/.config/starship/starship.toml"
+
+	# Define patterns for starship config
+	error_pattern='error_symbol = "\[✗\](#[0-9a-fA-F]\{6\})"'
+	success_pattern='success_symbol = "\[󰁕\](#[0-9a-fA-F]\{6\})"'
+
+	update_config "$starship" "$error_pattern" "error_symbol = \"[✗]($color)\"" || true
+	update_config "$starship" "$success_pattern" "success_symbol = \"[󰁕]($color)\"" || true
+}
+
+# Reload services after configuration updates
+reload_services() {
+	# Use a subshell to avoid killing the script if a service fails
+	(bspc wm -r) || log_error "Failed to reload bspwm"
+
+	# reload ST terminal new values
+	xrdb -merge ~/.Xresources && kill -USR1 "$(pidof st)"
+
+	# Kill dunst and restart it
+	if pgrep dunst >/dev/null; then
+		pkill dunst
+		# Wait for dunst to terminate before restarting
+		sleep 0.5
+	fi
+
+	# Start dunst in the background
+	dunst &
+}
+
+# Notify user of completion
+notify_user() {
+	notify-send "Appearance" "Updated primary color to $1" || log_error "Failed to send notification"
+}
+
+# Main function
+main() {
+	# Get the selected color
+	selected_color="$(select_color)"
+
+	# Check if color selection was successful
+	if [ -z "$selected_color" ]; then
+		log_error "No color selected"
+		echo "No color selected" >&2
+		exit 1
+	fi
+
+	echo "Selected color: $selected_color"
+
+	# Update all configuration files
+	update_rofi "$selected_color"
+	update_bspwm "$selected_color"
+	update_dunst "$selected_color"
+	update_starship "$selected_color"
+	update_alacritty "$selected_color"
+	update_xresources "$selected_color"
+
+	# Reload services
+	reload_services
+
+	# Notify user
+	notify_user "$selected_color"
+
+	echo "Theme update completed successfully"
+}
+
+# Execute main function
+main
