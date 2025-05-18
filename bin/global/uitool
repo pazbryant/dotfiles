@@ -12,6 +12,8 @@ log_error() {
 
 # Function to select a color using xcolor
 select_color() {
+	notify-send "XCOLOR" "Picking color"
+
 	xcolor || {
 		log_error "Failed to select color with xcolor"
 		echo "Failed to select color" >&2
@@ -104,7 +106,8 @@ reload_services() {
 	(bspc wm -r) || log_error "Failed to reload bspwm"
 
 	# reload ST terminal new values
-	xrdb -merge ~/.Xresources && kill -USR1 "$(pidof st)"
+	# shellcheck disable=SC2046
+	xrdb -merge ~/.Xresources && kill -USR1 $(pidof st)
 
 	# Kill dunst and restart it
 	if pgrep dunst >/dev/null; then
