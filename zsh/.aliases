@@ -18,7 +18,7 @@ alias ff="fastfetch"
 alias sht="shutdown now"
 alias dh="rm ~/.history.db"
 alias sp="systemctl suspend"
-alias reboot="systemctl reboot"
+alias rebootcmd="systemctl reboot"
 alias fontcache="sudo fc-cache -f -v"
 alias rex="xrdb -merge ~/.Xresources && kill -USR1 \$(pidof st)"
 alias motivation="mpv ~/Documents/github/media/videos/biy/cristiano.mp4"
@@ -44,4 +44,4 @@ alias tn='tmux new -s $USER'
 
 alias zls='ls $ZPLUGINDIR'
 
-alias media='cd /run/media/bryant'
+alias media='cd /run/media'
