@@ -8,13 +8,13 @@ Xft.lcdfilter:	lcddefault
 ! Global colors
 *background: #1d1f21
 *foreground: #ffffff
-*cursorColor: #631e54
+*cursorColor: #541a4a
 
 
 ! ST specific configurations
-st.font: Maple Mono:pixelsize=14.5:style:Bold
-! st.font: CaskaydiaCove Nerd Font Mono:pixelsize=14:style:SemiBold
-! st.font: Recursive Mn Csl St Smb:pixelsize=14.5:style:SemiBold
+! st.font: Maple Mono:pixelsize=13.5:style:Bold
+! st.font: CaskaydiaCove Nerd Font Mono:pixelsize=13.5:style:SemiBold
+st.font: Recursive Mn Csl St Smb:pixelsize=13.5:style:SemiBold
 
 st.alpha: 0.90
 st.chscale: 1.00
