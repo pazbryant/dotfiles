@@ -3,18 +3,18 @@ function stow_dots --description "Restow dotfiles using GNU Stow from ~/Document
 
     # Create the directory if it doesn't exist
     mkdir -p "$dotfiles_dir"
-    if test $status -ne 0 # Check status of mkdir
+    if test $status -ne 0
         echo "Error: Could not create directory $dotfiles_dir" >&2
-        return 1 # Exit function with error status
+        return 1
     end
 
     # Change to the dotfiles directory
     cd "$dotfiles_dir"
-    if test $status -ne 0 # Check status of cd
+    if test $status -ne 0
         echo "Error: Could not change to directory $dotfiles_dir" >&2
-        return 1 # Exit function with error status
+        return 1
     end
 
-    # Run stow; $USER is an environment variable available in Fish
-    command stow --target="/home/$USER" --restow .
+    # Run stow with optional extra args
+    command stow --target="/home/$USER" --restow $argv .
 end

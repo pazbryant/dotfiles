@@ -24,7 +24,7 @@ update_grub() {
 stow_dots() {
 	dots="$HOME/Documents/github/dotfiles"
 	mkdir -p "$dots" && cd "$dots" || return
-	stow --target=/home/"$USER" --restow .
+	stow --target=/home/"$USER" "$@" --restow .
 }
 
 # NOTE: this function is used in ~/.zshconfig file

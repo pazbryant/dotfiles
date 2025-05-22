@@ -18,7 +18,7 @@ end
 
 if command -v atuin >/dev/null
     atuin init fish --disable-up-arrow | source
-		bind \cp 'atuin search --shell-up-search-key'
+		bind \cp _atuin_bind_up
 end
 
 if command -v starship >/dev/null
