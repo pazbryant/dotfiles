@@ -1,4 +1,5 @@
 # main
+alias ls=\ls
 alias cl "clear"
 alias c "xclip -selection clipboard"
 alias vi "env NVIM_APPNAME='vim' nvim"
