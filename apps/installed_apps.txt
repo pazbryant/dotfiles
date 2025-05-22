@@ -21,7 +21,6 @@ docker 1:28.1.1-1
 docker-buildx 0.23.0-1
 docker-compose 2.36.1-1
 dunst 1.12.2-1
-dust 1.2.0-1
 efibootmgr 18-3
 eza 0.21.3-1
 fastfetch 2.43.0-1
@@ -29,6 +28,7 @@ fd 10.2.0-1
 feh 3.10.3-1
 ffmpegthumbnailer 2.2.3-3
 firefox 138.0.4-1
+fish 4.0.2-1
 fzf 0.62.0-1
 gimp 3.0.4-2
 git 2.49.0-2
@@ -43,6 +43,7 @@ hurl 6.1.1-2
 hyperfine 1.19.0-1
 imv 4.5.0-5
 jq 1.7.1-2
+just 1.40.0-1
 lazygit 0.50.0-1
 linux 6.14.6.arch1-1
 linux-firmware 20250508.788aadc8-1
