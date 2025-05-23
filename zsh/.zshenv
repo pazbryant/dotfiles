@@ -11,6 +11,7 @@ export OPENER="xdg-open"
 export PAGER="less"
 export BAT_PAGER=$PAGER
 export WM="bspwm"
+export GPG_TTY=$(tty)
 export MANPAGER='nvim +Man!'
 export GOPATH="/home/bryant/go/bin"
 export CM_LAUNCHER="rofi"
