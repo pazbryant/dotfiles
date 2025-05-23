@@ -17,7 +17,7 @@ h = pan 10 0
 # Zoom controls
 <equal> = zoom actual
 <minus> = zoom -1.5
-<Ctrl+Shift+plus> = zoom +1.5
+<Shift+plus> = zoom +1.5
 
 # Image navigation
 n = next
