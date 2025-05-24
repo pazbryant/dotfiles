@@ -41,7 +41,9 @@ super + e
 	pcmanfm
 
 super + i
-	pavucontrol
+  bspc rule -a Nsxiv -o state=floating follow=on center=true \
+    rectangle=1200x700+0+0 && ~/bin/wm/bg
+
 
 super + minus
   st -e sh -c "yazi"
@@ -73,7 +75,7 @@ super + s
 super + r
   ~/bin/wm/read
 
-super + w
+super + shift + w
   ~/bin/wm/start-polybar
 
 super + c
@@ -81,7 +83,7 @@ super + c
 
 # -------- floating windows -----------
 
-super + shift + w
+super + w
   bspc node focused.tiled -t floating || bspc node focused.floating -t tiled
 
 super + {Left,Down,Up,Right}

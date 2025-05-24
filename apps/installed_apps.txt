@@ -26,6 +26,7 @@ efibootmgr 18-3
 eza 0.21.3-1
 fastfetch 2.43.0-1
 fd 10.2.0-1
+feh 3.10.3-1
 ffmpegthumbnailer 2.2.3-3
 firefox 138.0.4-1
 fish 4.0.2-1

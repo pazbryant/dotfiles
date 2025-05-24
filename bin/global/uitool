@@ -102,22 +102,21 @@ update_starship() {
 
 # Reload services after configuration updates
 reload_services() {
-	# Use a subshell to avoid killing the script if a service fails
-	(bspc wm -r) || log_error "Failed to reload bspwm"
-
 	# reload ST terminal new values
 	# shellcheck disable=SC2046
 	xrdb -merge ~/.Xresources && kill -USR1 $(pidof st)
 
-	# Kill dunst and restart it
 	if pgrep dunst >/dev/null; then
 		pkill dunst
-		# Wait for dunst to terminate before restarting
-		sleep 0.5
+		# Wait until dunst is no longer running
+		while pgrep dunst >/dev/null; do
+			sleep 0.1 # Check more frequently
+		done
 	fi
 
-	# Start dunst in the background
-	dunst &
+	# Use a subshell to avoid killing the script if a service fails
+	# it alwo will reload dunst because of the bspwmrc script file
+	(bspc wm -r) || log_error "Failed to reload bspwm"
 }
 
 # Notify user of completion
@@ -128,7 +127,13 @@ notify_user() {
 # Main function
 main() {
 	# Get the selected color
-	selected_color="$(select_color)"
+	selected_color=""
+
+	if [ -n "$1" ]; then
+		selected_color="$1"
+	else
+		selected_color="$(select_color)"
+	fi
 
 	# Check if color selection was successful
 	if [ -z "$selected_color" ]; then
@@ -136,8 +141,6 @@ main() {
 		echo "No color selected" >&2
 		exit 1
 	fi
-
-	echo "Selected color: $selected_color"
 
 	# Update all configuration files
 	update_rofi "$selected_color"
@@ -157,4 +160,4 @@ main() {
 }
 
 # Execute main function
-main
+main "$@"
