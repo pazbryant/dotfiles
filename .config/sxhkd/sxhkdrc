@@ -1,7 +1,7 @@
 super + q
   bspc node -c
 
-super + shift + {e,r}
+super + alt + {e,r}
 	bspc {quit,wm -r} && notify-send "Bspwm reloaded"
 
 super + control + Escape
@@ -74,6 +74,9 @@ super + s
 
 super + r
   ~/bin/wm/read
+
+super + shift + r
+  ~/bin/global/recording
 
 super + shift + w
   ~/bin/wm/start-polybar
