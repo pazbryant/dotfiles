@@ -26,7 +26,6 @@ efibootmgr 18-3
 eza 0.21.3-1
 fastfetch 2.43.0-1
 fd 10.2.0-1
-feh 3.10.3-1
 ffmpegthumbnailer 2.2.3-3
 firefox 138.0.4-1
 fish 4.0.2-1
@@ -42,6 +41,7 @@ grub 2:2.12.r292.g73d1c959-1
 gst-plugin-pipewire 1:1.4.2-1
 hurl 6.1.1-2
 hyperfine 1.19.0-1
+imagemagick 7.1.1.47-2
 imv 4.5.0-5
 jq 1.7.1-2
 just 1.40.0-1
@@ -65,6 +65,7 @@ neovim 0.11.1-2
 networkmanager 1.52.0-1
 noto-fonts-emoji 1:2.047-1
 npm 11.4.0-1
+nsxiv 33-1
 obsidian 1.8.10-1
 openresolv 3.16.5-1
 openssh 10.0p1-3
