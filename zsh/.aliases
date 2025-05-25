@@ -4,12 +4,12 @@
 alias yay="paru"
 alias cl="clear"
 alias sudo="sudo "
-alias pass='gopass'
+alias pass="gopass"
 alias bb="btm --basic"
 alias transes="trans en:es"
 alias anime="ani-cli -q 1080"
 alias vi="NVIM_APPNAME='vim' nvim"
-alias wg="sudo wg" # for custom vpn
+alias wg="sudo wg"
 alias c="xclip -selection clipboard"
 alias ani-cli-dub="ani-cli -q 1080 --dub"
 alias p="xclip -selection clipboard -o"
@@ -30,18 +30,26 @@ alias gc="git commit"
 alias gaa="git add -A"
 alias gco="git checkout"
 alias gdc="git diff --cached"
-alias gcc='git rev-list --count HEAD'
+alias gcc="git rev-list --count HEAD"
 alias gsb="git status --short --branch"
-alias ggpull='git pull origin $(git rev-parse --abbrev-ref HEAD)'
-alias ggpush='git push origin $(git rev-parse --abbrev-ref HEAD)'
+alias ggpull="git pull origin \$(git rev-parse --abbrev-ref HEAD)"
+alias ggpush="git push origin \$(git rev-parse --abbrev-ref HEAD)"
 alias glg="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --all"
 
 alias lzd="lazydocker"
 
 alias ta="tmux attach"
 alias tk="tmux kill-server"
-alias tn='tmux new -s $USER'
+alias tn="tmux new -s \$USER"
 
-alias zls='ls $ZPLUGINDIR'
+alias zls="ls \$ZPLUGINDIR"
 
-alias media='cd /run/media'
+alias media="cd /run/media"
+
+alias yt="yt-dlp"
+alias yta="yt-dlp --cookies \"\$YT_DLP_COOKIES\" --format bestaudio --extract-audio --audio-format mp3 --audio-quality 0"
+alias ytv="yt-dlp --cookies \"\$YT_DLP_COOKIES\" --format \"bestvideo[height<=1080]+bestaudio/best[height<=1080]\" --merge-output-format mp4"
+alias ytap="yt-dlp --cookies \"\$YT_DLP_COOKIES\" --yes-playlist --format bestaudio --extract-audio --audio-format mp3 --audio-quality 0"
+alias ytvp="yt-dlp --cookies \"\$YT_DLP_COOKIES\" --yes-playlist --format \"bestvideo[height<=1080]+bestaudio/best[height<=1080]\" --merge-output-format mp4"
+alias yts-audio="mpv --no-video --ytdl-raw-options=cookies=\"\$YT_DLP_COOKIES\",format=bestaudio"
+alias yts-video="mpv --ytdl-raw-options=cookies=\"\$YT_DLP_COOKIES\",format=\"bestvideo[height<=1080]+bestaudio/best[height<=1080]\""
