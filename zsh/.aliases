@@ -47,9 +47,8 @@ alias zls="ls \$ZPLUGINDIR"
 alias media="cd /run/media"
 
 alias yt="yt-dlp"
-alias yta="yt-dlp --cookies \"\$YT_DLP_COOKIES\" --format bestaudio --extract-audio --audio-format mp3 --audio-quality 0"
-alias ytv="yt-dlp --cookies \"\$YT_DLP_COOKIES\" --format \"bestvideo[height<=1080]+bestaudio/best[height<=1080]\" --merge-output-format mp4"
-alias ytap="yt-dlp --cookies \"\$YT_DLP_COOKIES\" --yes-playlist --format bestaudio --extract-audio --audio-format mp3 --audio-quality 0"
-alias ytvp="yt-dlp --cookies \"\$YT_DLP_COOKIES\" --yes-playlist --format \"bestvideo[height<=1080]+bestaudio/best[height<=1080]\" --merge-output-format mp4"
-alias yts-audio="mpv --no-video --ytdl-raw-options=cookies=\"\$YT_DLP_COOKIES\",format=bestaudio"
-alias yts-video="mpv --ytdl-raw-options=cookies=\"\$YT_DLP_COOKIES\",format=\"bestvideo[height<=1080]+bestaudio/best[height<=1080]\""
+alias yts='yt-dlp -o - --quiet | mpv --title="%(title)s" -'
+alias yta='yt-dlp -f bestaudio/best -x --embed-thumbnail --add-metadata --embed-subs'
+alias ytap='yt-dlp -f bestaudio/best -x --embed-thumbnail --add-metadata --embed-subs -o "%(playlist)s/%(title)s.%(ext)s"'
+alias ytv='yt-dlp -f "bestvideo[height<=2160]+bestaudio/best" --merge-output-format mp4'
+alias ytvp='yt-dlp -f "bestvideo[height<=2160]+bestaudio/best" --merge-output-format mp4 -o "%(playlist)s/%(title)s.%(ext)s"'
