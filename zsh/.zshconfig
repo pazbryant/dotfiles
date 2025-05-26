@@ -59,3 +59,4 @@ eval "$(zoxide init zsh)"
 
 # disable "c-s delay"
 stty -ixon
+stty susp undef

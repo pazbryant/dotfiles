@@ -29,6 +29,8 @@ set -gx FZF_DEFAULT_COMMAND "fd \
   --follow \
   --exclude=.git"
 
-if status is-interactive
+if status --is-interactive
+    stty -ixon
+    stty susp undef
     set -gx GPG_TTY (tty)
 end
