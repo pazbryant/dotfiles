@@ -13,11 +13,11 @@ super + f
 super + {_,shift + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east}
 
-super + {n,p}
-	bspc node -f {next,prev}.local.!hidden.window
-
-super + shift + {p,n}
+super + {p,n}
   bspc desktop -f {prev,next}.local
+
+super + shift + {n,p}
+	bspc node -f {next,prev}.local.!hidden.window
 
 super + { bracketleft,braceleft,parenleft,percent,equal, \
 ampersand,parenright,braceright,bracketright,exclam}
@@ -81,23 +81,11 @@ super + shift + r
 super + shift + w
   ~/bin/wm/start-polybar
 
-super + c
-  mpv --fullscreen ~/Documents/github/media/videos/biy/cristiano.mp4
 
 # -------- floating windows -----------
 
 super + w
   bspc node focused.tiled -t floating || bspc node focused.floating -t tiled
-
-super + {Left,Down,Up,Right}
-  bspc node -v {-30 0,0 30,0 -30,30 0}
-
-super + u
-  if [ "$(bspc query -N -n focused.floating)" ]; then \
-      bspc node -f last.tiled.local; \
-  else \
-      bspc node -f last.floating.local; \
-  fi
 
 # -------- man keys with custom rules -----------
 
