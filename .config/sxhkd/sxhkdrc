@@ -10,14 +10,11 @@ super + control + Escape
 super + f
   bspc node -t {fullscreen,tiled}
 
-super + {_,shift + }{h,j,k,l}
-	bspc node -{f,s} {west,south,north,east}
+super + {l,h}
+	bspc node -f {next,prev}.local.!hidden.window
 
 super + {p,n}
   bspc desktop -f {prev,next}.local
-
-super + shift + {n,p}
-	bspc node -f {next,prev}.local.!hidden.window
 
 super + { bracketleft,braceleft,parenleft,percent,equal, \
 ampersand,parenright,braceright,bracketright,exclam}
@@ -120,15 +117,6 @@ super + alt + j
 
 super + alt + k
   bspc node -z bottom 0 -20 || bspc node -z top 0 -20
-
-# --------------- hide windows --------------------
-
-super + v
-  bspc node -g hidden
-
-# unhide window
-super + shift + v
-  bspc node {,$(bspc query -N -n .hidden | tail -n1)} -g hidden=off
 
 # ---------------- audio control ----------------------
 
