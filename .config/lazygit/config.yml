@@ -1,3 +1,3 @@
 os:
   open: "st -e nvim {{filename}}"
-  editPreset: "nvim"
+  edit: "NVIM_APPNAME='vim' nvim {{filename}}"
