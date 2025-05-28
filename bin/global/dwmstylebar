@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+
+get_datetime() {
+	printf "%s" "$(date '+%A %B %d - %H:%M' | tr '[:lower:]' '[:upper:]')"
+}
+
+while :; do
+	DATETIME="$(get_datetime)"
+
+	# Construct the full status bar string.
+	# For tags, DWM automatically handles displaying them based on its internal state.
+	# The status bar string itself doesn't need to contain the tags.
+	# We only need to provide the content for the right side (date/time).
+	# DWM will handle the placement of tags on the left and the status content on the right.
+	# The status2d commands are used here for coloring the date/time.
+	# ^c#FFFFFF^ sets foreground color to white
+	# ^d^ resets to default colors
+	xsetroot -name "^c#FFFFFF^$DATETIME^d^"
+
+	# Wait for 1 minute before updating again
+	sleep 60
+done
