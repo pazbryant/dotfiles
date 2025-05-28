@@ -2,7 +2,7 @@ db_path = "~/.history.db"
 
 filter_mode = "global" # session/global/directory/host
 
-filter_mode_shell_up_key_binding = "directory" # session/global/directory/host
+filter_mode_shell_up_key_binding = "session" # session/global/directory/host
 
 key_path = "~/.key"
 
