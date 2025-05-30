@@ -3,13 +3,12 @@ if test -z "$DISPLAY"; and test (tty) = /dev/tty1; and status is-login
 end
 
 set -U fish_user_paths \
-    ~/bin/global/ \
-    ~/.cargo/bin/ \
-    ~/.local/bin/ \
-    ~/.local/share/bob/nvim-bin/ \
-    ~/.local/share/nvim/mason/bin/ \
-    /usr/local/bin/ \
-    /var/lib/flatpak/exports/bin/ \
+		~/bin/global/ \
+		~/.cargo/bin/ \
+		~/.local/bin/ \
+		/usr/local/bin/ \
+		/var/lib/flatpak/exports/bin/ \
+		~/.local/share/nvim/mason/bin/ \
     $fish_user_paths
 
 if command -v fzf >/dev/null

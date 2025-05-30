@@ -27,7 +27,6 @@ extra_path=(
   ~/bin/global/
   ~/.cargo/bin/
   ~/.local/bin/
-  ~/.local/share/bob/nvim-bin/
   ~/.local/share/nvim/mason/bin/
   /usr/local/bin/
   /var/lib/flatpak/exports/bin/
