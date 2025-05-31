@@ -15,7 +15,7 @@ while :; do
 	# The status2d commands are used here for coloring the date/time.
 	# ^c#FFFFFF^ sets foreground color to white
 	# ^d^ resets to default colors
-	xsetroot -name "^c#FFFFFF^$DATETIME^d^"
+	xsetroot -name "$DATETIME"
 
 	# Wait for 1 minute before updating again
 	sleep 60

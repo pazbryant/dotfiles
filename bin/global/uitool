@@ -22,7 +22,7 @@ select_color() {
 }
 
 # Function to update config files
-update_config() {
+update() {
 	file="$1"
 	pattern="$2"
 	replacement="$3"
@@ -43,52 +43,58 @@ update_config() {
 }
 
 # Update functions for each configuration file
-update_bspwm() {
+owerwrite_bspwm_colors() {
 	color="$1"
 	bspwmrc="$HOME/.config/bspwm/bspwmrc"
 
-	update_config "$bspwmrc" \
+	update "$bspwmrc" \
 		'focused_border_color "#[0-9a-fA-F]\{6\}"' \
 		"focused_border_color \"$color\""
 }
 
-update_rofi() {
+overwrite_rofi_colors() {
 	color="$1"
 	theme_rasi="$HOME/.config/rofi/theme.rasi"
 
-	update_config "$theme_rasi" \
+	update "$theme_rasi" \
 		'background-alt:\s*#[0-9a-fA-F]\{6\};' \
 		"background-alt:\t\t\t$color;"
 }
 
-update_xresources() {
+overwrite_xresources_colors() {
 	color="$1"
 	xresources="$HOME/.Xresources"
 
-	update_config "$xresources" \
-		'\*cursorColor: #[0-9a-fA-F]\{6\}' \
-		"*cursorColor: $color"
+	cursor_pattern='\*cursorColor:[[:space:]]*#[0-9a-fA-F]\{6\}'
+	update "$xresources" "$cursor_pattern" "*cursorColor: $color" | true
+
+	dwm_self_bg_pattern='dwm.selbgcolor: #[0-9a-fA-F]\{6\}'
+	update "$xresources" "$dwm_self_bg_pattern" "dwm.selbgcolor: $color" | true
+
+	dwm_self_bd_pattern='dwm.selbordercolor: #[0-9a-fA-F]\{6\}'
+	update "$xresources" "$dwm_self_bd_pattern" "dwm.selbordercolor: $color" | true
+
 }
 
-update_alacritty() {
+overwrite_alacritty_colors() {
 	color="$1"
 	alacritty_config="$HOME/.config/alacritty/alacritty.toml"
 
-	update_config "$alacritty_config" \
+	update "$alacritty_config" \
 		'cursor = "#[0-9a-fA-F]\{6\}"' \
 		"cursor = \"$color\""
 }
 
-update_dunst() {
+overwrite_dunst_colors() {
 	color="$1"
 	dunstrc="$HOME/.config/dunst/dunstrc"
 
-	update_config "$dunstrc" \
+	update "$dunstrc" \
 		'background = "#[0-9a-fA-F]\{6\}"' \
 		"background = \"$color\""
 }
 
-update_starship() {
+overwrite_starship_colors() {
 	color="$1"
 	starship="$HOME/.config/starship/starship.toml"
 
@@ -96,13 +102,14 @@ update_starship() {
 	error_pattern='error_symbol = "\[✗\](#[0-9a-fA-F]\{6\})"'
 	success_pattern='success_symbol = "\[󰁕\](#[0-9a-fA-F]\{6\})"'
 
-	update_config "$starship" "$error_pattern" "error_symbol = \"[✗]($color)\"" || true
-	update_config "$starship" "$success_pattern" "success_symbol = \"[󰁕]($color)\"" || true
+	update "$starship" "$error_pattern" "error_symbol = \"[✗]($color)\"" || true
+	update "$starship" "$success_pattern" "success_symbol = \"[󰁕]($color)\"" || true
 }
 
 # Reload services after configuration updates
 reload_services() {
 	# reload ST terminal new values
+	# reload DWM Tiling window manager
 	# shellcheck disable=SC2046
 	xrdb -merge ~/.Xresources && kill -USR1 $(pidof st)
 
@@ -116,7 +123,14 @@ reload_services() {
 
 	# Use a subshell to avoid killing the script if a service fails
 	# it alwo will reload dunst because of the bspwmrc script file
-	(bspc wm -r) || log_error "Failed to reload bspwm"
+	if command -v bspwm >/dev/null 2>&1; then
+		(bspc wm -r) || log_error "Failed to reload bspwm"
+	fi
+
+	# Reload DWM colors using Xresources
+	if command -v dwm >/dev/null 2>&1; then
+		xsetroot -name "fsignal:1"
+	fi
 }
 
 # Notify user of completion
@@ -143,12 +157,13 @@ main() {
 	fi
 
 	# Update all configuration files
-	update_rofi "$selected_color"
-	update_bspwm "$selected_color"
-	update_dunst "$selected_color"
-	update_starship "$selected_color"
-	update_alacritty "$selected_color"
-	update_xresources "$selected_color"
+
+	overwrite_rofi_colors "$selected_color"
+	owerwrite_bspwm_colors "$selected_color"
+	overwrite_dunst_colors "$selected_color"
+	overwrite_starship_colors "$selected_color"
+	overwrite_alacritty_colors "$selected_color"
+	overwrite_xresources_colors "$selected_color"
 
 	# Reload services
 	reload_services
