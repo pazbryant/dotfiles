@@ -8,7 +8,7 @@ set -gx COLORTERM "truecolor"
 set -gx OPENER "xdg-open"
 set -gx PAGER "less"
 set -gx BAT_PAGER "$PAGER"
-set -gx WM "bspwm"
+set -gx WM "dwm"
 set -gx MANPAGER 'nvim +Man!'
 set -gx GOPATH "/home/bryant/go/bin"
 set -gx CM_LAUNCHER "rofi"
