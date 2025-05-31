@@ -39,7 +39,7 @@ super + e
 
 super + i
   bspc rule -a Nsxiv -o state=floating follow=on center=true \
-    rectangle=1200x700+0+0 && ~/bin/wm/bg
+    rectangle=1200x700+0+0 && ~/bin/wm/select-background
 
 super + d
   rofi -show drun -show-icons
