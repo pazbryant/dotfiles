@@ -1,4 +1,5 @@
 # main
+abbr -a n "nvim"
 abbr -a yay "paru"
 abbr -a pass "gopass"
 abbr -a bb "btm --basic"

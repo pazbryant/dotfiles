@@ -1,11 +1,12 @@
 # main
 alias ls="ls"
 alias cl="clear"
-alias zshc="vi ~/zsh/.zshconfig"
+alias zsha="cd ~/zsh && vi .aliases"
 alias c="xclip -selection clipboard"
 alias vi="env NVIM_APPNAME='vim' nvim"
+alias zshc="cd ~/zsh && vi .zshconfig"
 alias p="xclip -selection clipboard -o"
-alias fishc="vi ~/.config/fish/config.fish"
+alias fishc="cd ~/.config/fish && vi config.fish"
 
 # system
 alias sht="shutdown now"
