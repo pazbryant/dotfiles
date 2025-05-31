@@ -131,6 +131,12 @@ reload_services() {
 	if command -v dwm >/dev/null 2>&1; then
 		xsetroot -name "fsignal:1"
 	fi
+
+	# Tmux refresh client
+	tmux_running=$(pgrep tmux)
+	if [ -n "$TMUX" ] && [ -n "$tmux_running" ]; then
+		tmux run-shell "tmux refresh-client"
+	fi
 }
 
 # Notify user of completion
