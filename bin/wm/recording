@@ -1,9 +1,5 @@
-#!/bin/sh
+#!/bin/env sh
 
-# Screen Recorder Toggle Script for sxhkd (POSIX Compliant)
-# Executes start_recording if not already recording, stop_recording if recording.
-
-# --- Configuration ---
 OUTPUT_DIR="$HOME/Videos/recordings"
 FILENAME_PREFIX="recording"
 PID_FILE="/tmp/screen_recorder.pid"
@@ -11,22 +7,16 @@ LOG_FILE="/tmp/screen_recorder.log"
 DISPLAY_SERVER="x11"          # "x11" or "wayland"
 PREDEFINED_MONITOR=":0.0+0,0" # Example: ":0.0+0,0" or ":0.0+0,0 -s 1920x1080"
 
-# --- Recording Quality Profiles ---
-# These variables ARE USED indirectly via the 'eval' command in 'start_recording'.
-# Linters might flag them as unused due to the dynamic nature of their access.
 PROFILE_HD_BEST_QUALITY="-c:v libx264 -preset medium -crf 18 -r 30 -s 1280x720"
 PROFILE_HD_BEST_FRAMERATE="-c:v libx264 -preset ultrafast -crf 22 -r 60 -s 1280x720"
 PROFILE_FULLHD_BEST_QUALITY="-c:v libx264 -preset medium -crf 18 -r 30 -s 1920x1080"
 PROFILE_FULLHD_BEST_FRAMERATE="-c:v libx264 -preset ultrafast -crf 22 -r 60 -s 1920x1080"
 PROFILE_4K_BEST_QUALITY="-c:v libx264 -preset medium -crf 18 -r 30 -s 3840x2160"
 PROFILE_4K_BEST_FRAMERATE="-c:v libx264 -preset ultrafast -crf 22 -r 60 -s 3840x2160"
-PROFILE_WINDOW_BEST_QUALITY="-c:v libx264 -preset medium -crf 18 -r 30" # Resolution for window is determined by selection
-
+PROFILE_WINDOW_BEST_QUALITY="-c:v libx264 -preset medium -crf 18 -r 30"
 DEFAULT_PROFILE_NAME="FULLHD_BEST_QUALITY"
-AUDIO_SOURCE=""  # Set to "default" to enable audio
-AUDIO_OPTIONS="" # Will be populated based on AUDIO_SOURCE
-
-# --- Helper Functions ---
+AUDIO_SOURCE="" # Set to "default" to enable audio
+AUDIO_OPTIONS=""
 
 notify() {
 	_message="$1"
@@ -72,8 +62,6 @@ get_x11_monitor() {
 	echo "${_display_num_screen}+${_x_offset},${_y_offset} -s ${_width}x${_height}"
 }
 
-# --- Recording Actions ---
-
 start_recording() {
 	_func_profile_name="$1"
 	_func_ffmpeg_input_source_and_res="$2"
@@ -83,8 +71,6 @@ start_recording() {
 	_output_file=""
 	_profile_options_str=""
 
-	# This check is technically redundant if called from the main toggle logic,
-	# but good for direct calls or future refactoring.
 	if [ -f "$PID_FILE" ]; then
 		_existing_pid=$(cat "$PID_FILE")
 		if ps -p "$_existing_pid" >/dev/null; then
@@ -92,7 +78,6 @@ start_recording() {
 			echo "Recording is already in progress (PID: $_existing_pid)." >&2
 			return 1
 		else
-			# PID file is stale, remove it
 			rm -f "$PID_FILE"
 		fi
 	fi
@@ -109,7 +94,7 @@ start_recording() {
 	mkdir -p "$OUTPUT_DIR"
 
 	_timestamp=$(date '+%Y-%m-%d_%H-%M-%S')
-	_output_file="${OUTPUT_DIR}/${FILENAME_PREFIX}_${_timestamp}.mkv"
+	_output_file="${OUTPUT_DIR}/${FILENAME_PREFIX}_${_timestamp}.mp4"
 
 	if [ "$DISPLAY_SERVER" = "x11" ]; then
 		_ffmpeg_input_source_part=$(echo "$_func_ffmpeg_input_source_and_res" | awk '{print $1}')
@@ -156,7 +141,7 @@ start_recording() {
 	else
 		notify "Error: Failed to start ffmpeg or get PID."
 		echo "Error: Failed to start ffmpeg. Check $LOG_FILE for details." >&2
-		rm -f "$PID_FILE" # Clean up pid file if ffmpeg failed
+		rm -f "$PID_FILE"
 		return 1
 	fi
 }
@@ -164,7 +149,6 @@ start_recording() {
 stop_recording() {
 	if [ ! -f "$PID_FILE" ]; then
 		notify "Not recording (no PID file found)."
-		# echo "Not recording (no PID file found)." >&2 # Less verbose for toggle
 		return 1
 	fi
 
@@ -172,7 +156,6 @@ stop_recording() {
 
 	if ! ps -p "$_pid" >/dev/null; then
 		notify "Recording process (PID: $_pid) not found. Cleaning up stale PID file."
-		# echo "Recording process (PID: $_pid) not found. Cleaning up." >&2
 		rm -f "$PID_FILE"
 		return 1
 	fi
@@ -198,9 +181,6 @@ stop_recording() {
 	echo "Recording stopped."
 }
 
-# --- Script Entry Point ---
-
-# Check for essential commands first
 if ! command_exists ffmpeg; then
 	notify "Error: ffmpeg command not found. Please install ffmpeg."
 	exit 1
@@ -209,18 +189,14 @@ if ! command_exists notify-send && [ -n "$DISPLAY" ]; then
 	echo "Warning: notify-send command not found. Notifications will not be shown." >&2
 fi
 
-# Main toggle logic
 if [ -f "$PID_FILE" ]; then
 	_current_pid=$(cat "$PID_FILE")
 	if ps -p "$_current_pid" >/dev/null; then
-		# Currently recording, so stop it
 		stop_recording
 	else
-		# PID file exists but process is not running (stale PID file)
 		notify "Stale PID file found. Cleaning up and preparing to start recording."
 		rm -f "$PID_FILE"
-		# Proceed to start recording
-		_profile_to_use="${1:-$DEFAULT_PROFILE_NAME}" # Use $1 as profile or default
+		_profile_to_use="${1:-$DEFAULT_PROFILE_NAME}"
 
 		_monitor_geo_and_res=""
 		if [ "$DISPLAY_SERVER" = "x11" ]; then
@@ -228,7 +204,7 @@ if [ -f "$PID_FILE" ]; then
 				_monitor_geo_and_res=$(get_x11_monitor)
 				case "$_monitor_geo_and_res" in
 				"ERROR_SLOP_MISSING" | "ERROR_NO_SELECTION")
-					exit 1 # Error already notified
+					exit 1
 					;;
 				esac
 			else
@@ -236,15 +212,14 @@ if [ -f "$PID_FILE" ]; then
 			fi
 			start_recording "$_profile_to_use" "$_monitor_geo_and_res"
 		elif [ "$DISPLAY_SERVER" = "wayland" ]; then
-			start_recording "$_profile_to_use" "" # Wayland source handled differently
+			start_recording "$_profile_to_use" ""
 		else
 			notify "Error: DISPLAY_SERVER misconfigured."
 			exit 1
 		fi
 	fi
 else
-	# Not recording (no PID file), so start it
-	_profile_to_use="${1:-$DEFAULT_PROFILE_NAME}" # Use $1 as profile or default
+	_profile_to_use="${1:-$DEFAULT_PROFILE_NAME}"
 
 	_monitor_geo_and_res=""
 	if [ "$DISPLAY_SERVER" = "x11" ]; then
@@ -252,7 +227,7 @@ else
 			_monitor_geo_and_res=$(get_x11_monitor)
 			case "$_monitor_geo_and_res" in
 			"ERROR_SLOP_MISSING" | "ERROR_NO_SELECTION")
-				exit 1 # Error already notified
+				exit 1
 				;;
 			esac
 		else
@@ -260,7 +235,7 @@ else
 		fi
 		start_recording "$_profile_to_use" "$_monitor_geo_and_res"
 	elif [ "$DISPLAY_SERVER" = "wayland" ]; then
-		start_recording "$_profile_to_use" "" # Wayland source handled differently
+		start_recording "$_profile_to_use" ""
 	else
 		notify "Error: DISPLAY_SERVER misconfigured."
 		exit 1
