@@ -8,8 +8,7 @@ Xft.lcdfilter:	lcddefault
 ! Global colors
 *background: #1d1f21
 *foreground: #ffffff
-*cursorColor: #541a4a
-
+*cursorColor: #641f55
 
 ! ST specific configurations
 ! st.font: Maple Mono:pixelsize=13.5:style:Bold
@@ -20,3 +19,11 @@ st.alpha: 0.90
 st.chscale: 1.00
 st.cwscale: 1.00
 st.borderpx: 0px
+
+! DWM specific configurations
+dwm.selbgcolor: #641f55
+dwm.selfgcolor: #ffffff
+dwm.normbgcolor: #641f56
+dwm.normfgcolor: #ffffff
+dwm.selbordercolor: #641f55
+dwm.normbordercolor: #817f7f
