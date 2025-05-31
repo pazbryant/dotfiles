@@ -35,15 +35,11 @@ super + o
   ~/bin/wm/passmenu --otp
 
 super + e
-	pcmanfm
+  st -e sh -c "yazi"
 
 super + i
   bspc rule -a Nsxiv -o state=floating follow=on center=true \
     rectangle=1200x700+0+0 && ~/bin/wm/bg
-
-
-super + minus
-  st -e sh -c "yazi"
 
 super + d
   rofi -show drun -show-icons
