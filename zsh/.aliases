@@ -1,16 +1,16 @@
 #!/usr/bin/sh
 
 # main
-alias yay="paru"
 alias cl="clear"
-alias sudo="sudo "
+alias yay="paru"
 alias wg="sudo wg"
+alias sudo="sudo "
 alias pass="gopass"
 alias bb="btm --basic"
 alias transes="trans en:es"
 alias anime="ani-cli -q 1080"
+alias zsha="vi ~/zsh/.aliases"
 alias zshc="vi ~/zsh/.zshconfig"
-alias zsha="vi ~/zsh/.zshconfig"
 alias vi="NVIM_APPNAME='vim' nvim"
 alias c="xclip -selection clipboard"
 alias p="xclip -selection clipboard -o"
