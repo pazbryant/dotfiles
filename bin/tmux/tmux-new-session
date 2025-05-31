@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ $# -eq 1 ]; then
+if [ -n "$1" ]; then
 	selected="$1"
 else
 	selected=$(fd . \
@@ -17,7 +17,12 @@ if [ -z "$selected" ]; then
 	exit 0
 fi
 
-selected_name=$(basename "$selected" | tr . _)
+if [ -n "$2" ]; then
+	selected_name="working"
+else
+	selected_name=$(basename "$selected" | tr . _)
+fi
+
 current_attached_session=$(tmux display-message -p '#S')
 tmux_running=$(pgrep tmux)
 
