@@ -8,6 +8,9 @@ local map = v.keymap.set
 -- better change inner word
 map('n', '<C-c>', 'ciw', { desc = 'Better Change Inner Word' })
 
+--  No highlights
+map('n', '<Escape>', '<cmd>noh<CR>', { desc = 'No search highlights' })
+
 -- movement left and right
 map({ 'n', 'v', 'o' }, 'H', '^', { desc = 'Start of the line' })
 map({ 'n', 'v', 'o' }, 'L', 'g_', { desc = 'End of the line' })

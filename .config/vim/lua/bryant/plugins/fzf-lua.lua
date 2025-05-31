@@ -5,11 +5,8 @@ return {
 		local file_ignore_patterns = {
 			'tags',
 			'*.pyc',
-			'.git/',
 			'mocks',
-			'.git/',
 			'go.mod',
-			'.git',
 			'dist/',
 			'go.sum',
 			'build/',
@@ -28,16 +25,6 @@ return {
 			'package%-lock%.json$',
 		}
 
-		local fd_exclude_args = ''
-		for _, pattern in ipairs(file_ignore_patterns) do
-			fd_exclude_args = fd_exclude_args .. " --exclude '" .. pattern .. "'"
-		end
-
-		local rg_exclude_args = ''
-		for _, pattern in ipairs(file_ignore_patterns) do
-			rg_exclude_args = rg_exclude_args .. " --glob '!" .. pattern .. "'"
-		end
-
 		return {
 			profile = {
 				enabled = true,
@@ -47,14 +34,19 @@ return {
 				height = 0.70,
 				width = 0.70,
 			},
+			file_ignore_patterns = file_ignore_patterns,
 			actions = {
 				files = {
 					['ctrl-s'] = actions.file_split,
 					['ctrl-v'] = actions.file_vsplit,
-					['ctrl-h'] = actions.toggle_hidden,
-					['ctrl-i'] = actions.toggle_ignore,
 					['enter'] = actions.file_edit_or_qf,
 					['ctrl-q'] = { fn = actions.file_sel_to_qf, prefix = 'select-all' },
+					['ctrl-h'] = actions.toggle_hidden, -- Toggle showing hidden files
+					['ctrl-i'] = actions.toggle_ignore, -- Toggle ignoring file_ignore_patterns
+				},
+				grep = { -- If you want to toggle hidden/ignore for grep, add them here too
+					['ctrl-h'] = actions.toggle_hidden,
+					['ctrl-i'] = actions.toggle_ignore,
 				},
 			},
 			previewers = {
@@ -70,27 +62,27 @@ return {
 				},
 			},
 			files = {
-				fd_opts = '--color=never --type f' .. fd_exclude_args,
+				hidden = true,
+				fd_opts = '--color=never --type f',
 			},
 			grep = {
-				rg_opts = '--column --line-number --no-heading --color=always --smart-case'
-					.. rg_exclude_args,
+				rg_opts = '--column --line-number --no-heading --color=always --smart-case',
 			},
 			live_grep = {
-				rg_opts = '--column --line-number --no-heading --color=always --smart-case'
-					.. rg_exclude_args,
+				hidden = true,
+				rg_opts = '--column --line-number --no-heading --color=always --smart-case',
 			},
 		}
 	end,
-  -- stylua: ignore start
+	-- stylua: ignore start
 	keys = {
-    { '<leader>fz', "<cmd> FzfLua <CR>" , desc = 'FzfLua' },
-    { '<c-p>', function() require('fzf-lua').files() end, desc = 'FzfLua Files' },
-    { '<m-c>', function() require('fzf-lua').buffers() end, desc = 'FzfLua buffers' },
-    { '<leader>k', function() require('fzf-lua').keymaps() end, desc = 'FzfLua show keymaps' },
-    { '<leader>ht', function() require('fzf-lua').help_tags() end, desc = 'FzfLua Help tags' },
-    { '<c-t>', function() require('fzf-lua').live_grep_native() end, desc = 'FzfLua Live grep' },
-    { 'z=', function() require('fzf-lua').spell_suggest() end, desc = 'FzfLua spell suggestions' },
-    { '<leader>th', function() require('fzf-lua').colorschemes() end, desc = 'FzfLua Switch colorschemes' },
+		{ '<leader>fz', "<cmd> FzfLua <CR>" , desc = 'FzfLua' },
+		{ '<c-p>', function() require('fzf-lua').files() end, desc = 'FzfLua Files' },
+		{ '<m-c>', function() require('fzf-lua').buffers() end, desc = 'FzfLua Buffers' },
+		{ '<leader>k', function() require('fzf-lua').keymaps() end, desc = 'FzfLua Show Key Maps' },
+		{ '<leader>ht', function() require('fzf-lua').help_tags() end, desc = 'FzfLua Help Tags' },
+		{ '<c-t>', function() require('fzf-lua').live_grep_native() end, desc = 'FzfLua Live Grep' },
+		{ 'z=', function() require('fzf-lua').spell_suggest() end, desc = 'FzfLua Spell Suggestions' },
+		{ '<leader>th', function() require('fzf-lua').colorschemes() end, desc = 'FzfLua Switch Colorschemes' },
 	},
 }
