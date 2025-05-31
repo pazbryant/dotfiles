@@ -1,6 +1,5 @@
 #!/bin/env sh
 
-set -x
 set -e
 
 BOOKS_DIR="$HOME/Documents/books"

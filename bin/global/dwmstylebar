@@ -1,22 +1,43 @@
 #!/usr/bin/env sh
 
+# Define a path for the PID file
+# Using /tmp is common, or a directory in your XDG_RUNTIME_DIR
+PID_FILE="/tmp/dwm_status.pid"
+
+# Function to clean up PID file on exit
+cleanup() {
+	rm -f "$PID_FILE"
+}
+
+# Check if another instance is already running
+if [ -f "$PID_FILE" ]; then
+	_old_pid=$(cat "$PID_FILE")
+	# Check if the process with that PID is actually running and is this script
+	# (ps -o comm= -p "$_old_pid" might give the command name for verification)
+	if ps -p "$_old_pid" >/dev/null; then
+		echo "DWM status script already running (PID: $_old_pid). Exiting."
+		exit 1
+	else
+		# Stale PID file, remove it
+		rm -f "$PID_FILE"
+	fi
+fi
+
+# Set up a trap to remove the PID file when the script exits for any reason
+# EXIT: normal exit
+# INT: Interrupt (Ctrl+C)
+# TERM: Termination signal
+trap cleanup EXIT INT TERM
+
+# Write current PID to the PID file
+echo "$$" >"$PID_FILE"
+
 get_datetime() {
 	printf "%s" "$(date '+%A %B %d - %H:%M' | tr '[:lower:]' '[:upper:]')"
 }
 
 while :; do
 	DATETIME="$(get_datetime)"
-
-	# Construct the full status bar string.
-	# For tags, DWM automatically handles displaying them based on its internal state.
-	# The status bar string itself doesn't need to contain the tags.
-	# We only need to provide the content for the right side (date/time).
-	# DWM will handle the placement of tags on the left and the status content on the right.
-	# The status2d commands are used here for coloring the date/time.
-	# ^c#FFFFFF^ sets foreground color to white
-	# ^d^ resets to default colors
-	xsetroot -name "$DATETIME"
-
-	# Wait for 1 minute before updating again
+	xsetroot -name "^c#FFFFFF^$DATETIME^d^"
 	sleep 60
 done

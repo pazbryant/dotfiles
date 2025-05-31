@@ -42,7 +42,7 @@ super + i
     rectangle=1200x700+0+0 && ~/bin/wm/select-background
 
 super + d
-  rofi -show drun -show-icons
+  rofi -show run
 
 super + t
   st
@@ -74,6 +74,8 @@ super + shift + r
 super + shift + w
   ~/bin/wm/start-polybar
 
+super + v
+  ~/bin/wm/watch
 
 # -------- floating windows -----------
 
