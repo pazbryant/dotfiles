@@ -19,7 +19,7 @@
     text_icon_padding = 0
     frame_width = 1
     sort = yes
-    font = Maple Mono NF 10
+    font = Inter Display 10
     line_height = 4
     markup = full
     # default
@@ -36,7 +36,7 @@
     max_icon_size = 96
     sticky_history = yes
     history_length = 6
-    browser = /usr/bin/firefox -new-tab
+    browser = /usr/bin/brave --profile-directory='personal'
     always_run_script = true
     title = Dunst
     class = Dunst
@@ -49,15 +49,15 @@
 
 
 [urgency_low]
-    background = "#5f1f53"
+    background = "#cd9448"
     foreground = "#000000"
 
 [urgency_normal]
-    background = "#5f1f53"
+    background = "#cd9448"
     foreground = "#000000"
 
 [urgency_critical]
-    background = "#5f1f53"
+    background = "#cd9448"
     foreground = "#000000"
 
 # vim: ft=cfg
