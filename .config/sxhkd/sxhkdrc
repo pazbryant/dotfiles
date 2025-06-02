@@ -54,10 +54,10 @@ super + space
   ~/bin/wm/switch-keyboard
 
 super + Return
-  thorium-browser
+	brave --profile-directory="personal"
 
 super + shift + Return
-	thorium-browser --user-data-dir=/home/bryant/.config/thorium-work
+	brave --profile-directory="work"
 
 super + b
   ~/bin/wm/set-brightness

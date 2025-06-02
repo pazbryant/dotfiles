@@ -31,8 +31,10 @@ gopass 1.15.16-1
 grub 2:2.12.r292.g73d1c959-1
 gst-plugin-pipewire 1:1.4.2-1
 imagemagick 7.1.1.47-2
+inter-font 4.1-1
 jq 1.7.1-2
 lazygit 0.51.1-1
+libnotify 0.8.6-1
 linux 6.14.7.arch2-1
 linux-firmware 20250508.788aadc8-2
 linux-headers 6.14.7.arch2-1

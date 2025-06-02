@@ -4,7 +4,7 @@ export EDITOR="nvim"
 export VISUAL=$EDITOR
 export TERMINAL="st"
 export SUDO_EDITOR=$EDITOR
-export BROWSER="thorium-browser"
+export BROWSER="brave --profile-directory='personal'"
 export VIDEO="mpv"
 export COLORTERM="truecolor"
 export OPENER="xdg-open"
