@@ -101,7 +101,7 @@ fi
 # Clean up user cache completely
 if confirm "Do you want to clean up ALL user cache?"; then
 	echo "Clearing ALL user cache..."
-	rm -rf ~/.cache/*
+	sudo rm -rf ~/.cache/*
 fi
 
 # AUR packages cleanup
