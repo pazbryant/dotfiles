@@ -6,7 +6,6 @@ autoload -U url-quote-magic edit-command-line compinit &&
 # zsh widgets
 zle -N edit-command-line
 zle -N copy_terminal_buffer
-zle -N self-insert url-quote-magic
 
 # custom key binds
 bindkey -e # set to emacs binds
