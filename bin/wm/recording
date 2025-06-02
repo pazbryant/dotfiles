@@ -1,149 +1,103 @@
 #!/bin/env sh
 
-OUTPUT_DIR="$HOME/Videos/recordings"
-FILENAME_PREFIX="recording"
-PID_FILE="/tmp/screen_recorder.pid"
-LOG_FILE="/tmp/screen_recorder.log"
-DISPLAY_SERVER="x11"          # "x11" or "wayland"
-PREDEFINED_MONITOR=":0.0+0,0" # Example: ":0.0+0,0" or ":0.0+0,0 -s 1920x1080"
+set -e
 
-PROFILE_HD_BEST_QUALITY="-c:v libx264 -preset medium -crf 18 -r 30 -s 1280x720"
-PROFILE_HD_BEST_FRAMERATE="-c:v libx264 -preset ultrafast -crf 22 -r 60 -s 1280x720"
-PROFILE_FULLHD_BEST_QUALITY="-c:v libx264 -preset medium -crf 18 -r 30 -s 1920x1080"
-PROFILE_FULLHD_BEST_FRAMERATE="-c:v libx264 -preset ultrafast -crf 22 -r 60 -s 1920x1080"
-PROFILE_4K_BEST_QUALITY="-c:v libx264 -preset medium -crf 18 -r 30 -s 3840x2160"
-PROFILE_4K_BEST_FRAMERATE="-c:v libx264 -preset ultrafast -crf 22 -r 60 -s 3840x2160"
-PROFILE_WINDOW_BEST_QUALITY="-c:v libx264 -preset medium -crf 18 -r 30"
-DEFAULT_PROFILE_NAME="FULLHD_BEST_QUALITY"
-AUDIO_SOURCE="" # Set to "default" to enable audio
-AUDIO_OPTIONS=""
+OUTPUT_DIR="$HOME/Videos/recordings"
+readonly OUTPUT_DIR
+
+FILENAME_PREFIX="recording"
+readonly FILENAME_PREFIX
+
+PID_FILE="/tmp/screen_recorder.pid"
+readonly PID_FILE
+
+LOG_FILE="/tmp/screen_recorder.log"
+readonly LOG_FILE
+
+PREDEFINED_MONITOR=":0.0+0,0" # record full screen
+readonly PREDEFINED_MONITOR
+
+DEFAULT_PROFILE_ALIAS="fhd_q" # Default short profile alias
+readonly DEFAULT_PROFILE_ALIAS
+
+AUDIO_SOURCE=""       # Set to "default" or a specific PulseAudio source to enable audio
+
+# --- Script-level variables for ffmpeg parameters ---
+# These will be set by set_recording_parameters()
+FFMPEG_INPUT_OPTS=""
+FFMPEG_PROFILE_OPTS=""
+FFMPEG_AUDIO_OPTS=""
 
 notify() {
 	_message="$1"
 	if [ -n "$DISPLAY" ]; then
 		notify-send "Screen Recorder" "$_message" -t 3000
 	else
-		echo "Screen Recorder: $_message"
+		printf "Screen Recorder: %s\n" "$_message"
 	fi
 }
 
-command_exists() {
-	command -v "$1" >/dev/null 2>&1
-}
+set_recording_parameters() {
+	_srp_profile_alias="$1"
+	_srp_input_source_and_res="$2"
 
-get_x11_monitor() {
-	if [ -n "$PREDEFINED_MONITOR" ]; then
-		echo "$PREDEFINED_MONITOR"
-		return
-	fi
-
-	if ! command_exists xrandr || ! command_exists awk || ! command_exists slop; then
-		notify "Error: xrandr, awk, or slop not found. Cannot select monitor automatically."
-		echo "Error: Please install xrandr, awk, and slop, or set PREDEFINED_MONITOR." >&2
-		echo "ERROR_SLOP_MISSING"
+	case "$_srp_profile_alias" in
+	"hd_q") FFMPEG_PROFILE_OPTS="-c:v libx264 -preset medium -crf 18 -r 30 -s 1280x720" ;;
+	"hd_f") FFMPEG_PROFILE_OPTS="-c:v libx264 -preset ultrafast -crf 22 -r 60 -s 1280x720" ;;
+	"fhd_q") FFMPEG_PROFILE_OPTS="-c:v libx264 -preset medium -crf 18 -r 30 -s 1920x1080" ;;
+	"fhd_f") FFMPEG_PROFILE_OPTS="-c:v libx264 -preset ultrafast -crf 22 -r 60 -s 1920x1080" ;;
+	"4k_q") FFMPEG_PROFILE_OPTS="-c:v libx264 -preset medium -crf 18 -r 30 -s 3840x2160" ;;
+	"4k_f") FFMPEG_PROFILE_OPTS="-c:v libx264 -preset ultrafast -crf 22 -r 60 -s 3840x2160" ;;
+	*)
+		notify "Error: Profile '$_srp_profile_alias' not found."
 		return 1
+		;;
+	esac
+
+	FFMPEG_INPUT_OPTS="-f x11grab -draw_mouse 1 -i ${_srp_input_source_and_res}"
+	if [ -n "$AUDIO_SOURCE" ]; then
+		FFMPEG_AUDIO_OPTS="-f pulse -i \"$AUDIO_SOURCE\" -c:a aac -b:a 192k"
+	else
+		FFMPEG_AUDIO_OPTS=""
 	fi
-
-	notify "Select a monitor or region to record by dragging a rectangle."
-	_selection=$(slop -f "%w %h %x %y" 2>/dev/null)
-
-	if [ -z "$_selection" ]; then
-		notify "Error: No region selected or slop failed. Aborting."
-		echo "ERROR_NO_SELECTION"
-		return 1
-	fi
-
-	_width=$(echo "$_selection" | awk '{print $1}')
-	_height=$(echo "$_selection" | awk '{print $2}')
-	_x_offset=$(echo "$_selection" | awk '{print $3}')
-	_y_offset=$(echo "$_selection" | awk '{print $4}')
-	_display_num_screen=$(echo "$DISPLAY" | cut -d'.' -f1)
-
-	echo "${_display_num_screen}+${_x_offset},${_y_offset} -s ${_width}x${_height}"
+	return 0
 }
 
 start_recording() {
-	_func_profile_name="$1"
-	_func_ffmpeg_input_source_and_res="$2"
-	_input_options=""
-	_resolution_option=""
-	_timestamp=""
-	_output_file=""
-	_profile_options_str=""
-
-	if [ -f "$PID_FILE" ]; then
-		_existing_pid=$(cat "$PID_FILE")
-		if ps -p "$_existing_pid" >/dev/null; then
-			notify "Recording is already in progress (PID: $_existing_pid)."
-			echo "Recording is already in progress (PID: $_existing_pid)." >&2
-			return 1
-		else
-			rm -f "$PID_FILE"
-		fi
-	fi
-
-	_profile_var_name="PROFILE_$_func_profile_name"
-	eval "_profile_options_str=\$$_profile_var_name"
-
-	if [ -z "$_profile_options_str" ]; then
-		notify "Error: Profile '$_func_profile_name' not found."
-		echo "Error: Profile '$_func_profile_name' not found." >&2
-		return 1
-	fi
-
-	mkdir -p "$OUTPUT_DIR"
+	_efr_profile_alias="$1" # Effective Profile Alias
 
 	_timestamp=$(date '+%Y-%m-%d_%H-%M-%S')
-	_output_file="${OUTPUT_DIR}/${FILENAME_PREFIX}_${_timestamp}.mp4"
+	_output_file="${OUTPUT_DIR}/${FILENAME_PREFIX}_${_timestamp}.mkv"
 
-	if [ "$DISPLAY_SERVER" = "x11" ]; then
-		_ffmpeg_input_source_part=$(echo "$_func_ffmpeg_input_source_and_res" | awk '{print $1}')
-		_resolution_option=$(echo "$_func_ffmpeg_input_source_and_res" | awk '{$1=""; print $0}' | sed 's/^[ \t]*//')
+	printf "Starting recording with profile: %s\n" "$_efr_profile_alias"
+	printf "Output file: %s\n" "$_output_file"
+	printf "FFmpeg command structure:\n"
+	printf "ffmpeg %s %s %s \"%s\" > \"%s\" 2>&1 &\n" \
+		"$FFMPEG_INPUT_OPTS" "$FFMPEG_AUDIO_OPTS" "$FFMPEG_PROFILE_OPTS" "$_output_file" "$LOG_FILE"
 
-		if [ -z "$_ffmpeg_input_source_part" ]; then
-			notify "Error: Could not determine X11 input source."
-			return 1
-		fi
-		_input_options="-f x11grab -draw_mouse 1 -i ${_ffmpeg_input_source_part}"
+	# Run ffmpeg in background, redirect output, and capture PID
+	# The variables $FFMPEG_..._OPTS are expanded by the current shell.
+	# The resulting string is passed to sh -c.
+	# $_output_file and $LOG_FILE are quoted for the inner shell.
+	sh -c "ffmpeg $FFMPEG_INPUT_OPTS $FFMPEG_AUDIO_OPTS $FFMPEG_PROFILE_OPTS \"$_output_file\" > \"$LOG_FILE\" 2>&1 & echo \$! > \"$PID_FILE\""
 
-	elif [ "$DISPLAY_SERVER" = "wayland" ]; then
-		if command_exists pw-record; then
-			_input_options="-f pipewire -framerate 30 -i screen"
-			notify "Using PipeWire. You may be prompted to select a screen/window."
-			_resolution_option=$(echo "$_profile_options_str" | grep -o -- '-s [0-9]*x[0-9]*')
-		else
-			notify "Error: Wayland configured, but PipeWire tools (e.g., pw-record) not found."
-			return 1
-		fi
-	else
-		notify "Error: Unsupported DISPLAY_SERVER: $DISPLAY_SERVER"
-		return 1
+	sleep 1 # Give ffmpeg a moment to start and write PID
+
+	_recorded_pid=""
+	if [ -f "$PID_FILE" ]; then
+		_recorded_pid=$(cat "$PID_FILE")
 	fi
 
-	if [ -n "$AUDIO_SOURCE" ]; then
-		AUDIO_OPTIONS="-f pulse -i $AUDIO_SOURCE -c:a aac -b:a 192k"
-	else
-		AUDIO_OPTIONS=""
-	fi
-
-	notify "Starting recording ($_func_profile_name)... Output: $_output_file"
-	echo "Starting recording with profile: $_func_profile_name"
-	echo "Output file: $_output_file"
-	echo "FFmpeg command:"
-	echo "ffmpeg $_input_options $_resolution_option $AUDIO_OPTIONS $_profile_options_str \"$_output_file\" > \"$LOG_FILE\" 2>&1 &"
-
-	sh -c "ffmpeg $_input_options $_resolution_option $AUDIO_OPTIONS $_profile_options_str \"$_output_file\" > \"$LOG_FILE\" 2>&1 & echo \$! > \"$PID_FILE\""
-
-	sleep 1
-	if [ -f "$PID_FILE" ] && ps -p "$(cat "$PID_FILE")" >/dev/null; then
-		notify "Recording started. PID: $(cat "$PID_FILE")"
-		echo "Recording started. PID: $(cat "$PID_FILE")"
+	if [ -n "$_recorded_pid" ] && ps -p "$_recorded_pid" >/dev/null; then
+		notify "Recording started"
+		printf "Recording started. PID: %s\n" "$_recorded_pid"
 	else
 		notify "Error: Failed to start ffmpeg or get PID."
-		echo "Error: Failed to start ffmpeg. Check $LOG_FILE for details." >&2
-		rm -f "$PID_FILE"
+		printf "Error: Failed to start ffmpeg. Check %s for details.\n" "$LOG_FILE" >&2
+		rm -f "$PID_FILE" # Clean up PID file if ffmpeg failed or PID is invalid
 		return 1
 	fi
+	return 0
 }
 
 stop_recording() {
@@ -154,23 +108,28 @@ stop_recording() {
 
 	_pid=$(cat "$PID_FILE")
 
-	if ! ps -p "$_pid" >/dev/null; then
-		notify "Recording process (PID: $_pid) not found. Cleaning up stale PID file."
+	if [ -z "$_pid" ] || ! ps -p "$_pid" >/dev/null; then
+		_stale_pid_message="Recording process "
+		if [ -n "$_pid" ]; then
+			_stale_pid_message="${_stale_pid_message}(PID: $_pid) "
+		fi
+		_stale_pid_message="${_stale_pid_message}not found. Cleaning up stale PID file."
+		notify "$_stale_pid_message"
 		rm -f "$PID_FILE"
 		return 1
 	fi
 
 	notify "Stopping recording (PID: $_pid)..."
-	echo "Stopping recording (PID: $_pid)..."
-	kill -INT "$_pid"
+	printf "Stopping recording (PID: %s)...\n" "$_pid"
+	kill -INT "$_pid" # Send SIGINT first for graceful shutdown
 
 	_count=0
 	while ps -p "$_pid" >/dev/null; do
 		sleep 1
 		_count=$((_count + 1))
-		if [ "$_count" -gt 10 ]; then
-			notify "ffmpeg (PID: $_pid) did not stop gracefully. Forcing stop."
-			echo "ffmpeg (PID: $_pid) did not stop gracefully after 10s. Sending SIGKILL." >&2
+		if [ "$_count" -gt 10 ]; then # Wait up to 10 seconds
+			notify "ffmpeg (PID: $_pid) did not stop gracefully. Forcing stop (SIGKILL)."
+			printf "ffmpeg (PID: %s) did not stop gracefully after 10s. Sending SIGKILL.\n" "$_pid" >&2
 			kill -KILL "$_pid"
 			break
 		fi
@@ -178,68 +137,55 @@ stop_recording() {
 
 	rm -f "$PID_FILE"
 	notify "Recording stopped."
-	echo "Recording stopped."
+	printf "Recording stopped.\n"
 }
 
-if ! command_exists ffmpeg; then
-	notify "Error: ffmpeg command not found. Please install ffmpeg."
-	exit 1
-fi
-if ! command_exists notify-send && [ -n "$DISPLAY" ]; then
-	echo "Warning: notify-send command not found. Notifications will not be shown." >&2
-fi
+main() {
+	_action="start" # Default action
 
-if [ -f "$PID_FILE" ]; then
-	_current_pid=$(cat "$PID_FILE")
-	if ps -p "$_current_pid" >/dev/null; then
+	if [ -f "$PID_FILE" ]; then
+		_pid_from_file=$(cat "$PID_FILE")
+		if [ -n "$_pid_from_file" ] && ps -p "$_pid_from_file" >/dev/null; then
+			_action="stop"
+		else
+			# Stale or invalid PID file
+			_cleanup_message="Stale PID file found"
+			if [ -n "$_pid_from_file" ]; then
+				_cleanup_message="${_cleanup_message} for PID $_pid_from_file"
+			else
+				_cleanup_message="Empty or invalid PID file found"
+			fi
+			_cleanup_message="${_cleanup_message}. Cleaning up."
+			notify "$_cleanup_message"
+			rm -f "$PID_FILE"
+			# _action remains "start" (default)
+		fi
+	fi
+
+	if [ "$_action" = "stop" ]; then
 		stop_recording
 	else
-		notify "Stale PID file found. Cleaning up and preparing to start recording."
-		rm -f "$PID_FILE"
-		_profile_to_use="${1:-$DEFAULT_PROFILE_NAME}"
+		# Default to start if no argument or if PID was stale
+		_profile_to_use="${1:-$DEFAULT_PROFILE_ALIAS}"
+		_input_arg="$PREDEFINED_MONITOR"
 
-		_monitor_geo_and_res=""
-		if [ "$DISPLAY_SERVER" = "x11" ]; then
-			if [ "$_profile_to_use" = "WINDOW_BEST_QUALITY" ] || [ -z "$PREDEFINED_MONITOR" ]; then
-				_monitor_geo_and_res=$(get_x11_monitor)
-				case "$_monitor_geo_and_res" in
-				"ERROR_SLOP_MISSING" | "ERROR_NO_SELECTION")
-					exit 1
-					;;
-				esac
-			else
-				_monitor_geo_and_res="$PREDEFINED_MONITOR"
+		# Ensure output directory exists
+		if ! mkdir -p "$OUTPUT_DIR"; then
+			notify "Error: Could not create output directory $OUTPUT_DIR"
+			printf "Error: Could not create output directory %s\n" "$OUTPUT_DIR" >&2
+			exit 1
+		fi
+
+		if set_recording_parameters "$_profile_to_use" "$_input_arg"; then
+			if ! start_recording "$_profile_to_use"; then
+				exit 1 # start_recording already printed error
 			fi
-			start_recording "$_profile_to_use" "$_monitor_geo_and_res"
-		elif [ "$DISPLAY_SERVER" = "wayland" ]; then
-			start_recording "$_profile_to_use" ""
 		else
-			notify "Error: DISPLAY_SERVER misconfigured."
+			# set_recording_parameters already sent notification
 			exit 1
 		fi
 	fi
-else
-	_profile_to_use="${1:-$DEFAULT_PROFILE_NAME}"
+	exit 0
+}
 
-	_monitor_geo_and_res=""
-	if [ "$DISPLAY_SERVER" = "x11" ]; then
-		if [ "$_profile_to_use" = "WINDOW_BEST_QUALITY" ] || [ -z "$PREDEFINED_MONITOR" ]; then
-			_monitor_geo_and_res=$(get_x11_monitor)
-			case "$_monitor_geo_and_res" in
-			"ERROR_SLOP_MISSING" | "ERROR_NO_SELECTION")
-				exit 1
-				;;
-			esac
-		else
-			_monitor_geo_and_res="$PREDEFINED_MONITOR"
-		fi
-		start_recording "$_profile_to_use" "$_monitor_geo_and_res"
-	elif [ "$DISPLAY_SERVER" = "wayland" ]; then
-		start_recording "$_profile_to_use" ""
-	else
-		notify "Error: DISPLAY_SERVER misconfigured."
-		exit 1
-	fi
-fi
-
-exit 0
+main "$@"
