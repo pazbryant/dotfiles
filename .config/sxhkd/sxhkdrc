@@ -41,6 +41,9 @@ super + i
   bspc rule -a Nsxiv -o state=floating follow=on center=true \
     rectangle=1200x700+0+0 && ~/bin/wm/select-background
 
+super + u
+	~/bin/wm/switch-sink
+
 super + d
   rofi -show run
 
