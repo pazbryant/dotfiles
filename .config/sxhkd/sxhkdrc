@@ -10,8 +10,8 @@ super + control + Escape
 super + f
   bspc node -t {fullscreen,tiled}
 
-super + {l,h}
-	bspc node -f {next,prev}.local.!hidden.window
+super + {_,shift + }{h,l}
+	bspc node -{f,s} {prev,next}.local.!hidden.window
 
 super + {p,n}
   bspc desktop -f {prev,next}.local
