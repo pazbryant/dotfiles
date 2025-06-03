@@ -28,15 +28,6 @@ FFMPEG_INPUT_OPTS=""
 FFMPEG_PROFILE_OPTS=""
 FFMPEG_AUDIO_OPTS=""
 
-notify() {
-	_message="$1"
-	if [ -n "$DISPLAY" ]; then
-		notify-send "Screen Recorder" "$_message" -t 3000
-	else
-		printf "Screen Recorder: %s\n" "$_message"
-	fi
-}
-
 refresh_status_bar() {
 	# NOTE: This is for ~/bin/global/slstatus-recording script. It executes it
 	# thought a signal of slstatus
@@ -55,7 +46,7 @@ set_recording_parameters() {
 	"4k_q") FFMPEG_PROFILE_OPTS="-c:v libx264 -preset medium -crf 18 -r 30 -s 3840x2160" ;;
 	"4k_f") FFMPEG_PROFILE_OPTS="-c:v libx264 -preset ultrafast -crf 22 -r 60 -s 3840x2160" ;;
 	*)
-		notify "Error: Profile '$_srp_profile_alias' not found."
+		echo "Error: Profile '$_srp_profile_alias' not found."
 		return 1
 		;;
 	esac
@@ -96,10 +87,8 @@ start_recording() {
 
 	if [ -n "$_recorded_pid" ] && ps -p "$_recorded_pid" >/dev/null; then
 		refresh_status_bar
-		notify "Recording started"
 		printf "Recording started. PID: %s\n" "$_recorded_pid"
 	else
-		notify "Error: Failed to start ffmpeg or get PID."
 		printf "Error: Failed to start ffmpeg. Check %s for details.\n" "$LOG_FILE" >&2
 		rm -f "$PID_FILE" # Clean up PID file if ffmpeg failed or PID is invalid
 		return 1
@@ -109,7 +98,7 @@ start_recording() {
 
 stop_recording() {
 	if [ ! -f "$PID_FILE" ]; then
-		notify "Not recording (no PID file found)."
+		echo "Not recording (no PID file found)."
 		return 1
 	fi
 
@@ -121,12 +110,11 @@ stop_recording() {
 			_stale_pid_message="${_stale_pid_message}(PID: $_pid) "
 		fi
 		_stale_pid_message="${_stale_pid_message}not found. Cleaning up stale PID file."
-		notify "$_stale_pid_message"
+		echo "$_stale_pid_message"
 		rm -f "$PID_FILE"
 		return 1
 	fi
 
-	notify "Stopping recording (PID: $_pid)..."
 	printf "Stopping recording (PID: %s)...\n" "$_pid"
 	kill -INT "$_pid" # Send SIGINT first for graceful shutdown
 
@@ -135,7 +123,6 @@ stop_recording() {
 		sleep 1
 		_count=$((_count + 1))
 		if [ "$_count" -gt 10 ]; then # Wait up to 10 seconds
-			notify "ffmpeg (PID: $_pid) did not stop gracefully. Forcing stop (SIGKILL)."
 			printf "ffmpeg (PID: %s) did not stop gracefully after 10s. Sending SIGKILL.\n" "$_pid" >&2
 			kill -KILL "$_pid"
 			break
@@ -144,7 +131,6 @@ stop_recording() {
 
 	rm -f "$PID_FILE"
 	refresh_status_bar
-	notify "Recording stopped."
 	printf "Recording stopped.\n"
 }
 
@@ -164,7 +150,7 @@ main() {
 				_cleanup_message="Empty or invalid PID file found"
 			fi
 			_cleanup_message="${_cleanup_message}. Cleaning up."
-			notify "$_cleanup_message"
+			echo "$_cleanup_message"
 			rm -f "$PID_FILE"
 			# _action remains "start" (default)
 		fi
@@ -179,7 +165,6 @@ main() {
 
 		# Ensure output directory exists
 		if ! mkdir -p "$OUTPUT_DIR"; then
-			notify "Error: Could not create output directory $OUTPUT_DIR"
 			printf "Error: Could not create output directory %s\n" "$OUTPUT_DIR" >&2
 			exit 1
 		fi
