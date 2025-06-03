@@ -20,7 +20,7 @@ readonly PREDEFINED_MONITOR
 DEFAULT_PROFILE_ALIAS="fhd_q" # Default short profile alias
 readonly DEFAULT_PROFILE_ALIAS
 
-AUDIO_SOURCE=""       # Set to "default" or a specific PulseAudio source to enable audio
+AUDIO_SOURCE="" # Set to "default" or a specific PulseAudio source to enable audio
 
 # --- Script-level variables for ffmpeg parameters ---
 # These will be set by set_recording_parameters()
@@ -35,6 +35,12 @@ notify() {
 	else
 		printf "Screen Recorder: %s\n" "$_message"
 	fi
+}
+
+refresh_status_bar() {
+	# NOTE: This is for ~/bin/global/slstatus-recording script. It executes it
+	# thought a signal of slstatus
+	pkill -RTMIN+1 slstatus
 }
 
 set_recording_parameters() {
@@ -89,6 +95,7 @@ start_recording() {
 	fi
 
 	if [ -n "$_recorded_pid" ] && ps -p "$_recorded_pid" >/dev/null; then
+		refresh_status_bar
 		notify "Recording started"
 		printf "Recording started. PID: %s\n" "$_recorded_pid"
 	else
@@ -136,6 +143,7 @@ stop_recording() {
 	done
 
 	rm -f "$PID_FILE"
+	refresh_status_bar
 	notify "Recording stopped."
 	printf "Recording stopped.\n"
 }
