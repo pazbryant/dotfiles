@@ -57,6 +57,7 @@ nsxiv 33-1
 openresolv 3.16.5-1
 openssh 10.0p1-3
 otf-overpass 3.0.5-2
+pacman-contrib 1.11.0-1
 pavucontrol 1:6.1-1
 pgcli 4.3.0-1
 picom 12.5-3
