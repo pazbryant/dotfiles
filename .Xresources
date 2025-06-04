@@ -23,7 +23,7 @@ st.borderpx: 0px
 ! DWM specific configurations
 dwm.selbgcolor: #641f55
 dwm.selfgcolor: #ffffff
-dwm.normbgcolor: #641f56
-dwm.normfgcolor: #ffffff
+dwm.normbgcolor: #000000
+dwm.normfgcolor: #817f7f
 dwm.selbordercolor: #641f55
 dwm.normbordercolor: #817f7f
