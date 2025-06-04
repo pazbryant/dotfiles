@@ -41,6 +41,10 @@ opt.isfname:append('@-@')
 
 opt.updatetime = 50
 
+-- update statusline
+opt.laststatus = 0
+-- opt.statusline = ' %f%m%r%h%w'
+
 opt.termguicolors = true
 
 -- folding options
