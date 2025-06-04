@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 # Color definitions for better readability
 GREEN='\033[0;32m'
@@ -6,146 +6,132 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-# Function to perform actions with confirmation
-confirm() {
-	printf "%b%s%b (y/n): " "$YELLOW" "$1" "$NC"
-	read -r response
-	if [ "$response" != "y" ]; then
-		return 1
-	fi
-	return 0
-}
+# Treat unset variables as an error after colors are set
+set -u
 
-# Function to perform actions without confirmation
+# Function to perform actions without confirmation (informational)
 perform() {
 	printf "%b%s%b\n" "$BLUE" "$1" "$NC"
 }
 
-# Check if running as root
+# --- Initial Checks ---
 if [ "$(id -u)" = 0 ]; then
-	echo "This script should not be run as root. It will use sudo when needed."
+	printf "%bThis script should not be run as root. It will use sudo when needed.%b\n" "$YELLOW" "$NC"
 	exit 1
 fi
 
-# Update system first
-perform "Updating package databases..."
-sudo pacman -Sy
+perform "Starting Arch Linux Maintenance Script..."
 
-# Safe operations that run automatically
-# Clear user cache - safe to do automatically
-perform "Clearing user cache..."
-fd -t f -d 4 --changed-before 30d . ~/.cache -x rm {} \; 2>/dev/null
+# --- Core System Maintenance ---
+perform "--- Core System Maintenance ---"
 
-# Check for failed systemd services
+perform "Updating package databases and upgrading system (sudo pacman -Syu)..."
+if sudo pacman -Syu; then
+	perform "System upgrade complete."
+else
+	perform "${YELLOW}System upgrade failed or was aborted.${NC}"
+fi
+
+perform "Checking for .pacnew files with pacdiff..."
+perform "Examine each file carefully. More info: https://wiki.archlinux.org/title/Pacman/Pacnew_and_Pacsave"
+sudo pacdiff
+
 perform "Checking for failed systemd services..."
 systemctl --failed
 
-# Clear temporary files
-perform "Clearing temporary files..."
-if [ -d /tmp ]; then
-	# Only delete files older than 2 days and not in use
-	fd -t f --changed-before 2d . /tmp -x rm {} \; 2>/dev/null
-fi
-
-# Operations that require confirmation
-# Remove orphaned packages
-if confirm "Do you want to remove orphaned packages?"; then
-	echo "Removing orphaned packages..."
-	orphans=$(pacman -Qdtq)
-	if [ -n "$orphans" ]; then
-		sudo pacman -Rns "$orphans"
-	else
-		echo "No orphaned packages found."
-	fi
-fi
-
-# Clear package cache
-if confirm "Do you want to clear the package cache?"; then
-	echo "Clearing package cache..."
-	sudo pacman -Sc
-fi
-
-# Remove unused config files
-if confirm "Do you want to remove unused config files?"; then
-	echo "Removing unused config files..."
-	unused=$(pacman -Qttq)
-	if [ -n "$unused" ]; then
-		sudo pacman -Rns "$unused"
-	else
-		echo "No unused config files found."
-	fi
-fi
-
-# Clean up log files - potentially destructive, keep confirmation
-if confirm "Do you want to clean up log files?"; then
-	echo "Clearing log files..."
-	sudo journalctl --vacuum-time=2weeks
-	# More targeted approach than truncating all logs
-	for log in /var/log/syslog /var/log/messages /var/log/auth.log; do
-		if [ -f "$log" ] && [ -s "$log" ]; then
-			sudo truncate -s 0 "$log"
-		fi
-	done
-fi
-
-# Check for broken symlinks in home directory
-if confirm "Do you want to check for broken symlinks?"; then
-	echo "Checking for broken symlinks..."
-	fd -t l . "$HOME" | while read -r link; do
-		if ! readlink -e "$link" >/dev/null 2>&1; then
-			echo "Broken symlink: $link"
-		fi
-	done
-fi
-
-# Clean up user cache completely
-if confirm "Do you want to clean up ALL user cache?"; then
-	echo "Clearing ALL user cache..."
-	sudo rm -rf ~/.cache/*
-fi
-
-# AUR packages cleanup
-if command -v paru >/dev/null 2>&1; then
-	if confirm "Do you want to clean up unused AUR packages?"; then
-		echo "Cleaning up AUR packages..."
-		paru -c
-	fi
-else
-	echo "paru is not installed. Skipping AUR cleanup."
-fi
-
-# Docker cleanup
-if command -v docker >/dev/null 2>&1; then
-	if confirm "Do you want to clean up Docker?"; then
-		echo "Cleaning up Docker..."
-		docker system prune -a
-	fi
-else
-	echo "Docker is not installed. Skipping Docker cleanup."
-fi
-
-# Flatpak cleanup
-if command -v flatpak >/dev/null 2>&1; then
-	if confirm "Do you want to clean up Flatpak?"; then
-		echo "Cleaning up Flatpak..."
-		flatpak uninstall --unused
-	fi
-else
-	echo "Flatpak is not installed. Skipping Flatpak cleanup."
-fi
-
-# Check disk usage
-perform "Checking disk usage..."
-df -h /
-
-# Added check for large files
-if confirm "Do you want to find large files (>100MB) in your home directory?"; then
-	echo "Finding large files in home directory..."
-	fd -t f -S +100M . "$HOME" -x ls -lh {} \; | sort -k5,5hr | head -n 20
-fi
-
-# Check systemd timers status
 perform "Checking systemd timers..."
 systemctl list-timers --all
 
-printf "%b%s%b\n" "$GREEN" "System maintenance complete!" "$NC"
+# --- Package Management & Cleanup ---
+perform "--- Package Management & Cleanup ---"
+
+perform "Identifying and removing orphaned packages (pacman -Rns \$(pacman -Qdtq))..."
+orphans=$(pacman -Qdtq)
+if [ -n "$orphans" ]; then
+	perform "Removing orphaned packages: $orphans"
+	# shellcheck disable=SC2086 # $orphans needs word splitting
+	sudo pacman -Rns $orphans
+else
+	perform "No orphaned packages found."
+fi
+
+perform "Cleaning package cache with paccache (keeping last 2 versions)..."
+sudo paccache -rk2
+perform "Removing all cached versions of UNINSTALLED packages with paccache..."
+sudo paccache -ruk0
+
+# AUR packages cleanup
+perform "Checking for AUR helper and cleaning cache..."
+aur_helper_found=""
+# The command -v here is for detection of which helper to use.
+if command -v paru >/dev/null 2>&1; then aur_helper_found="paru"; fi
+if command -v yay >/dev/null 2>&1; then aur_helper_found="yay"; fi # yay takes precedence if both installed
+
+if [ -n "$aur_helper_found" ]; then
+	perform "Cleaning up AUR helper ($aur_helper_found) build files/caches..."
+	if [ "$aur_helper_found" = "paru" ]; then
+		paru -Sc --aur
+	elif [ "$aur_helper_found" = "yay" ]; then
+		yay -Yc
+	fi
+else
+	perform "No common AUR helper (paru or yay) detected by script. Skipping AUR cleanup."
+fi
+
+# --- Filesystem & User Space Cleanup ---
+perform "--- Filesystem & User Space Cleanup ---"
+
+perform "Clearing old files (older than 30 days, max depth 4) from user cache ($HOME/.cache) using fd..."
+fd --type file --max-depth 4 --changed-before 30d . "$HOME/.cache" -X rm 2>/dev/null
+
+if [ -d /tmp ]; then
+	perform "Clearing old files (older than 2 days) from /tmp (owned by you or deletable) using fd..."
+	fd --type file --changed-before 2d . "/tmp" -X rm 2>/dev/null
+fi
+
+perform "Clearing ALL user cache ($HOME/.cache)..."
+rm -rf "$HOME/.cache/"*
+perform "User cache cleared. Some applications might rebuild their caches on next start."
+
+perform "Checking for broken symlinks in $HOME using fd..."
+fd --type l --base-directory "$HOME" . | while IFS= read -r link_path; do
+	if ! readlink -e "$link_path" >/dev/null 2>&1; then
+		printf "${YELLOW}Broken symlink: %s${NC}\n" "$link_path"
+	fi
+done
+perform "Broken symlink check complete."
+
+perform "Finding top 20 largest files (>100MB) in $HOME using fd..."
+fd --type file --size +100M --base-directory "$HOME" . -X ls -lh {} \; | sort -k5,5hr -k10,10 | head -n 20
+perform "Large file search complete."
+
+# --- System Specific Cleanups (Docker, Flatpak) ---
+perform "--- System Specific Cleanups ---"
+
+perform "Cleaning up Docker (prune system: all unused images, containers, volumes, networks)..."
+if command -v docker >/dev/null 2>&1; then
+	docker system prune -a -f
+else
+	perform "Docker not found. Skipping Docker cleanup."
+fi
+
+perform "Cleaning up Flatpak (uninstall unused runtimes/apps)..."
+if command -v flatpak >/dev/null 2>&1; then
+	flatpak uninstall --unused -y
+else
+	perform "Flatpak not found. Skipping Flatpak cleanup."
+fi
+
+# --- System Information & Final Steps ---
+perform "--- System Information & Final Steps ---"
+
+perform "Checking disk usage for / ..."
+df -h /
+
+perform "Cleaning journald log files (vacuum to keep last 2 weeks)..."
+sudo journalctl --vacuum-time=2weeks
+
+perform "${YELLOW}IMPORTANT: Remember to check the Arch Linux news for any manual interventions required!${NC}"
+perform "${BLUE}Visit: https://archlinux.org/news/${NC}"
+
+printf "%b%s%b\n" "$GREEN" "System maintenance script complete!" "$NC"
