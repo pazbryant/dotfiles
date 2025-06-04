@@ -140,14 +140,8 @@ reload_services() {
 
 	# Reload tmux configuration if tmux server is running
 	if pgrep tmux >/dev/null; then # Adjusted pgrep command
-		echo "do here this"
 		tmux source-file "${HOME}/.tmux.conf" || echo "Failed to reload tmux configuration"
 	fi
-}
-
-# Notify user of completion
-notify_user() {
-	notify-send "Appearance" "Updated primary color to $1" || echo "Failed to send notification"
 }
 
 # Main function
@@ -195,9 +189,6 @@ main() {
 
 	# Reload services
 	reload_services
-
-	# Notify user
-	notify_user "$selected_color"
 
 	echo "Theme update completed successfully for color $selected_color"
 }
