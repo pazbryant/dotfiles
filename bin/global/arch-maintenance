@@ -1,22 +1,16 @@
 #!/usr/bin/env sh
 
-# Color definitions for better readability
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-NC='\033[0m' # No Color
-
-# Treat unset variables as an error after colors are set
+# Treat unset variables as an error
 set -u
 
 # Function to perform actions without confirmation (informational)
 perform() {
-	printf "%b%s%b\n" "$BLUE" "$1" "$NC"
+	printf "%s\n" "$1"
 }
 
 # --- Initial Checks ---
 if [ "$(id -u)" = 0 ]; then
-	printf "%bThis script should not be run as root. It will use sudo when needed.%b\n" "$YELLOW" "$NC"
+	printf "This script should not be run as root. It will use sudo when needed.\n"
 	exit 1
 fi
 
@@ -29,12 +23,8 @@ perform "Updating package databases and upgrading system (sudo pacman -Syu)..."
 if sudo pacman -Syu; then
 	perform "System upgrade complete."
 else
-	perform "${YELLOW}System upgrade failed or was aborted.${NC}"
+	printf "System upgrade failed or was aborted.\n"
 fi
-
-perform "Checking for .pacnew files with pacdiff..."
-perform "Examine each file carefully. More info: https://wiki.archlinux.org/title/Pacman/Pacnew_and_Pacsave"
-sudo pacdiff
 
 perform "Checking for failed systemd services..."
 systemctl --failed
@@ -57,6 +47,7 @@ fi
 
 perform "Cleaning package cache with paccache (keeping last 2 versions)..."
 sudo paccache -rk2
+
 perform "Removing all cached versions of UNINSTALLED packages with paccache..."
 sudo paccache -ruk0
 
@@ -96,7 +87,7 @@ perform "User cache cleared. Some applications might rebuild their caches on nex
 perform "Checking for broken symlinks in $HOME using fd..."
 fd --type l --base-directory "$HOME" . | while IFS= read -r link_path; do
 	if ! readlink -e "$link_path" >/dev/null 2>&1; then
-		printf "${YELLOW}Broken symlink: %s${NC}\n" "$link_path"
+		printf "Broken symlink: %s\n" "$link_path"
 	fi
 done
 perform "Broken symlink check complete."
@@ -131,7 +122,7 @@ df -h /
 perform "Cleaning journald log files (vacuum to keep last 2 weeks)..."
 sudo journalctl --vacuum-time=2weeks
 
-perform "${YELLOW}IMPORTANT: Remember to check the Arch Linux news for any manual interventions required!${NC}"
-perform "${BLUE}Visit: https://archlinux.org/news/${NC}"
+printf "IMPORTANT: Remember to check the Arch Linux news for any manual interventions required!\n"
+printf "Visit: https://archlinux.org/news/\n"
 
-printf "%b%s%b\n" "$GREEN" "System maintenance script complete!" "$NC"
+printf "System maintenance script complete!\n"
