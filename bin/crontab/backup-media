@@ -1,0 +1,173 @@
+#!/bin/env sh
+
+set -e
+
+BLOCK_DEVICE="/dev/sdb1"                         # USB stick device
+MEDIA_DESTINATION="/run/media/bryant/tiagovault" # Expected mount point for the USB stick
+MEDIA_SOURCES="$HOME/Documents/books $HOME/Music"
+
+mount_disk() {
+	if mountpoint -q "$MEDIA_DESTINATION"; then
+		_mounted_fs=$(df "$MEDIA_DESTINATION" 2>/dev/null | awk 'NR==2 {print $1}')
+		if [ "$_mounted_fs" = "$BLOCK_DEVICE" ]; then
+			echo "Already mounted: '$BLOCK_DEVICE' is active at '$MEDIA_DESTINATION'."
+			return 0
+		else
+			echo "Error: Path '$MEDIA_DESTINATION' is mounted by '$_mounted_fs', not '$BLOCK_DEVICE'."
+			echo "Please unmount '$_mounted_fs' or change MEDIA_DESTINATION in the script."
+			return 1
+		fi
+	fi
+
+	echo "Attempting to mount '$BLOCK_DEVICE'..."
+	_mount_output="$(udisksctl mount -b "$BLOCK_DEVICE" 2>&1)"
+
+	# Parse the actual mount path from udisksctl output (e.g., "Mounted /dev/sdb1 at /path/to/mount.")
+	_actual_mount_path=$(echo "$_mount_output" | grep '^Mounted .* at ' | awk -F ' at ' '{print $2}' | sed 's/\.$//')
+
+	if [ -n "$_actual_mount_path" ]; then
+		if [ "$_actual_mount_path" = "$MEDIA_DESTINATION" ]; then
+			echo "Success: '$BLOCK_DEVICE' mounted at '$MEDIA_DESTINATION'."
+			return 0
+		else
+			echo "Error: Device '$BLOCK_DEVICE' mounted at '$_actual_mount_path',"
+			echo "but script expected '$MEDIA_DESTINATION'."
+			echo "Ensure device's volume label matches or adjust MEDIA_DESTINATION."
+			echo "Attempting to unmount '$_actual_mount_path' as a cleanup..."
+			udisksctl unmount -b "$BLOCK_DEVICE" --force >/dev/null 2>&1
+			return 1
+		fi
+	else
+		echo "Error: Failed to mount '$BLOCK_DEVICE'."
+		# Check if it failed because it's already mounted elsewhere
+		_already_mounted_at=$(echo "$_mount_output" | grep 'already mounted at ' | awk -F 'already mounted at ' '{print $2}' | sed 's/[`.]*$//g')
+		if [ -n "$_already_mounted_at" ]; then
+			echo "Reason: Device is already mounted at '$_already_mounted_at'."
+		else
+			echo "udisksctl output: $_mount_output"
+		fi
+		return 1
+	fi
+}
+
+# === Unmount Function ===
+# Unmounts the specified block device.
+unmount_disk() {
+	echo "--- Unmounting Disk ($BLOCK_DEVICE) ---"
+	echo "Attempting to unmount '$BLOCK_DEVICE'..."
+	_unmount_output="$(udisksctl unmount -b "$BLOCK_DEVICE" 2>&1)"
+
+	if echo "$_unmount_output" | grep -q "Unmounted"; then
+		echo "Success: '$BLOCK_DEVICE' has been unmounted."
+		if mountpoint -q "$MEDIA_DESTINATION"; then # Check if expected path is still mounted
+			echo "Warning: '$MEDIA_DESTINATION' still appears as a mount point. Please check manually."
+		fi
+		return 0
+	elif echo "$_unmount_output" | grep -q "is not mounted"; then
+		echo "Info: '$BLOCK_DEVICE' was already not mounted."
+		return 0 # This is a success state (disk is unmounted)
+	else
+		echo "Error: Failed to unmount '$BLOCK_DEVICE'."
+		echo "udisksctl output: $_unmount_output"
+		return 1
+	fi
+}
+
+# === Backup Function ===
+# Backs up a single source directory to the mounted media.
+# Destination on USB: $MEDIA_DESTINATION/backups/<target_leaf_name>/
+run_backup() {
+	_source_path="$1"
+	_source_basename="$(basename "$_source_path")" # Gets the last component, e.g., "books" or "Music"
+
+	echo "--- Running Backup for '$_source_basename' ---"
+
+	# Determine target leaf directory name based on requirements
+	_target_leaf_name="$_source_basename" # Default to original basename
+	if [ "$_source_basename" = "Music" ]; then
+		_target_leaf_name="music" # Specific: $HOME/Music -> backups/music
+	elif [ "$_source_basename" = "books" ]; then
+		_target_leaf_name="books" # Specific: $HOME/Documents/books -> backups/books
+	fi
+	# For other sources, _target_leaf_name will be the original basename.
+
+	_backup_destination_base="$MEDIA_DESTINATION/backups"
+	_final_destination_path="$_backup_destination_base/$_target_leaf_name"
+
+	echo "Source: '$_source_path'"
+	echo "Destination: '$_final_destination_path'"
+
+	if ! mkdir -p "$_final_destination_path"; then
+		echo "Error: Failed to create destination directory '$_final_destination_path'."
+		notify-send "Backup Error" "Failed to create directory for $_source_basename" -u critical
+		return 1
+	fi
+
+	echo "Starting rsync..."
+	# Use trailing slash on source to copy contents into destination.
+	if rsync -a --delete "$_source_path/" "$_final_destination_path/"; then
+		sync # Ensure all data is written to disk
+		echo "Success: Backup of '$_source_basename' completed."
+		notify-send "Backup Success: $_source_basename" "Backed up to folder: $_target_leaf_name"
+		if command -v sound-alert >/dev/null 2>&1; then
+			sound-alert
+		else
+			echo "Info: 'sound-alert' command not found, skipping sound notification."
+		fi
+		return 0
+	else
+		echo "Error: rsync failed for '$_source_basename'."
+		notify-send "Backup Failed: $_source_basename" "rsync command failed" -u critical
+		return 1
+	fi
+}
+
+# === Main Function ===
+# Orchestrates the mount, backup, and unmount operations.
+main() {
+	echo "=== Starting Backup Process ==="
+	if ! mount_disk; then
+		echo "Critical Error: Disk mount failed. Aborting backup process."
+		notify-send "Backup Aborted" "Disk mount failed for $BLOCK_DEVICE" -u critical
+		return 1
+	fi
+
+	_overall_status=0 # 0 for all success, 1 if any part fails
+
+	# Iterate over each source defined in MEDIA_SOURCES.
+	# The shell performs word splitting on the unquoted $MEDIA_SOURCES.
+	for source_item in $MEDIA_SOURCES; do
+		echo                             # Add a blank line for readability between source processing
+		if [ ! -e "$source_item" ]; then # Check if source file/directory exists
+			echo "Error: Source path '$source_item' does not exist. Skipping."
+			notify-send "Backup Warning" "Source '$source_item' not found." -u normal
+			_overall_status=1
+			continue
+		fi
+
+		if ! run_backup "$source_item"; then
+			# run_backup function shows its own errors and notifications
+			_overall_status=1 # Mark that at least one backup task failed
+		fi
+	done
+
+	echo # Add a blank line for readability
+	if ! unmount_disk; then
+		echo "Warning: Disk unmount operation reported an issue for $BLOCK_DEVICE."
+		notify-send "Backup Warning" "Disk unmount issue for $BLOCK_DEVICE" -u normal
+		_overall_status=1 # Consider unmount issues as part of overall failure for caution
+	fi
+
+	echo # Add a blank line for readability
+	if [ "$_overall_status" -eq 0 ]; then
+		echo "=== Backup Process Completed Successfully ==="
+		notify-send "Backup Complete" "All tasks finished successfully."
+		return 0
+	else
+		echo "=== Backup Process Completed With Errors/Warnings ==="
+		notify-send "Backup Complete" "Process finished with errors or warnings." -u normal
+		return 1
+	fi
+}
+
+main
