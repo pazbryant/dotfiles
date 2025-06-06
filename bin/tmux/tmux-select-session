@@ -10,7 +10,7 @@ fi
 
 if [ "$current_attached_session" = "$selected_session" ]; then
 	tmux display-message "You are currently attached to this session."
-	exit 0
+	exit 1
 fi
 
 if ! tmux has-session -t="$selected_session" 2>/dev/null; then

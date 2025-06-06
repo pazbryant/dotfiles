@@ -19,11 +19,8 @@ kill_windows() {
 go_home() {
 	if ! tmux has-session -t "bryant" 2>/dev/null; then
 		tmux new-session -s "bryant" -d
-		tmux switch-client -t "bryant"
-	else
-		tmux switch-client -t "bryant"
 	fi
-	tmux display-message "All has been killed but home session"
+	tmux switch-client -t "bryant"
 }
 
 # Call the function
@@ -36,6 +33,8 @@ main() {
 	go_home "$session_name"
 	kill_sessions "$session_name"
 	kill_windows "$session_name"
+
+	tmux display-message "All sessions and windows has been killed"
 
 }
 
