@@ -1,6 +1,7 @@
 # main
 alias ls="ls"
 alias cl="clear"
+alias :q="exit"
 alias zsha="cd ~/zsh && vi .aliases"
 alias c="xclip -selection clipboard"
 alias vi="env NVIM_APPNAME='vim' nvim"

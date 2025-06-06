@@ -2,6 +2,7 @@
 
 # main
 alias n="nvim"
+alias :q="exit"
 alias yay="paru"
 alias cl="clear"
 alias sudo="sudo "
