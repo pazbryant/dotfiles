@@ -26,6 +26,14 @@ kill_other_windows() {
 	done
 }
 
+navigate_home() {
+	_target_session="$1"
+	if [ -n "$TMUX" ]; then
+		tmux switch-client -t "$_target_session"
+	fi
+	tmux display-message -t "$_target_session" "Cleaned up other sessions and windows."
+}
+
 main() {
 	if [ -z "$1" ]; then
 		echo "Error: No session name provided." >&2
@@ -36,14 +44,9 @@ main() {
 	readonly TARGET_SESSION="$1"
 
 	ensure_session_exists "$TARGET_SESSION"
+	navigate_home "$TARGET_SESSION" # needs to switch before kill
 	kill_other_sessions "$TARGET_SESSION"
 	kill_other_windows "$TARGET_SESSION"
-
-	if [ -n "$TMUX" ]; then
-		tmux switch-client -t "$TARGET_SESSION"
-	fi
-
-	tmux display-message -t "$TARGET_SESSION" "Cleaned up other sessions and windows."
 }
 
 main "$@"
