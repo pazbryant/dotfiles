@@ -17,16 +17,13 @@ readonly LOG_FILE
 PREDEFINED_MONITOR=":0.0+0,0" # record full screen
 readonly PREDEFINED_MONITOR
 
-DEFAULT_PROFILE_ALIAS="fhd_q" # Default short profile alias
+DEFAULT_PROFILE_ALIAS="fhd_f" # Default short profile alias
 readonly DEFAULT_PROFILE_ALIAS
-
-AUDIO_SOURCE="" # Set to "default" or a specific PulseAudio source to enable audio
 
 # --- Script-level variables for ffmpeg parameters ---
 # These will be set by set_recording_parameters()
 FFMPEG_INPUT_OPTS=""
 FFMPEG_PROFILE_OPTS=""
-FFMPEG_AUDIO_OPTS=""
 
 refresh_status_bar() {
 	# NOTE: This is for ~/bin/global/slstatus-recording script. It executes it
@@ -39,12 +36,11 @@ set_recording_parameters() {
 	_srp_input_source_and_res="$2"
 
 	case "$_srp_profile_alias" in
-	"hd_q") FFMPEG_PROFILE_OPTS="-c:v libx264 -preset medium -crf 18 -r 30 -s 1280x720" ;;
-	"hd_f") FFMPEG_PROFILE_OPTS="-c:v libx264 -preset ultrafast -crf 22 -r 60 -s 1280x720" ;;
-	"fhd_q") FFMPEG_PROFILE_OPTS="-c:v libx264 -preset medium -crf 18 -r 30 -s 1920x1080" ;;
-	"fhd_f") FFMPEG_PROFILE_OPTS="-c:v libx264 -preset ultrafast -crf 22 -r 60 -s 1920x1080" ;;
-	"4k_q") FFMPEG_PROFILE_OPTS="-c:v libx264 -preset medium -crf 18 -r 30 -s 3840x2160" ;;
-	"4k_f") FFMPEG_PROFILE_OPTS="-c:v libx264 -preset ultrafast -crf 22 -r 60 -s 3840x2160" ;;
+	"4k_b") FFMPEG_PROFILE_OPTS="-c:v libvpx-vp9 -crf 24 -b:v 0 -cpu-used 2 -an -s 3840x2160" ;;
+	"4k_q") FFMPEG_PROFILE_OPTS="-c:v libx264 -preset slow -crf 18 -g 15 -bf 2 -pix_fmt yuv420p -movflags +faststart -an -s 3840x2160" ;;
+	"fhd_q") FFMPEG_PROFILE_OPTS="-c:v libx264 -preset slow -crf 18 -g 15 -bf 2 -pix_fmt yuv420p -movflags +faststart -an -s 1920x1080" ;;
+	"4k_f") FFMPEG_PROFILE_OPTS="-c:v libx264 -preset faster -crf 22 -g 30 -bf 2 -pix_fmt yuv420p -movflags +faststart -an -s 3840x2160" ;;
+	"fhd_f") FFMPEG_PROFILE_OPTS="-c:v libx264 -preset faster -crf 20 -g 30 -bf 2 -pix_fmt yuv420p -movflags +faststart -an -s 1920x1080" ;;
 	*)
 		echo "Error: Profile '$_srp_profile_alias' not found."
 		return 1
@@ -52,11 +48,6 @@ set_recording_parameters() {
 	esac
 
 	FFMPEG_INPUT_OPTS="-f x11grab -draw_mouse 1 -i ${_srp_input_source_and_res}"
-	if [ -n "$AUDIO_SOURCE" ]; then
-		FFMPEG_AUDIO_OPTS="-f pulse -i \"$AUDIO_SOURCE\" -c:a aac -b:a 192k"
-	else
-		FFMPEG_AUDIO_OPTS=""
-	fi
 	return 0
 }
 
@@ -70,13 +61,13 @@ start_recording() {
 	printf "Output file: %s\n" "$_output_file"
 	printf "FFmpeg command structure:\n"
 	printf "ffmpeg %s %s %s \"%s\" > \"%s\" 2>&1 &\n" \
-		"$FFMPEG_INPUT_OPTS" "$FFMPEG_AUDIO_OPTS" "$FFMPEG_PROFILE_OPTS" "$_output_file" "$LOG_FILE"
+		"$FFMPEG_INPUT_OPTS" "$FFMPEG_PROFILE_OPTS" "$_output_file" "$LOG_FILE"
 
 	# Run ffmpeg in background, redirect output, and capture PID
 	# The variables $FFMPEG_..._OPTS are expanded by the current shell.
 	# The resulting string is passed to sh -c.
 	# $_output_file and $LOG_FILE are quoted for the inner shell.
-	sh -c "ffmpeg $FFMPEG_INPUT_OPTS $FFMPEG_AUDIO_OPTS $FFMPEG_PROFILE_OPTS \"$_output_file\" > \"$LOG_FILE\" 2>&1 & echo \$! > \"$PID_FILE\""
+	sh -c "ffmpeg $FFMPEG_INPUT_OPTS $FFMPEG_PROFILE_OPTS \"$_output_file\" > \"$LOG_FILE\" 2>&1 & echo \$! > \"$PID_FILE\""
 
 	sleep 1 # Give ffmpeg a moment to start and write PID
 
