@@ -12,7 +12,7 @@ list_folders() {
 
 # Function to list files within a selected folder
 list_files_in_folder() {
-	fd --type f --base-directory "$VIDEOS_DIR/$1"
+	fd --type f --base-directory "$VIDEOS_DIR/$1" | sort -r
 }
 
 # Function to select a folder using Rofi
