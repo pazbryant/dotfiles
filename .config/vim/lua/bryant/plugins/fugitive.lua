@@ -2,14 +2,13 @@ return {
 	'tpope/vim-fugitive',
 	event = 'VeryLazy',
 	keys = {
-		{ '<leader>gs', vim.cmd.Git, desc = 'Fugitive init' },
 		{
 			'<leader>gd',
 			function()
 				vim.cmd([[Gvdiffsplit!]])
 				vim.notify('Resolving git conflicts', vim.log.levels.INFO)
 			end,
-			desc = 'Fugitive diff split',
+			desc = 'Fugitive Diff Split',
 		},
 		{
 			'<leader>go',
@@ -17,7 +16,7 @@ return {
 				vim.cmd([[diffget //2]])
 				vim.notify('Git ours selected', vim.log.levels.INFO)
 			end,
-			desc = 'Fugitive ours changes',
+			desc = 'Fugitive Ours Changes',
 		},
 		{
 			'<leader>gt',
@@ -25,7 +24,7 @@ return {
 				vim.cmd([[diffget //3]])
 				vim.notify('Git theirs selected', vim.log.levels.INFO)
 			end,
-			desc = 'Fugitive theirs changes',
+			desc = 'Fugitive Theirs Changes',
 		},
 	},
 }
