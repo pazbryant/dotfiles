@@ -2,7 +2,6 @@
 
 # **Requirements**
 # tmux multiplexer terminal
-# bat replacement for cat
 # translate shell from `soimort`
 
 language_list="$HOME/.tmux/tmux-translate-languages"
@@ -30,7 +29,7 @@ tmux_translate() {
     echo '⚡⚡⚡⚡⚡'; read -n 1"
 }
 
-selected_source=$(bat "$language_list" | fzf)
+selected_source=$(cat "$language_list" | fzf)
 
 if [ -z "$selected_source" ]; then
 	exit 0

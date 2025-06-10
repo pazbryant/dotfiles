@@ -10,7 +10,7 @@ select_template() {
 		--hidden \
 		--type=file \
 		--exclude="*.md" |
-		fzf --multi --preview "bat --color=always --style=numbers $BOILER_PLATE_DIR/{}" \
+		fzf --multi --preview "cat --color=always --style=numbers $BOILER_PLATE_DIR/{}" \
 			--preview-window=right:60% \
 			--header="Select a template (ESC to exit)"
 
@@ -24,7 +24,7 @@ copy_to_clipboard() {
 
 	[ "$response" = "n" ] && return 0
 
-	if bat "$1" | xclip -selection clipboard; then
+	if cat "$1" | xclip -selection clipboard; then
 		COPY_MESSAGE="✓ $filename has been copied \n"
 		return 0
 	fi
