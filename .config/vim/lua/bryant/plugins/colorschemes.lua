@@ -11,6 +11,8 @@ return {
 	},
 
 	{
+		lazy = false,
+		priority = 1000,
 		'rose-pine/neovim',
 		config = function()
 			require('rose-pine').setup({
@@ -20,27 +22,11 @@ return {
 					transparency = false,
 				},
 			})
-			vim.cmd.colorscheme('rose-pine')
+			vim.cmd.colorscheme('rose-pine-moon')
 		end,
 	},
 
 	{
-		'craftzdog/solarized-osaka.nvim',
-		config = function()
-			require('solarized-osaka').setup({
-				transparent = false,
-				styles = {
-					comments = { italic = false },
-					keywords = { italic = false },
-				},
-			})
-			vim.cmd.colorscheme('solarized-osaka')
-		end,
-	},
-
-	{
-		lazy = false,
-		priority = 1000,
 		'rebelot/kanagawa.nvim',
 		config = function()
 			require('kanagawa').setup({

@@ -8,6 +8,12 @@ local map = v.keymap.set
 -- better change inner word
 map('n', '<C-c>', 'ciw', { desc = 'Better Change Inner Word' })
 
+-- better quit
+map('n', '<leader>q', '<cmd>quit!<cr>', { desc = 'Better quit' })
+
+-- better quit all
+map('n', '<leader><leader>', '<cmd>quitall!<cr>', { desc = 'Better quit all' })
+
 --  No highlights
 map('n', '<Escape>', '<cmd>noh<CR>', { desc = 'No search highlights' })
 
