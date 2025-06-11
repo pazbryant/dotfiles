@@ -8,12 +8,14 @@ Xft.lcdfilter:	lcddefault
 ! Global colors
 *background: #1d1f21
 *foreground: #ffffff
-*cursorColor: #D69DA2
+*cursorColor: #014b89
 
 ! ST specific configurations
 ! st.font: Maple Mono:pixelsize=13.5:style:SemiBold
 ! st.font: Maple Mono NL NF:pixelsize=13.5:style:SemiBold
-st.font: Maple Mono Normal NL NF:pixelsize=13.5:style:SemiBold
+! st.font: Maple Mono NL:pixelsize=13.5:style:SemiBold
+st.font: Maple Mono Normal NL:pixelsize=13.5:style:SemiBold
+! st.font: Maple Mono Normal NL NF:pixelsize=13.5:style:SemiBold
 ! st.font: Recursive Mn Csl St Smb:pixelsize=13.5:style:SemiBold
 
 st.alpha: 0.85
@@ -22,9 +24,9 @@ st.cwscale: 1.01
 st.borderpx: 5px
 
 ! DWM specific configurations
-dwm.selbgcolor: #D69DA2
+dwm.selbgcolor: #014b89
 dwm.selfgcolor: #ffffff
 dwm.normbgcolor: #000000
 dwm.normfgcolor: #817f7f
-dwm.selbordercolor: #D69DA2
+dwm.selbordercolor: #014b89
 dwm.normbordercolor: #817f7f
