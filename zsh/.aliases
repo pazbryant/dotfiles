@@ -25,7 +25,7 @@ alias dh="rm ~/.history.db"
 alias sp="systemctl suspend"
 alias rebootcmd="systemctl reboot"
 alias fontcache="sudo fc-cache -f -v"
-alias rex="xrdb -merge ~/.Xresources && kill -USR1 \$(pidof st)"
+alias rex="xrdb -remove && xrdb -merge ~/.Xresources && kill -USR1 \$(pidof st)"
 alias motivation="mpv ~/Documents/github/media/videos/biy/cristiano.mp4"
 
 alias gd="git diff"

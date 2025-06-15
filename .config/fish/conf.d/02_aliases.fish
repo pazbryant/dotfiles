@@ -8,6 +8,7 @@ alias vi="env NVIM_APPNAME='vim' nvim"
 alias zshc="cd ~/zsh && vi .zshconfig"
 alias p="xclip -selection clipboard -o"
 alias fishc="cd ~/.config/fish && vi config.fish"
+alias rex="xrdb -remove && xrdb -merge ~/.Xresources && kill -USR1 \$(pidof st)"
 
 # system
 alias sht="shutdown now"

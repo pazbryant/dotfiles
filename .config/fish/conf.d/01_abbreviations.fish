@@ -10,7 +10,6 @@ abbr -a ani-cli-dub "ani-cli -q 1080 --dub"
 
 abbr -a ff "fastfetch"
 abbr -a dh "rm ~/.local/share/fish/fish_history"
-abbr -a rex "xrdb -merge ~/.Xresources; and pkill -USR1 -x st"
 abbr -a motivation "mpv ~/Documents/github/media/videos/biy/cristiano.mp4"
 
 # git
