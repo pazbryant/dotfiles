@@ -9,11 +9,11 @@
 
 /*****----- Global Properties -----*****/
 * {
-background		:     #1d1f21;
-background-alt:			#5f1f53;
-foreground		:     #000000;
-selected			:     #5e5e5e;
-font					:			"Overpass SemiBold 10";
+background		:     #000000;
+background-alt:			#D69DA2;
+foreground		:     #ffffff;
+selected			:     #000000;
+font					:			"Overpass SemiBold 9.5";
 }
 
 /*****----- Main Window -----*****/
@@ -32,7 +32,7 @@ window {
     padding:                     0px;
     border:                      2px solid;
     border-radius:               0px;
-    border-color:                @selected;
+    border-color:                @background-alt;
     background-color:            @background;
     cursor:                      "default";
 }
