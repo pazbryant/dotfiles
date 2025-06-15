@@ -16,8 +16,7 @@ if command -v fzf >/dev/null
 end
 
 if command -v atuin >/dev/null
-    atuin init fish --disable-up-arrow | source
-		bind \cp _atuin_bind_up
+    atuin init fish | source
 end
 
 if command -v starship >/dev/null
