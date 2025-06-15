@@ -25,6 +25,7 @@ feh 3.10.3-1
 ffmpegthumbnailer 2.2.3-3
 firefox 139.0.4-1
 fish 4.0.2-1
+flatpak 1:1.16.1-1
 fzf 0.62.0-1
 git 2.49.0-2
 glow 2.1.1-1
@@ -33,7 +34,6 @@ gopass 1.15.16-1
 grub 2:2.12.r292.g73d1c959-1
 gst-plugin-pipewire 1:1.4.5-1
 imagemagick 7.1.1.47-2
-inter-font 4.1-1
 jq 1.8.0-1
 lazygit 0.52.0-1
 libnotify 0.8.6-1
@@ -58,9 +58,9 @@ npm 11.4.2-1
 nsxiv 33-1
 openresolv 3.16.5-1
 openssh 10.0p1-3
-otf-overpass 3.0.5-2
 pacman-contrib 1.12.0-1
 pavucontrol 1:6.1-1
+pcmanfm 1.4.0-1
 pgcli 4.3.0-1
 picom 12.5-3
 piper 0.8-2
