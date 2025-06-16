@@ -4,41 +4,18 @@ set -e
 
 FOLDER="${HOME}/Documents/github/media/images/wallpapers"
 
-# totaly generated with gemini
-get_dominant_color() {
-	_gd_image_path="$1"
-	_gd_pixel_data=""
+get_palette() {
+	_gp_image_path="$1"
 
-	# Check if ImageMagick (magick) is available
-	if ! command -v magick >/dev/null 2>&1; then
-		echo "Error: ImageMagick (magick) not found. Cannot determine dominant color."
+	if [ -z "${_gp_image_path}" ]; then
+		echo "Error: No image path provided." >&2
 		return 1
 	fi
 
-	# Check if an image path was provided
-	if [ -z "${_gd_image_path}" ]; then
-		echo "Error: No image path provided to get_dominant_color."
-		return 1
-	fi
-
-	# Use ImageMagick to scale the image to 1x1 pixel and output as text.
-	# The output format for txt: is consistent and includes the #RRGGBB hex code.
-	# Example line: 0,0: (230,213,204,255)  #E6D5CCFF  srgba(90.0121%,83.6783%,80.1519%,0.999793)
-	_gd_pixel_data="$(magick "${_gd_image_path}" -scale 1x1! txt:-)"
-
-	# Extract the 6-digit hex color code (#RRGGBB) directly.
-	# We look for '#', then capture exactly 6 hex characters.
-	_gd_hex_color=$(echo "${_gd_pixel_data}" | tail -n 1 | sed -E 's/.* (#([0-9a-fA-F]{6})([0-9a-fA-F]{2})?).*$/#\2/')
-
-	# Check if we successfully extracted a 6-digit hex color.
-	if ! echo "${_gd_hex_color}" | grep -qE '^#[0-9a-fA-F]{6}$'; then
-		echo "Warning: Could not parse 6-digit hex color from ImageMagick output. Defaulting to gray."
-		echo "#999897"
-		return 0
-	fi
-
-	echo "${_gd_hex_color}" # Output the extracted 6-digit hex color
-	return 0
+	# Generate a palette of 8 colors, sorted by frequency (most dominant first),
+	# and extract just the hex codes.
+	magick "${_gp_image_path}" +dither -colors 8 -format '%c' histogram:info: |
+		sed -n 's/.*\(#[0-9A-F]\{6\}\).*/\1/p'
 }
 
 select_image() {
@@ -65,10 +42,16 @@ main() {
 
 	set_background "${selected_image}"
 
-	dominant_color="$(get_dominant_color "${selected_image}")"
+	# Get the entire palette (a list of hex codes)
+	palette=$(get_palette "${selected_image}" | tac)
+	if [ -z "${palette}" ]; then
+		echo "Could not generate color palette." >&2
+		return 1
+	fi
 
-	if [ -n "${dominant_color}" ]; then
-		"$HOME/bin/global/uitool" "$dominant_color"
+	accent_color=$(echo "${palette}" | sed -n '2p')
+	if [ -n "${accent_color}" ]; then
+		"$HOME/bin/global/uitool" "${accent_color}"
 	fi
 }
 

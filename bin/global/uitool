@@ -153,7 +153,6 @@ main() {
 		# select_color exits on failure, so if we are here, it succeeded
 		# or returned an empty string (e.g. user cancelled xcolor)
 		selected_color="$selected_color_output"
-
 	fi
 
 	if [ "$selected_color" = "" ]; then
@@ -169,8 +168,6 @@ main() {
 		echo "Error: Invalid color format: $selected_color. Expected #RRGGBB." >&2
 		exit 1
 	fi
-
-	echo "Selected color: $selected_color"
 
 	# Update all configuration files
 	# The `|| true` on some `update` calls in specific functions like
