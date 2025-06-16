@@ -2,9 +2,6 @@
 
 set -e
 
-# Log file for debugging
-LOG_FILE="${HOME}/.theme_update.log"
-
 # Function to select a color using xcolor
 select_color() {
 	notify-send "XCOLOR" "Picking color"
@@ -106,7 +103,7 @@ reload_services() {
 	if [ -f "${HOME}/.Xresources" ]; then
 		if xrdb -merge "${HOME}/.Xresources"; then
 			st_pids=$(pgrep -x st)
-			if [ -n "$st_pids" ]; then
+			if [ "$st_pids" != "" ]; then
 				echo "$st_pids" | while IFS= read -r pid; do
 					kill -USR1 "$pid" 2>/dev/null || echo "Failed to send USR1 to st PID: $pid (may have exited)"
 				done
@@ -148,7 +145,7 @@ reload_services() {
 main() {
 	selected_color=""
 
-	if [ -n "$1" ]; then
+	if [ "$1" != "" ]; then
 		selected_color="$1"
 	else
 		# Capture output of select_color which is the color hex
@@ -159,7 +156,7 @@ main() {
 
 	fi
 
-	if [ -z "$selected_color" ]; then
+	if [ "$selected_color" = "" ]; then
 		# This can happen if xcolor returns an empty string (e.g., user pressed Esc)
 		echo "No color selected or provided. Exiting." >&2
 		exit 1
