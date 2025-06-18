@@ -55,7 +55,6 @@ ncmpcpp 0.10.1-4
 neovim 0.11.2-3
 networkmanager 1.52.0-1
 noto-fonts-emoji 1:2.047-1
-npm 11.4.2-1
 nsxiv 33-1
 openresolv 3.16.5-1
 openssh 10.0p1-3
