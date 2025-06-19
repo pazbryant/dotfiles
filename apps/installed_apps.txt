@@ -8,13 +8,13 @@ base 3-2
 base-devel 1-2
 bottom 0.10.2-1
 breeze-gtk 6.3.5-1
-breeze-icons 6.14.0-1
+breeze-icons 6.15.0-1
 calibre 8.4.0-2
 capitaine-cursors 4-3
-code 1.100.3-1
+code 1.101.0-1
 cronie 1.7.2-1
 docker 1:28.2.2-1
-docker-buildx 0.24.0-1
+docker-buildx 0.25.0-1
 docker-compose 2.37.1-1
 dunst 1.12.2-1
 dust 1.2.1-1
@@ -28,7 +28,7 @@ firefox 139.0.4-1
 fish 4.0.2-1
 flatpak 1:1.16.1-1
 fzf 0.62.0-1
-git 2.49.0-2
+git 2.50.0-1
 glow 2.1.1-1
 go 2:1.24.4-1
 gopass 1.15.16-1
@@ -44,12 +44,12 @@ linux-headers 6.15.2.arch1-1
 linux-lts 6.12.33-1
 linux-lts-headers 6.12.33-1
 lua51 5.1.5-13
-luarocks 3.12.0-1
+luarocks 3.12.1-1
 lxappearance 0.6.4-1
 maim 5.8.0-3
 man-db 2.13.1-1
 mpc 0.35-1
-mpd 0.24.4-1
+mpd 0.24.4-2
 mpv 1:0.40.0-3
 ncmpcpp 0.10.1-4
 neovim 0.11.2-3
@@ -71,6 +71,7 @@ pipewire-pulse 1:1.4.5-1
 pnpm 10.12.1-1
 python-pip 25.1.1-1
 qbittorrent 5.1.0-1
+qutebrowser 3.5.1-1
 ripgrep 14.1.1-1
 rofi 1.7.9.1-1
 rsync 3.4.1-2
@@ -97,7 +98,7 @@ wireplumber 0.5.10-1
 xclip 0.13-6
 xcolor 0.5.1-4
 xdotool 3.20211022.1-2
-xorg-server 21.1.16-1
+xorg-server 21.1.18-1
 xorg-xev 1.2.6-1
 xorg-xinit 1.4.4-1
 xorg-xrandr 1.5.3-1
