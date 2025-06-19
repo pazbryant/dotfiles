@@ -1,5 +1,5 @@
 return {
-	'williamboman/mason.nvim',
+	'mason-org/mason.nvim',
 	dependencies = 'WhoIsSethDaniel/mason-tool-installer.nvim',
 	branch = 'main',
 	cmd = 'Mason',
@@ -27,9 +27,7 @@ return {
 			'golangci-lint',
 
 			-- python
-			'black',
 			'ruff',
-			'isort',
 
 			-- markdown
 			'alex',
