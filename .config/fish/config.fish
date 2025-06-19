@@ -6,6 +6,7 @@ set -U fish_user_paths \
 		~/bin/global/ \
 		~/.cargo/bin/ \
 		~/.local/bin/ \
+		~/bin/crontab/ \
 		/usr/local/bin/ \
 		/var/lib/flatpak/exports/bin/ \
 		~/.local/share/nvim/mason/bin/ \
