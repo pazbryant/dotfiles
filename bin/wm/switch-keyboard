@@ -14,10 +14,10 @@ send_notification() {
 
 switch_layout() {
 	current_layout=$(get_current_layout)
-	if [ "$current_layout" = "bryant-dvorak" ]; then
-		setxkbmap bryant-dvorak-itl
+	if [ "$current_layout" = "bryantd" ]; then
+		setxkbmap bryantdi
 	else
-		setxkbmap bryant-dvorak
+		setxkbmap bryantd
 	fi
 	new_layout=$(get_current_layout)
 	send_notification "$new_layout"
