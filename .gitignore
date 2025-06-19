@@ -58,3 +58,4 @@
 .config/calibre/metadata-sources-cache.json
 .config/obsidian
 .config/google-chrome
+.config/configstore
