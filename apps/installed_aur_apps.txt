@@ -11,5 +11,6 @@ litecli 1.15.0-1
 paru 2.0.4-1
 paru-debug 2.0.4-1
 postman-bin 11.49.4-1
+rofi-greenclip 4.2-3
 vesktop-bin 1.5.7-1
 wego 2.3-2
