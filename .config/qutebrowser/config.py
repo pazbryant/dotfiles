@@ -44,17 +44,22 @@ config.bind("<Ctrl-u>", "fake-key <Shift-Home><Delete>", "insert")
 
 # set default bind imitating brave browser
 config.bind("<Ctrl-h>", "history")
-config.bind("<Ctrl-j>", "download-open")
 config.bind("<Ctrl-Shift-n>", "open -p")
+config.bind("<Ctrl-j>", "download-open")
 config.bind("<Ctrl-Shift-r>", "reload -f")
 config.bind("<Ctrl-Shift-o>", "bookmark-list")
 config.bind("<Ctrl-Shift-i>", "devtools right")
+config.bind('xt', 'config-cycle tabs.show always never')
+config.bind('<Ctrl-m>', 'hint links spawn mpv {hint-url}')
+config.bind('xb', 'config-cycle statusbar.show always never')
+config.bind('xx', 'config-cycle statusbar.show always never;; config-cycle tabs.show always never')
+
 
 # set default search engines
 c.url.searchengines = {
     "DEFAULT": "https://www.google.com/search?q={}",
     "dg": "https://duckduckgo.com/?q={}",
-    "yt": "https://www.youtube.com/results?search_query={}",
+    "ys": "https://www.youtube.com/results?search_query={}",
 }
 
 # Set the page opened when a new empty tab is created

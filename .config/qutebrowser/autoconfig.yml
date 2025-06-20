@@ -29,6 +29,8 @@ settings:
     global: auto
   new_instance_open_target:
     global: tab-silent
+  statusbar.show:
+    global: always
   tabs.last_close:
     global: close
   tabs.show:
