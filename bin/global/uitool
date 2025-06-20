@@ -114,8 +114,8 @@ reload_services() {
 	fi
 
 	# Reload qutebrowser after xresources
-	if command -v qutebrowser >/dev/null 2>&1; then
-		qutebrowser :config-source
+	if pgrep -x qutebrowser >/dev/null; then
+		qutebrowser :config-source --no-startup
 	fi
 
 	# Reload dunst: pkill and rely on bspwmrc to restart it.
@@ -128,7 +128,6 @@ reload_services() {
 		done
 	fi
 
-	qutebrowser :config-source
 	# Reload bspwm if running (this may also restart dunst via bspwmrc)
 	if pgrep -x bspwm >/dev/null; then
 		(bspc wm -r) || echo "Failed to reload bspwm"
