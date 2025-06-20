@@ -65,7 +65,7 @@ overwrite_xresources_colors() {
 	xresources="${HOME}/.Xresources"
 
 	# These updates are considered non-critical if the pattern is not found.
-	update "$xresources" '\*cursorColor:[[:space:]]*#[0-9a-fA-F]\{6\}' "*cursorColor: $color" || true
+	update "$xresources" '\*.cursorColor:[[:space:]]*#[0-9a-fA-F]\{6\}' "*.cursorColor: $color" || true
 	update "$xresources" 'dwm.selbgcolor: #[0-9a-fA-F]\{6\}' "dwm.selbgcolor: $color" || true
 	update "$xresources" 'dwm.selbordercolor: #[0-9a-fA-F]\{6\}' "dwm.selbordercolor: $color" || true
 }
@@ -113,6 +113,11 @@ reload_services() {
 		fi
 	fi
 
+	# Reload qutebrowser after xresources
+	if command -v qutebrowser >/dev/null 2>&1; then
+		qutebrowser :config-source
+	fi
+
 	# Reload dunst: pkill and rely on bspwmrc to restart it.
 	# This implies bspwm is running and its bspwmrc handles dunst.
 	if pgrep -x dunst >/dev/null; then
@@ -123,6 +128,7 @@ reload_services() {
 		done
 	fi
 
+	qutebrowser :config-source
 	# Reload bspwm if running (this may also restart dunst via bspwmrc)
 	if pgrep -x bspwm >/dev/null; then
 		(bspc wm -r) || echo "Failed to reload bspwm"
