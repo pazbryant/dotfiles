@@ -51,6 +51,7 @@ config.bind("<Ctrl-Shift-o>", "bookmark-list")
 config.bind("<Ctrl-Shift-i>", "devtools right")
 config.bind('xt', 'config-cycle tabs.show always never')
 config.bind('<Ctrl-m>', 'hint links spawn mpv {hint-url}')
+config.bind('<Ctrl-t>', 'open -t;; set-cmd-text -s :open ')
 config.bind('xb', 'config-cycle statusbar.show always never')
 config.bind('xx', 'config-cycle statusbar.show always never;; config-cycle tabs.show always never')
 
