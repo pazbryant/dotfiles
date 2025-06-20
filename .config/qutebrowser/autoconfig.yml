@@ -27,10 +27,6 @@ settings:
     https://web.telegram.org: false
   content.notifications.presenter:
     global: auto
-  fonts.messages.error:
-    global: default_size default_familts
-  fonts.tabs.selected:
-    global: default_size default_family
   new_instance_open_target:
     global: tab-silent
   tabs.last_close:
@@ -38,6 +34,6 @@ settings:
   tabs.show:
     global: always
   tabs.width:
-    global: 15%
+    global: 10%
   url.auto_search:
     global: dns

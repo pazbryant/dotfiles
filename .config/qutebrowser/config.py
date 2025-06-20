@@ -1,15 +1,15 @@
 import subprocess
 
-c.fonts.default_size = "10pt"
+c.fonts.default_size = "10.5pt"
 c.fonts.web.size.default = 15
-c.fonts.default_family = "sans-serif"
+c.fonts.default_family = "Overpass Medium"
 
-c.fonts.web.family.serif = "serif"
+c.fonts.web.family.serif = "default_family"
+c.fonts.web.family.standard = "default_family"
+c.fonts.web.family.sans_serif = "default_family"
 c.fonts.web.family.fixed = "monospace"
-c.fonts.web.family.cursive = "monospace"
 c.fonts.web.family.fantasy = "monospace"
-c.fonts.web.family.standard = "sans-serif"
-c.fonts.web.family.sans_serif = "sans-serif"
+c.fonts.web.family.cursive = "monospace"
 
 # yank url to clipboard in obsidian format
 config.bind("<y><o>", "yank inline [{title}]({url})")
@@ -18,7 +18,6 @@ config.bind("<y><o>", "yank inline [{title}]({url})")
 c.colors.webpage.darkmode.enabled = True
 c.colors.webpage.darkmode.algorithm = "lightness-cielab"
 c.colors.webpage.darkmode.policy.images = "never"
-config.set("colors.webpage.darkmode.enabled", False, "file://*")
 
 # toggle dark mode
 config.bind("<Ctrl+Shift+d>", "config-cycle colors.webpage.darkmode.enabled")
@@ -44,20 +43,17 @@ config.bind("<Ctrl-k>", "fake-key <Shift-End><Delete>", "insert")
 config.bind("<Ctrl-u>", "fake-key <Shift-Home><Delete>", "insert")
 
 # set default bind imitating brave browser
-config.bind('<Ctrl-h>', 'history')
-config.bind('<Ctrl-j>', 'download-open')
-config.bind('<Ctrl-Shift-n>', 'open -p')
-config.bind('<Ctrl-Shift-r>', 'reload -f')
-config.bind('<Ctrl-Shift-o>', 'bookmark-list')
-config.bind('<Ctrl-Shift-i>', 'devtools right')
+config.bind("<Ctrl-h>", "history")
+config.bind("<Ctrl-j>", "download-open")
+config.bind("<Ctrl-Shift-n>", "open -p")
+config.bind("<Ctrl-Shift-r>", "reload -f")
+config.bind("<Ctrl-Shift-o>", "bookmark-list")
+config.bind("<Ctrl-Shift-i>", "devtools right")
 
 # set default search engines
 c.url.searchengines = {
     "DEFAULT": "https://www.google.com/search?q={}",
     "dg": "https://duckduckgo.com/?q={}",
-    "gh": "https://github.com/search?q={}",
-    "g": "https://www.google.com/search?q={}",
-    "aw": "https://wiki.archlinux.org/?search={}",
     "yt": "https://www.youtube.com/results?search_query={}",
 }
 
@@ -65,9 +61,7 @@ c.url.searchengines = {
 c.url.default_page = "about:blank"
 
 # Set the page(s) opened when qutebrowser starts
-c.url.start_pages = [
-    "https://web.telegram.org/a/#7524611776https://web.telegram.org/a/#7524611776"
-]  # :open -s opens all start pages
+c.url.start_pages = ["about:blank"]  # :open -s opens all start pages
 
 
 # set your preferred download folder
@@ -84,7 +78,11 @@ c.content.cookies.accept = "all"  # Allow 3rd-party cookies
 c.content.blocking.enabled = True
 
 # custom user css file. Modify web pages css
-c.content.user_stylesheets = ["~/.config/qutebrowser/user.css"]
+c.content.user_stylesheets = [
+    "/home/bryant/.config/qutebrowser/custom_css/global.css",
+    "/home/bryant/.config/qutebrowser/custom_css/telegram.css",
+    "/home/bryant/.config/qutebrowser/custom_css/twitter.css",
+]
 
 
 # ====================== xresources ======================= {{{
@@ -112,10 +110,10 @@ c.colors.statusbar.normal.fg = xresources["*.foreground"]
 c.colors.tabs.bar.bg = xresources["*.background"]
 c.colors.tabs.even.bg = xresources["*.color8"]
 c.colors.tabs.odd.bg = xresources["*.color8"]
-c.colors.tabs.even.fg = xresources["*.foreground"]
-c.colors.tabs.odd.fg = xresources["*.foreground"]
-c.colors.tabs.selected.even.fg = xresources["*.background"]
-c.colors.tabs.selected.odd.fg = xresources["*.background"]
+c.colors.tabs.even.fg = xresources["*.background"]
+c.colors.tabs.odd.fg = xresources["*.background"]
+c.colors.tabs.selected.even.fg = xresources["*.foreground"]
+c.colors.tabs.selected.odd.fg = xresources["*.foreground"]
 c.colors.tabs.selected.even.bg = xresources["*.cursorColor"]
 c.colors.tabs.selected.odd.bg = xresources["*.cursorColor"]
 c.colors.hints.bg = xresources["*.cursorColor"]
