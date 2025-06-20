@@ -43,6 +43,14 @@ config.bind("<Ctrl-w>", "fake-key <Ctrl-Backspace>", "insert")
 config.bind("<Ctrl-k>", "fake-key <Shift-End><Delete>", "insert")
 config.bind("<Ctrl-u>", "fake-key <Shift-Home><Delete>", "insert")
 
+# set default bind imitating brave browser
+config.bind('<Ctrl-h>', 'history')
+config.bind('<Ctrl-j>', 'download-open')
+config.bind('<Ctrl-Shift-n>', 'open -p')
+config.bind('<Ctrl-Shift-r>', 'reload -f')
+config.bind('<Ctrl-Shift-o>', 'bookmark-list')
+config.bind('<Ctrl-Shift-i>', 'devtools right')
+
 # set default search engines
 c.url.searchengines = {
     "DEFAULT": "https://www.google.com/search?q={}",
