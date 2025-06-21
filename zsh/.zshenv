@@ -9,7 +9,6 @@ export VIDEO="mpv"
 export COLORTERM="truecolor"
 export OPENER="xdg-open"
 export PAGER="less"
-export BAT_PAGER=$PAGER
 export WM="dwm"
 export GPG_TTY=$(tty)
 export MANPAGER='nvim +Man!'
