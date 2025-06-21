@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+
 set -e
 
 _NOTE_REPO_DIR="$HOME/Documents/github/notes"

@@ -4,7 +4,7 @@ set -e
 
 BLOCK_DEVICE="/dev/sdb1"                         # USB stick device
 MEDIA_DESTINATION="/run/media/bryant/tiagovault" # Expected mount point for the USB stick
-MEDIA_SOURCES="$HOME/Documents/books $HOME/Music"
+MEDIA_SOURCES="$HOME/Documents/books $HOME/Music $HOME/.config/BraveSoftware"
 
 mount_disk() {
 	if mountpoint -q "$MEDIA_DESTINATION"; then
@@ -105,7 +105,7 @@ run_backup() {
 
 	echo "Starting rsync..."
 	# Use trailing slash on source to copy contents into destination.
-	if rsync -a --delete "$_source_path/" "$_final_destination_path/"; then
+	if rsync -avL --delete "$_source_path/" "$_final_destination_path/"; then
 		sync # Ensure all data is written to disk
 		echo "Success: Backup of '$_source_basename' completed."
 		notify-send "Backup Success: $_source_basename" "Backed up to folder: $_target_leaf_name"
