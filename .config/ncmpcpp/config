@@ -1,6 +1,5 @@
 # general
 ncmpcpp_directory = ~/.config/ncmpcpp
-lyrics_directory = ~/.config/mpd/lyrics
 
 # mpd
 mpd_host = 127.0.0.1
@@ -30,8 +29,6 @@ playlist_editor_display_mode = "columns"
 autocenter_mode = "yes"
 centered_cursor = "yes"
 user_interface = "classic"
-follow_now_playing_lyrics = "yes"
-lyrics_fetchers = tekstowo, azlyrics, genius, musixmatch, sing365, metrolyrics, justsomelyrics, jahlyrics, plyrics , zeneszoveg, internet
 locked_screen_width_part = "50"
 ask_for_locked_screen_width_part = "yes"
 display_bitrate = "no"
