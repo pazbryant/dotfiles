@@ -8,8 +8,9 @@ else
 		--type=directory \
 		--type=symlink \
 		--follow \
+		~/ \
 		~/Documents/github/ \
-		~/Documents/temp/ \
+		~/Documents/github/temp \
 		~/Downloads/ 2>/dev/null | fzf)
 fi
 
