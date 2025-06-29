@@ -24,7 +24,10 @@ update_grub() {
 stow_dots() {
 	dots="$HOME/Documents/github/dotfiles"
 	mkdir -p "$dots" && cd "$dots" || return
-	stow --target=/home/"$USER" "$@" --restow .
+	stow --dir="$dots" --target=/home/"$USER" --adopt --restow .
+	# the "." at the end it is important, because stow needs to know which files
+	# you want to add to the "--target" folder. If not, then no dir nor file will
+	# be symlinked
 }
 
 # NOTE: this function is used in ~/.zshconfig file
