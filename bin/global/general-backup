@@ -159,18 +159,32 @@ main() {
 		printf '%s\n' "Warning: One or more backup tasks failed." >&2
 	fi
 
-	if ! flush_disk_cache; then
-		unmount_disk
+	if flush_disk_cache; then
+		printf '%s' "Would you like to unmount the disk $BLOCK_DEVICE (y/n)? "
+		read -r response
+
+		if [ "$response" = "y" ] || [ "$response" = "Y" ]; then
+			if unmount_disk; then
+				printf '%s\n' "=== Disk $BLOCK_DEVICE unmounted successfully. ==="
+				printf '%s\n' "=== General backup has finished. ==="
+				exit 0
+			else
+				printf '%s\n' "ERROR: Failed to unmount disk $BLOCK_DEVICE." >&2
+				exit 1
+			fi
+		elif [ "$response" = "n" ] || [ "$response" = "N" ]; then
+			printf '%s\n' "=== General backup has finished. ==="
+			exit 0
+		else
+			printf '%s\n' "WARNING: Invalid response. Assuming 'n' (no unmount)." >&2
+			printf '%s\n' "=== General backup has finished. ==="
+			exit 0
+		fi
+	else
+		printf '%s\n' "ERROR: Disk cache flush failed. Aborting backup." >&2
 		exit 1
 	fi
 
-	if ! unmount_disk; then
-		printf "Critical Error: Disk unmount failed for %s.\n" "$BLOCK_DEVICE" >&2
-		exit 1
-	fi
-
-	printf '%s\n' "=== Backup Process Finished === "
-	return 0
 }
 
 main "$@"
