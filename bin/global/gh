@@ -34,7 +34,7 @@ github() {
 		done
 	}
 
-	dirs="/home/bryant/Documents/github"
+	dirs="/home/bryant/Documents/github /home/bryant/.config /home/bryant/Documents/temp"
 
 	directories="$(traverse_all_directories "$dirs" | sort | uniq)"
 
