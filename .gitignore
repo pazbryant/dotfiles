@@ -1,0 +1,10 @@
+.config/alacritty
+.config/bspwm
+.config/dunst
+.config/polybar
+.config/rofi
+.config/starship
+.tmux.conf
+.Xresources
+.config/mpd/mpd.log
+.config/mpd/mpdstate
