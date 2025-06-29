@@ -78,3 +78,5 @@ Syncthing
 systemd
 pacman
 dwm
+qBitTorrent
+symlinked
