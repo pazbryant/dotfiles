@@ -8,3 +8,4 @@
 .Xresources
 .config/mpd/mpd.log
 .config/mpd/mpdstate
+.config/qBittorrent
