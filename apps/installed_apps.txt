@@ -74,6 +74,7 @@ python-pip 25.1.1-1
 qbittorrent 5.1.1-2
 qt6ct 0.10-4
 qutebrowser 3.5.1-1
+rclone 1.70.2-1
 ripgrep 14.1.1-1
 rofi 1.7.9.1-1
 rsync 3.4.1-2
